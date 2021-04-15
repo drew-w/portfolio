@@ -49,7 +49,7 @@ export default function Home() {
             icon={<HamburgerIcon />}
           />
         </Stack>
-        <Flex direction="column" align="center">
+        <Flex direction="column">
           <HomePage />
           <About />
           <Projects />
