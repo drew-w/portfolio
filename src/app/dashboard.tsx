@@ -1,6 +1,6 @@
 'use client'
 
-import styles from '@/styles/Home.module.css'
+import styles from '@styles/Home.module.css'
 import { useAccount } from 'wagmi'
 import {
   useRewardTokenBalanceOf,
@@ -19,7 +19,7 @@ import {
   usePrepareRewardDistributorUnstakeAllTokens
 } from '../generated'
 
-enum contractAddress {
+enum ContractAddress {
   RewardToken = '0x9B7Aa964f4Eb862EdE5b1C9a14A400534dd2DD95',
   Nft = '0xED32089936765F5d2d195f2e96dE381569B951ec',
   RewardDistributor = '0x60a315f4BB7F0ed10edBBD83a752C27fcb31Bf99'
@@ -30,32 +30,32 @@ export default function Dashboard () {
 
   const { data: tokenBalance } = useRewardTokenBalanceOf({
     enabled: account?.isConnected,
-    address: contractAddress.RewardToken,
+    address: ContractAddress.RewardToken,
     args: [account.address!]
   })
 
   const { data: pendingRewards } = useRewardDistributorPendingRewards({
     enabled: account?.isConnected,
-    address: contractAddress.RewardDistributor,
+    address: ContractAddress.RewardDistributor,
     args: [account.address!],
     watch: true
   })
 
   const { data: nftBalance } = useRewardNftBalanceOf({
     enabled: account?.isConnected,
-    address: contractAddress.Nft,
+    address: ContractAddress.Nft,
     args: [account.address!]
   })
 
   const { data: stakedBalance } = useRewardDistributorStakedBalanceOf({
     enabled: account?.isConnected,
-    address: contractAddress.RewardDistributor,
+    address: ContractAddress.RewardDistributor,
     args: [account.address!]
   })
 
   const safeMintPrep = usePrepareRewardNftSafeMint({
     enabled: account?.isConnected,
-    address: contractAddress.Nft,
+    address: ContractAddress.Nft,
     args: [account.address!]
   })
 
@@ -63,7 +63,7 @@ export default function Dashboard () {
 
   const stakeNftPrep = usePrepareRewardDistributorStakeAllTokens({
     enabled: account?.isConnected,
-    address: contractAddress.RewardDistributor
+    address: ContractAddress.RewardDistributor
   })
 
   const stakeNftMutation = useRewardDistributorStakeAllTokens(
@@ -72,7 +72,7 @@ export default function Dashboard () {
 
   const unstakeNftPrep = usePrepareRewardDistributorUnstakeAllTokens({
     enabled: account?.isConnected,
-    address: contractAddress.RewardDistributor
+    address: ContractAddress.RewardDistributor
   })
 
   const unstakeNftMutation = useRewardDistributorUnstakeAllTokens(
@@ -81,8 +81,8 @@ export default function Dashboard () {
 
   const approveStakePrep = usePrepareRewardNftSetApprovalForAll({
     enabled: account?.isConnected,
-    address: contractAddress.Nft,
-    args: [contractAddress.RewardDistributor, true]
+    address: ContractAddress.Nft,
+    args: [ContractAddress.RewardDistributor, true]
   })
 
   const approveStakeMutation = useRewardNftSetApprovalForAll(
@@ -91,7 +91,7 @@ export default function Dashboard () {
 
   const collectPrep = usePrepareRewardDistributorCollectRewards({
     enabled: account?.isConnected,
-    address: contractAddress.RewardDistributor
+    address: ContractAddress.RewardDistributor
   })
 
   const collectMutation = useRewardDistributorCollectRewards(collectPrep.config)
