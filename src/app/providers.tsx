@@ -4,13 +4,8 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import * as React from 'react'
 import { WagmiConfig } from 'wagmi'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ChakraProvider } from '@chakra-ui/react'
 
 import { chains, config } from '../wagmi'
 
@@ -20,11 +15,13 @@ export function Providers ({ children }: { children: React.ReactNode }) {
   React.useEffect(() => setMounted(true), [])
   return (
     <QueryClientProvider client={queryClient}>
-      <WagmiConfig config={config}>
-        <RainbowKitProvider chains={chains}>
-          {mounted && children}
-        </RainbowKitProvider>
-      </WagmiConfig>
+      <ChakraProvider>
+        <WagmiConfig config={config}>
+          <RainbowKitProvider chains={chains}>
+            {mounted && children}
+          </RainbowKitProvider>
+        </WagmiConfig>
+      </ChakraProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
