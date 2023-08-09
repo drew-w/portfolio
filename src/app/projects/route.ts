@@ -9,7 +9,8 @@ export async function GET () {
         'Content-Type': 'application/json',
         // 'API-Key': process.env.AIRTABLE_API_TOKEN!,
         Authorization: `Bearer ${process.env.AIRTABLE_API_TOKEN}`
-      }
+      },
+      cache: 'no-cache'
     }
   )
   const data = await res.json()
