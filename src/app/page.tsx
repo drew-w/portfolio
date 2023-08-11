@@ -1,21 +1,22 @@
-import { ConnectButton } from '../components/ConnectButton'
-import { Connected } from '../components/Connected'
-import Dashboard from './dashboard'
-import styles from '@styles/Home.module.css'
+'use client'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { Flex, Center } from '@chakra-ui/react'
+import logo from '@assets/debtlogo.svg'
+import Image from 'next/image'
 
 export function Page () {
+  const router = useRouter()
+  useEffect(() => {
+    // if (typeof window !== 'undefined')
+    router.push('/home')
+  })
   return (
-    <>
-      <main className={`${styles.main}`}>
-        <div className={styles.center}>
-          <ConnectButton />
-
-          <Connected>
-            <Dashboard />
-          </Connected>
-        </div>
-      </main>
-    </>
+    <Flex h='80vh' w='100vw' as='main'>
+      <Center w='full'>
+        <Image src={logo} height={70} alt='debt' />
+      </Center>
+    </Flex>
   )
 }
 

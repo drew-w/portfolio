@@ -25,7 +25,7 @@ enum ContractAddress {
   RewardDistributor = '0x60a315f4BB7F0ed10edBBD83a752C27fcb31Bf99'
 }
 
-export default function Dashboard () {
+export function Dashboard () {
   const account = useAccount()
 
   const { data: tokenBalance } = useRewardTokenBalanceOf({
