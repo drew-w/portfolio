@@ -5,7 +5,7 @@ import { mode, GlobalStyleProps } from '@chakra-ui/theme-tools'
 
 // import { Input } from 'theme/inputStyle'
 // import { Text, Heading, Link } from 'theme/textStyle'
-// import { Button } from 'theme/buttonStyle'
+import { Button } from '@theme/Button'
 // import { Box } from 'theme/BoxStyle'
 
 const config = {
@@ -34,20 +34,15 @@ const fonts = {
   poppins: poppins.style.fontFamily
 }
 
-// const components = {
-//   Box,
-//   Text,
-//   Heading,
-//   Link,
-//   Button,
-//   Input
-// }
+const components = {
+  Button
+}
 
 const theme = extendTheme({
   semanticTokens,
   config,
   styles,
-  //   components,
+  components,
   fonts
 })
 export default theme

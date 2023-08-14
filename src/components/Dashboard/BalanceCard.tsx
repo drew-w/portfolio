@@ -54,8 +54,8 @@ export const BalanceCard = () => {
           <Flex as='span'>
             <Text fontSize='16px'>Rewards</Text>
           </Flex>
-          <Flex as='span' w='full' justify='space-between'>
-            <Button>Collect</Button>
+          <Flex as='span' w='full' justify='space-between' align='baseline'>
+            <Button variant='secondary'>COLLECT</Button>
             <Text fontSize='30px' fontWeight='semibold'>
               {(pendingRewards || 0)?.toLocaleString('en-US', {
                 style: 'currency',
@@ -80,7 +80,7 @@ export const BalanceCard = () => {
             <Text fontSize='16px'>Wallet</Text>
           </Flex>
           <Flex as='span' w='full'>
-            <></>
+            <></> {/*placeholder for percantage change */}
             <Text fontSize='30px' fontWeight='semibold'>
               {(tokenBalance || 0)?.toLocaleString('en-US', {
                 style: 'currency',
