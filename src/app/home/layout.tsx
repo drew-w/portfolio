@@ -20,6 +20,7 @@ export default function RootLayout ({
         align='center'
         px='30px'
         h='61px'
+        position='sticky'
       >
         <Image src={logo} height={30} alt='debt' />
         <Stack align='center' spacing={10} direction='row' h='full'>
