@@ -10,6 +10,9 @@ import {
 } from '@generated'
 import { Connected } from '@components/Connected'
 
+//Style UI
+import { InfoTooltip } from '@components/InfoTooltip'
+
 //Types
 import { ContractAddress } from '@utils/constants'
 
@@ -48,11 +51,12 @@ export const BalanceCard = () => {
         color='text-secondary'
         direction='column'
         justify='space-between'
-        p='12px'
+        p='10px'
       >
         <Connected>
-          <Flex as='span'>
+          <Flex as='span' align='baseline' justify='space-between'>
             <Text fontSize='16px'>Rewards</Text>
+            <InfoTooltip label='hello' dark />
           </Flex>
           <Flex as='span' w='full' justify='space-between' align='baseline'>
             <Button variant='secondary'>COLLECT</Button>
@@ -73,11 +77,12 @@ export const BalanceCard = () => {
         color='text-primary'
         direction='column'
         justify='space-between'
-        p='8px'
+        p='10px'
       >
         <Connected>
-          <Flex as='span'>
+          <Flex as='span' align='baseline' justify='space-between'>
             <Text fontSize='16px'>Wallet</Text>
+            <InfoTooltip label='are you feeling ok' />
           </Flex>
           <Flex as='span' w='full'>
             <></> {/*placeholder for percantage change */}

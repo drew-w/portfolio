@@ -3,9 +3,9 @@ import { Connected } from '@components/Connected'
 import { Dashboard } from '@components/Dashboard'
 import styles from '@styles/Home.module.css'
 
-export function Page () {
+export default function TestPage () {
   return (
-    <>
+    <div>
       {/* <main className={`${styles.main}`}>
         <div className={styles.center}>
           <ConnectButton />
@@ -16,8 +16,6 @@ export function Page () {
         </div>
       </main> */}
       test page
-    </>
+    </div>
   )
 }
-
-export default Page
