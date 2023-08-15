@@ -8,8 +8,13 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '@theme'
 import merge from 'lodash.merge'
-
 import { chains, config } from '../wagmi'
+
+//FONT AWESOME
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUserSecret, faCircleInfo } from '@fortawesome/pro-light-svg-icons'
+
+library.add(faUserSecret, faCircleInfo)
 
 export function Providers ({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false)

@@ -27,6 +27,12 @@ export const semanticTokens = {
     },
     'btn-secondary-bg': {
       default: '#F3F3F3'
+    },
+    'icon-primary': {
+      default: '#CDCDCD'
+    },
+    'icon-secondary': {
+      default: '#6D6D6D'
     }
   },
   fonts: {
