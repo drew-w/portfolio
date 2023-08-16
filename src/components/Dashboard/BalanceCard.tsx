@@ -17,7 +17,8 @@ import { InfoTooltip } from '@components/InfoTooltip'
 import { ContractAddress } from '@utils/constants'
 
 export const BalanceCard = () => {
-  const account = useAccount()
+  const account = useAccount(),
+    { isConnected } = account
 
   const { data: tokenBalance } = useRewardTokenBalanceOf({
     enabled: account?.isConnected,
@@ -45,56 +46,68 @@ export const BalanceCard = () => {
       shadow='box-shadow-primary'
       justify='space-between'
     >
-      <Flex
-        w='full'
-        flex={1}
-        color='text-secondary'
-        direction='column'
-        justify='space-between'
-        p='10px'
-      >
-        <Connected>
-          <Flex as='span' align='baseline' justify='space-between'>
-            <Text fontSize='16px'>Rewards</Text>
-            <InfoTooltip label='hello' dark />
+      {isConnected ? (
+        <>
+          <Flex
+            w='full'
+            flex={1}
+            color='text-secondary'
+            direction='column'
+            justify='space-between'
+            p='10px'
+          >
+            <Flex as='span' align='baseline' justify='space-between'>
+              <Text fontSize='16px' fontWeight={500}>
+                Rewards
+              </Text>
+              <InfoTooltip label='hello' dark />
+            </Flex>
+            <Flex as='span' w='full' justify='space-between' align='baseline'>
+              <Button variant='secondary'>COLLECT</Button>
+              <Text fontSize='30px' fontWeight='semibold'>
+                {(pendingRewards || 0)?.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD'
+                })}
+              </Text>
+            </Flex>
           </Flex>
-          <Flex as='span' w='full' justify='space-between' align='baseline'>
-            <Button variant='secondary'>COLLECT</Button>
-            <Text fontSize='30px' fontWeight='semibold'>
-              {(pendingRewards || 0)?.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD'
-              })}
-            </Text>
+          <Flex
+            flex={1}
+            w='full'
+            bg='box-bg-primary'
+            borderRadius='10px'
+            color='text-primary'
+            direction='column'
+            justify='space-between'
+            p='10px'
+          >
+            <Flex as='span' align='baseline' justify='space-between'>
+              <Text fontSize='16px' fontWeight={500}>
+                Wallet
+              </Text>
+              <InfoTooltip label='are you feeling ok' />
+            </Flex>
+            <Flex as='span' w='full'>
+              <></> {/*placeholder for percantage change */}
+              <Text fontSize='30px' fontWeight='semibold'>
+                {(tokenBalance || 0)?.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD'
+                })}
+              </Text>
+            </Flex>
           </Flex>
-        </Connected>
-      </Flex>
-      <Flex
-        flex={1}
-        w='full'
-        bg='box-bg-primary'
-        borderRadius='10px'
-        color='text-primary'
-        direction='column'
-        justify='space-between'
-        p='10px'
-      >
-        <Connected>
-          <Flex as='span' align='baseline' justify='space-between'>
-            <Text fontSize='16px'>Wallet</Text>
-            <InfoTooltip label='are you feeling ok' />
-          </Flex>
-          <Flex as='span' w='full'>
-            <></> {/*placeholder for percantage change */}
-            <Text fontSize='30px' fontWeight='semibold'>
-              {(tokenBalance || 0)?.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD'
-              })}
-            </Text>
-          </Flex>
-        </Connected>
-      </Flex>
+        </>
+      ) : (
+        <Flex color='text-secondary'>
+          <Text>
+            asdfjl fas jkl fs ljk dfs jkl f dsajkl dfsajlk fds ajl k;fads jlk
+            ;dfas jkl dfas jlk df asjkl ;adfs jkl;dfsa jkl ;adfs jlk ; adfsjkl
+            ;adfs jkl ;dfa jkl ;adfs jkl;df asjkl; adfsl ;jk
+          </Text>
+        </Flex>
+      )}
     </Flex>
   )
 }
