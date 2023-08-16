@@ -2,7 +2,7 @@ import '@rainbow-me/rainbowkit/styles.css'
 import { Providers } from './providers'
 
 export const metadata = {
-  title: 'wagmi'
+  title: 'DEBT'
 }
 
 export default function RootLayout ({
@@ -12,6 +12,9 @@ export default function RootLayout ({
 }) {
   return (
     <html lang='en'>
+      <head>
+        <link rel='icon' href='/favicon.ico' />
+      </head>
       <body>
         <Providers>{children}</Providers>
       </body>
