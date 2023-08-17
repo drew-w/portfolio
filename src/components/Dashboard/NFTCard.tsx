@@ -1,9 +1,15 @@
 //Chakra
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Text, Button } from '@chakra-ui/react'
 
 //Data
 import { useAccount } from 'wagmi'
-import { useRewardNftBalanceOf } from '@generated'
+import {
+  useRewardNftBalanceOf,
+  useRewardDistributorPendingRewards
+} from '@generated'
+
+//Style UI
+import { InfoTooltip } from '@components/InfoTooltip'
 
 //Types
 import { ContractAddress } from '@utils/constants'
@@ -17,40 +23,69 @@ export const NFTCard = ({}) => {
     address: ContractAddress.Nft,
     args: [account.address!]
   })
-
+  //temp~
+  const { data: pendingRewards } = useRewardDistributorPendingRewards({
+    enabled: account?.isConnected,
+    address: ContractAddress.RewardDistributor,
+    args: [account.address!],
+    watch: true
+  })
+  //temp~~
   return (
     <Flex
       as='section'
       direction='column'
-      p='5px'
+      bg='pink'
       w='full'
       maxW='320px'
       h='280px'
-      bg='box-bg-secondary'
-      borderRadius='10px'
       shadow='box-shadow-primary'
-      justify='space-between'
     >
       {isConnected ? (
         <>
           <Flex
             w='full'
-            flex={1}
-            color='text-secondary'
-            direction='column'
-            justify='space-between'
-            p='10px'
-          ></Flex>
-          <Flex
-            flex={1}
-            w='full'
+            h='135px'
             bg='box-bg-primary'
             borderRadius='10px'
             color='text-primary'
             direction='column'
-            justify='space-between'
             p='10px'
-          ></Flex>
+            mb='10px'
+          >
+            <Flex as='span' align='baseline' justify='space-between'>
+              <Text fontSize='16px' fontWeight={500}>
+                Total NFTs
+              </Text>
+              <InfoTooltip label='micros are small standards are big' />
+            </Flex>
+          </Flex>
+          <Flex
+            flex={1}
+            justify='space-between'
+            w='full'
+            h='135px'
+            bg='box-bg-primary'
+            borderRadius='10px'
+            color='text-primary'
+            direction='column'
+            p='10px'
+          >
+            <Flex as='span' align='baseline' justify='space-between'>
+              <Text fontSize='16px' fontWeight={500}>
+                Active Rate
+              </Text>
+              <InfoTooltip label='rate of activity, even (˶•ᴗ•˶)' />
+            </Flex>
+            <Flex as='span' w='full' justify='end'>
+              <Text fontSize='30px' fontWeight='semibold'>
+                {(pendingRewards || 0)?.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD'
+                })}
+              </Text>
+            </Flex>
+          </Flex>
         </>
       ) : (
         <Flex color='text-secondary'>
