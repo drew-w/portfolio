@@ -35,7 +35,6 @@ export const NFTCard = ({}) => {
     <Flex
       as='section'
       direction='column'
-      bg='pink'
       w='full'
       maxW='320px'
       h='280px'
@@ -44,6 +43,8 @@ export const NFTCard = ({}) => {
       {isConnected ? (
         <>
           <Flex
+            flex={1}
+            justify='space-between'
             w='full'
             h='135px'
             bg='box-bg-primary'
@@ -59,7 +60,60 @@ export const NFTCard = ({}) => {
               </Text>
               <InfoTooltip label='micros are small standards are big' />
             </Flex>
+            <Flex
+              w='220px'
+              h='49px'
+              bg='#F3F3F3'
+              borderRadius='8px'
+              color='text-primary'
+              as='span'
+              alignSelf='flex-end'
+            >
+              <Flex
+                borderRadius='8px'
+                p='5px'
+                color='#000000'
+                w='115px'
+                h='49px'
+              >
+                <Text alignSelf='flex-end' marginLeft='6px' fontSize='14px'>
+                  Micro
+                </Text>
+                <Text
+                  alignSelf='flex-end'
+                  marginLeft='6px'
+                  fontSize='30px'
+                  fontWeight='semibold'
+                  lineHeight='30px'
+                >
+                  {String(nftBalance || 0)}
+                </Text>
+              </Flex>
+
+              <Flex
+                borderRadius='8px'
+                p='5px'
+                bg='#000000'
+                color='#ffffff'
+                w='115px'
+                h='49px'
+              >
+                <Text alignSelf='flex-end' marginLeft='6px' fontSize='14px'>
+                  Standard
+                </Text>
+                <Text
+                  alignSelf='flex-end'
+                  marginLeft='6px'
+                  fontSize='30px'
+                  fontWeight='semibold'
+                  lineHeight='30px'
+                >
+                  {String(nftBalance || 0)}
+                </Text>
+              </Flex>
+            </Flex>
           </Flex>
+
           <Flex
             flex={1}
             justify='space-between'
