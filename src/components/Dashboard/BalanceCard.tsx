@@ -100,12 +100,37 @@ export const BalanceCard = () => {
           </Flex>
         </>
       ) : (
-        <Flex color='text-secondary'>
-          <Text>
-            asdfjl fas jkl fs ljk dfs jkl f dsajkl dfsajlk fds ajl k;fads jlk
-            ;dfas jkl dfas jlk df asjkl ;adfs jkl;dfsa jkl ;adfs jlk ; adfsjkl
-            ;adfs jkl ;dfa jkl ;adfs jkl;df asjkl; adfsl ;jk
-          </Text>
+        <Flex
+          flex={1}
+          direction='column'
+          justify='flex-end'
+          p='10px'
+          color='#ffffff'
+        >
+          <div style={{ flex: 1 }}>
+            <Text fontSize='20px' fontWeight='semibold'>
+              Welcome
+            </Text>
+            <Text fontSize='12px' marginTop='5px'>
+              Utilizing DEBT's Box's proprietary software, you can create a
+              portfolio of blockchain miners. By purchasing and managing
+              different software node licenses you can earn rewards from several
+              asset classes, all from the comfort and convenience of your own
+              home.
+            </Text>
+          </div>
+          <Button
+            bg='#f3f3f3'
+            w='156px'
+            h='30px'
+            borderRadius='15px'
+            fontSize='16px'
+            fontWeight='semibold'
+            alignSelf='flex-end'
+            color='#000000'
+          >
+            Connect Wallet
+          </Button>
         </Flex>
       )}
     </Flex>

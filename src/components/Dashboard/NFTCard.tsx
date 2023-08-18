@@ -142,12 +142,36 @@ export const NFTCard = ({}) => {
           </Flex>
         </>
       ) : (
-        <Flex color='text-secondary'>
-          <Text>
-            asdfjl fas jkl fs ljk dfs jkl f dsajkl dfsajlk fds ajl k;fads jlk
-            ;dfas jkl dfas jlk df asjkl ;adfs jkl;dfsa jkl ;adfs jlk ; adfsjkl
-            ;adfs jkl ;dfa jkl ;adfs jkl;df asjkl; adfsl ;jk
-          </Text>
+        <Flex
+          color='text-primary'
+          bg='white'
+          w='full'
+          h='280px'
+          borderRadius='10px'
+          p='15px'
+          direction='column'
+          justifyContent='space-between'
+        >
+          <div>
+            <Text fontSize='20px' fontWeight='semibold'>
+              Learn
+            </Text>
+            <Text fontSize='12px' marginTop='5px'>
+              Learn about the DEBT ecosystem and gain an edge through the
+              Insider Track! Watch podcast episodes on DEBT Insider and BizPro.
+            </Text>
+          </div>
+          <Button
+            bg='#f3f3f3'
+            w='120px'
+            h='30px'
+            borderRadius='15px'
+            fontSize='16px'
+            fontWeight='semibold'
+            alignSelf='flex-end'
+          >
+            Learn More
+          </Button>
         </Flex>
       )}
     </Flex>
