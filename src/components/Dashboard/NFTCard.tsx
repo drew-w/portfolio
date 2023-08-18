@@ -162,12 +162,9 @@ export const NFTCard = ({}) => {
             </Text>
           </div>
           <Button
-            bg='#f3f3f3'
-            w='120px'
+            variant='secondary'
             h='30px'
-            borderRadius='15px'
             fontSize='16px'
-            fontWeight='semibold'
             alignSelf='flex-end'
           >
             Learn More

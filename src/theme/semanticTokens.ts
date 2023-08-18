@@ -28,6 +28,9 @@ export const semanticTokens = {
     'btn-secondary-bg': {
       default: '#F3F3F3'
     },
+    'btn-white-bg': {
+      default: '#FFFFFF'
+    },
     'icon-primary': {
       default: '#CDCDCD'
     },

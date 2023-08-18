@@ -120,14 +120,10 @@ export const BalanceCard = () => {
             </Text>
           </div>
           <Button
-            bg='#f3f3f3'
-            w='156px'
-            h='30px'
-            borderRadius='15px'
             fontSize='16px'
-            fontWeight='semibold'
+            height='30px'
             alignSelf='flex-end'
-            color='#000000'
+            variant='white'
           >
             Connect Wallet
           </Button>
