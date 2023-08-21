@@ -15,6 +15,7 @@ const baseStyle = definePartsStyle({
   dialog: {
     borderRadius: 'md',
     bg: `box-bg-primary`,
+    fontSize: '12px'
   },
   body: {
     color: 'text-primary'
