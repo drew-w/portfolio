@@ -5,6 +5,11 @@ import { Flex, Text } from '@chakra-ui/react'
 import { useAccount } from 'wagmi'
 import { useRewardNftBalanceOf } from '@generated'
 
+//Style UI
+import Image from 'next/image'
+import appStore from '@public/images/appStore.svg'
+import playStore from '@public/images/playStore.svg'
+
 //Types
 import { ContractAddress } from '@utils/constants'
 
@@ -35,7 +40,6 @@ export const TokenCard = ({}) => {
     >
       {isConnected ? (
         <>
-          
           <Flex
             flex={1}
             w='full'
@@ -45,15 +49,32 @@ export const TokenCard = ({}) => {
             direction='column'
             justify='space-between'
             p='10px'
-          ></Flex>
+          />
         </>
       ) : (
-        <Flex color='text-secondary'>
-          <Text>
-            asdfjl fas jkl fs ljk dfs jkl f dsajkl dfsajlk fds ajl k;fads jlk
-            ;dfas jkl dfas jlk df asjkl ;adfs jkl;dfsa jkl ;adfs jlk ; adfsjkl
-            ;adfs jkl ;dfa jkl ;adfs jkl;df asjkl; adfsl ;jk
-          </Text>
+        <Flex
+          color='text-primary'
+          bg='white'
+          w='full'
+          h='280px'
+          borderRadius='10px'
+          p='15px'
+          direction='column'
+          //   justifyContent='space-between'
+        >
+          <div>
+            <Text fontSize='20px' fontWeight='semibold'>
+              Download
+            </Text>
+            <Text fontSize='12px' marginTop='5px'>
+              View and interact with the DEBT Box ecosystem on the go with our
+              iOS and Android mobile apps.
+            </Text>
+          </div>
+          <Flex direction='column'>
+            <Image src={appStore} alt='app store' />
+            <Image src={playStore} alt='play store' />
+          </Flex>
         </Flex>
       )}
     </Flex>
