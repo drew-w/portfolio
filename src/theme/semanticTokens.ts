@@ -42,6 +42,9 @@ export const semanticTokens = {
     },
     'icon-secondary': {
       default: '#6D6D6D'
+    },
+    'table-border': {
+      default: '#F3F3F3'
     }
   },
   fonts: {
