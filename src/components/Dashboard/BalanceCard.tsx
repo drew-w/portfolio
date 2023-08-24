@@ -1,24 +1,17 @@
-'use client'
-//Chakra
 import { Button, Flex, Text } from '@chakra-ui/react'
-
-//Data
 import { useAccount } from 'wagmi'
 import {
   useRewardTokenBalanceOf,
   useRewardDistributorPendingRewards
 } from '@generated'
-import { Connected } from '@components/Connected'
-
-//Style UI
 import { InfoTooltip } from '@components/InfoTooltip'
-
-//Types
+import { CollectModal } from './CollectModal'
 import { ContractAddress } from '@utils/constants'
+import { useState } from 'react'
 
 export const BalanceCard = () => {
-  const account = useAccount(),
-    { isConnected } = account
+  const account = useAccount()
+  const { isConnected } = account
 
   const { data: tokenBalance } = useRewardTokenBalanceOf({
     enabled: account?.isConnected,
@@ -32,6 +25,8 @@ export const BalanceCard = () => {
     args: [account.address!],
     watch: true
   })
+
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
     <Flex
@@ -63,7 +58,9 @@ export const BalanceCard = () => {
               <InfoTooltip label='hello' dark />
             </Flex>
             <Flex as='span' w='full' justify='space-between' align='baseline'>
-              <Button variant='secondary'>COLLECT</Button>
+              <Button variant='secondary' onClick={() => setIsOpen(true)}>
+                COLLECT
+              </Button>
               <Text fontSize='30px' fontWeight='semibold'>
                 {(pendingRewards || 0)?.toLocaleString('en-US', {
                   style: 'currency',
@@ -89,7 +86,7 @@ export const BalanceCard = () => {
               <InfoTooltip label='are you feeling ok' />
             </Flex>
             <Flex as='span' w='full'>
-              <></> {/*placeholder for percantage change */}
+              <></>
               <Text fontSize='30px' fontWeight='semibold'>
                 {(tokenBalance || 0)?.toLocaleString('en-US', {
                   style: 'currency',
@@ -105,7 +102,7 @@ export const BalanceCard = () => {
           direction='column'
           justify='flex-end'
           p='10px'
-          color='#ffffff'
+          color='text-secondary'
         >
           <div style={{ flex: 1 }}>
             <Text fontSize='20px' fontWeight='semibold'>
@@ -129,6 +126,7 @@ export const BalanceCard = () => {
           </Button>
         </Flex>
       )}
+      <CollectModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </Flex>
   )
 }

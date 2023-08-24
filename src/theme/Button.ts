@@ -31,6 +31,22 @@ const variantSecondary = defineStyle(() => {
   }
 })
 
+const variantSquare = defineStyle(() => {
+  return {
+    color: 'text-secondary',
+    bg: 'btn-primary-bg',
+    p: '15px',
+    borderRadius: '6px',
+    fontSize: '16px',
+    fontWeight: 500,
+    _hover: {
+      opacity: 0.9,
+      _disabled: {
+        bg: 'btn-secondary-bg'
+      }
+    }}
+    })
+
 const variantWhite = defineStyle(() => {
   return {
     color: 'text-primary',
@@ -64,6 +80,7 @@ const Button: ComponentStyleConfig = {
   variants: {
     primary: variantPrimary,
     secondary: variantSecondary,
+    square: variantSquare,
     white: variantWhite
   }
 }
