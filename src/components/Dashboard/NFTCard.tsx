@@ -36,7 +36,7 @@ export const NFTCard = ({}) => {
           <Flex
             w='full'
             flex={1}
-            color='text-secondary'
+            color='text-white'
             direction='column'
             justify='space-between'
             p='10px'
@@ -46,14 +46,14 @@ export const NFTCard = ({}) => {
             w='full'
             bg='box-bg-primary'
             borderRadius='10px'
-            color='text-primary'
+            color='text-black'
             direction='column'
             justify='space-between'
             p='10px'
           ></Flex>
         </>
       ) : (
-        <Flex color='text-secondary'>
+        <Flex color='text-white'>
           <Text>
             asdfjl fas jkl fs ljk dfs jkl f dsajkl dfsajlk fds ajl k;fads jlk
             ;dfas jkl dfas jlk df asjkl ;adfs jkl;dfsa jkl ;adfs jlk ; adfsjkl

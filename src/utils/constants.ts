@@ -5,9 +5,10 @@ export enum RouteParams {
 }
 
 export enum ContractAddress {
-  RewardToken = '0x9B7Aa964f4Eb862EdE5b1C9a14A400534dd2DD95',
-  Nft = '0xED32089936765F5d2d195f2e96dE381569B951ec',
-  RewardDistributor = '0x60a315f4BB7F0ed10edBBD83a752C27fcb31Bf99'
+  RewardToken = '0x0241B580020bbc1894d28A4885601d4d5aCBaD0a',
+  Nft = '0x7631a5043E45684C59C9b032Ea7542ea3F6f1f1d',
+  MicroToken = '0x4257c70f2b23BCF9D76a3db5291b73972561523E',
+  RewardDistributor = '0xBF26c3ba03996c00A2D77FAF08520F7a1E058179'
 }
 
 // https://api.airtable.com/v0/appqvwJhjQuPPs95b/tblgJHluRnelpreeD

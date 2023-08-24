@@ -16,11 +16,20 @@ export const semanticTokens = {
     'box-bg-secondary': {
       default: '#0C0C0C'
     },
-    'text-primary': {
+    'text-black': {
       default: '#0C0C0C'
     },
-    'text-secondary': {
+    'text-white': {
       default: '#FFFFFF'
+    },
+    'text-gray': {
+      default: '#9D9D9D'
+    },
+    'text-green': {
+      default: '#00DE5C'
+    },
+    'text-red': {
+      default: '#FD1A1A'
     },
     'btn-primary-bg': {
       default: '#0C0C0C'

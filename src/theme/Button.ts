@@ -3,21 +3,23 @@ import { defineStyle } from '@chakra-ui/styled-system'
 
 const variantPrimary = defineStyle(() => {
   return {
-    color: 'btn-primary-text',
+    color: 'text-white',
     bg: 'btn-primary-bg',
+    fontSize: '11px',
+    fontWeight: 600,
     _hover: {
-      bg: 'btn-primary-bg-hover',
+      opacity: 0.9,
       _disabled: {
         bg: 'btn-primary-bg'
       }
     },
-    _active: { bg: 'btn-primary-bg-active' }
+    _active: { opacity: 0.8 }
   }
 })
 
 const variantSecondary = defineStyle(() => {
   return {
-    color: 'text-primary',
+    color: 'text-black',
     bg: 'btn-secondary-bg',
     fontSize: '11px',
     fontWeight: 600,

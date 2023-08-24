@@ -8,7 +8,6 @@ import {
   useRewardTokenBalanceOf,
   useRewardDistributorPendingRewards
 } from '@generated'
-import { Connected } from '@components/Connected'
 
 //Style UI
 import { InfoTooltip } from '@components/InfoTooltip'
@@ -51,7 +50,7 @@ export const BalanceCard = () => {
           <Flex
             w='full'
             flex={1}
-            color='text-secondary'
+            color='text-white'
             direction='column'
             justify='space-between'
             p='10px'
@@ -77,7 +76,7 @@ export const BalanceCard = () => {
             w='full'
             bg='box-bg-primary'
             borderRadius='10px'
-            color='text-primary'
+            color='text-black'
             direction='column'
             justify='space-between'
             p='10px'
@@ -100,7 +99,7 @@ export const BalanceCard = () => {
           </Flex>
         </>
       ) : (
-        <Flex color='text-secondary'>
+        <Flex color='text-white'>
           <Text>
             asdfjl fas jkl fs ljk dfs jkl f dsajkl dfsajlk fds ajl k;fads jlk
             ;dfas jkl dfas jlk df asjkl ;adfs jkl;dfsa jkl ;adfs jlk ; adfsjkl

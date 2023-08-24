@@ -5,6 +5,7 @@ import { Flex, Grid, GridItem } from '@chakra-ui/react'
 //Style UI
 import { BalanceCard } from '@components/Dashboard/BalanceCard'
 import { NFTCard } from '@components/Dashboard/NFTCard'
+import { TokenTable } from '@components/Dashboard/TokenTable'
 
 export default function Home () {
   return (
@@ -27,7 +28,11 @@ export default function Home () {
         </GridItem>
 
         <GridItem h='280px' colSpan={1} bg='green.300' />
-        <GridItem h='620px' colSpan={3} bg='yellow.300' />
+        <GridItem h='620px' colSpan={3} bg='yellow.300'>
+          <Flex as='span' w='full' justify='center' py='20px'>
+            <TokenTable />
+          </Flex>
+        </GridItem>
       </Grid>
     </Flex>
   )
