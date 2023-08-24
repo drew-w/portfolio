@@ -31,6 +31,22 @@ const variantSecondary = defineStyle(() => {
   }
 })
 
+const variantWhite = defineStyle(() => {
+  return {
+    color: 'text-primary',
+    bg: 'btn-white-bg',
+    fontSize: '11px',
+    fontWeight: 600,
+    _hover: {
+      opacity: 0.9,
+      _disabled: {
+        bg: 'btn-white-bg'
+      }
+    },
+    _active: { opacity: 0.8 }
+  }
+})
+
 const Button: ComponentStyleConfig = {
   baseStyle: {
     // textTransform: 'uppercase',
@@ -47,7 +63,8 @@ const Button: ComponentStyleConfig = {
   },
   variants: {
     primary: variantPrimary,
-    secondary: variantSecondary
+    secondary: variantSecondary,
+    white: variantWhite
   }
 }
 
