@@ -9,6 +9,7 @@ import { useRewardNftBalanceOf } from '@generated'
 import Image from 'next/image'
 import appStore from '@public/images/appStore.svg'
 import playStore from '@public/images/playStore.svg'
+import qrCode from '@public/images/qrCode.png'
 
 //Types
 import { ContractAddress } from '@utils/constants'
@@ -60,7 +61,7 @@ export const TokenCard = ({}) => {
           borderRadius='10px'
           p='15px'
           direction='column'
-          //   justifyContent='space-between'
+          justifyContent='space-between'
         >
           <div>
             <Text fontSize='20px' fontWeight='semibold'>
@@ -71,9 +72,12 @@ export const TokenCard = ({}) => {
               iOS and Android mobile apps.
             </Text>
           </div>
-          <Flex direction='column'>
-            <Image src={appStore} alt='app store' />
-            <Image src={playStore} alt='play store' />
+          <Flex justifyContent='space-between'>
+            <Image src={qrCode} height={80} alt='qr code' />
+            <Flex direction='column'>
+              <Image src={appStore} alt='app store' />
+              <Image src={playStore} alt='play store' />
+            </Flex>
           </Flex>
         </Flex>
       )}
