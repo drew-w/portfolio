@@ -1,5 +1,17 @@
 //Chakra
-import { Flex, Text } from '@chakra-ui/react'
+import {
+  Flex,
+  Text,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  Button
+} from '@chakra-ui/react'
 
 //Data
 import { useAccount } from 'wagmi'
@@ -50,7 +62,20 @@ export const TokenCard = ({}) => {
             direction='column'
             justify='space-between'
             p='10px'
-          />
+          >
+<Menu gutter={0}>
+  <MenuButton>
+    Token Value
+  </MenuButton>
+  <MenuList>
+    <MenuItem>Download</MenuItem>
+    <MenuItem>Create a Copy</MenuItem>
+    <MenuItem>Mark as Draft</MenuItem>
+    <MenuItem>Delete</MenuItem>
+    <MenuItem>Attend a Workshop</MenuItem>
+  </MenuList>
+</Menu>
+            </Flex>
         </>
       ) : (
         <Flex

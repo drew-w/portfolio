@@ -2,6 +2,7 @@ import { Poppins } from 'next/font/google'
 import { semanticTokens } from '@theme/semanticTokens'
 import { extendTheme } from '@chakra-ui/react'
 import { mode, GlobalStyleProps } from '@chakra-ui/theme-tools'
+import { menuTheme } from '@theme/Menu'
 
 // import { Input } from 'theme/inputStyle'
 // import { Text, Heading, Link } from 'theme/textStyle'
@@ -39,10 +40,13 @@ const components = {
 }
 
 const theme = extendTheme({
+  
   semanticTokens,
   config,
   styles,
-  components,
+  components: {
+    Menu: menuTheme,
+  },
   fonts
 })
 export default theme
