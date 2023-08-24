@@ -2,13 +2,13 @@ export const semanticTokens = {
   colors: {
     fair: '#006BDB',
     'bg-default': {
-      default: '#121212',
-      _light: '#FAFAFC'
+      // default: '#121212',
+      default: '#FAFAFC'
       // _light: 'red'
     },
     'fg-default': {
-      default: '##0C0C0C',
-      _light: '#FFFFFF'
+      // default: '##0C0C0C',
+      default: '#FFFFFF'
     },
     'box-bg-primary': {
       default: '#FFFFFF'
@@ -28,12 +28,18 @@ export const semanticTokens = {
     'btn-secondary-bg': {
       default: '#F3F3F3'
     },
+    'btn-white-bg': {
+      default: '#FFFFFF'
+    },
     'icon-primary': {
       default: '#CDCDCD'
     },
     'icon-secondary': {
       default: '#6D6D6D'
-    }
+    },
+    'box-border': {
+      default: '#f3f3f3'
+    },
   },
   fonts: {
     body: 'poppins',

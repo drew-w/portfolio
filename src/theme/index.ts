@@ -7,6 +7,7 @@ import { menuTheme } from '@theme/Menu'
 // import { Input } from 'theme/inputStyle'
 // import { Text, Heading, Link } from 'theme/textStyle'
 import { Button } from '@theme/Button'
+import { Modal } from '@theme/Modal'
 // import { Box } from 'theme/BoxStyle'
 
 const config = {
@@ -36,7 +37,8 @@ const fonts = {
 }
 
 const components = {
-  Button
+  Button,
+  Modal
 }
 
 const theme = extendTheme({
