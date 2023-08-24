@@ -1,4 +1,3 @@
-'use client'
 //Chakra
 import { Button, Flex, Text } from '@chakra-ui/react'
 
@@ -8,16 +7,16 @@ import {
   useRewardTokenBalanceOf,
   useRewardDistributorPendingRewards
 } from '@generated'
+import { ContractAddress } from '@utils/constants'
+import { useState } from 'react'
 
 //Style UI
 import { InfoTooltip } from '@components/InfoTooltip'
-
-//Types
-import { ContractAddress } from '@utils/constants'
+import { CollectModal } from './CollectModal'
 
 export const BalanceCard = () => {
-  const account = useAccount(),
-    { isConnected } = account
+  const account = useAccount()
+  const { isConnected } = account
 
   const { data: tokenBalance } = useRewardTokenBalanceOf({
     enabled: account?.isConnected,
@@ -31,6 +30,8 @@ export const BalanceCard = () => {
     args: [account.address!],
     watch: true
   })
+
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
     <Flex
@@ -50,7 +51,7 @@ export const BalanceCard = () => {
           <Flex
             w='full'
             flex={1}
-            color='text-white'
+            color='text-secondary'
             direction='column'
             justify='space-between'
             p='10px'
@@ -62,7 +63,9 @@ export const BalanceCard = () => {
               <InfoTooltip label='hello' dark />
             </Flex>
             <Flex as='span' w='full' justify='space-between' align='baseline'>
-              <Button variant='secondary'>COLLECT</Button>
+              <Button variant='secondary' onClick={() => setIsOpen(true)}>
+                COLLECT
+              </Button>
               <Text fontSize='30px' fontWeight='semibold'>
                 {(pendingRewards || 0)?.toLocaleString('en-US', {
                   style: 'currency',
@@ -76,7 +79,7 @@ export const BalanceCard = () => {
             w='full'
             bg='box-bg-primary'
             borderRadius='10px'
-            color='text-black'
+            color='text-primary'
             direction='column'
             justify='space-between'
             p='10px'
@@ -88,7 +91,7 @@ export const BalanceCard = () => {
               <InfoTooltip label='are you feeling ok' />
             </Flex>
             <Flex as='span' w='full'>
-              <></> {/*placeholder for percantage change */}
+              <></>
               <Text fontSize='30px' fontWeight='semibold'>
                 {(tokenBalance || 0)?.toLocaleString('en-US', {
                   style: 'currency',
@@ -99,14 +102,36 @@ export const BalanceCard = () => {
           </Flex>
         </>
       ) : (
-        <Flex color='text-white'>
-          <Text>
-            asdfjl fas jkl fs ljk dfs jkl f dsajkl dfsajlk fds ajl k;fads jlk
-            ;dfas jkl dfas jlk df asjkl ;adfs jkl;dfsa jkl ;adfs jlk ; adfsjkl
-            ;adfs jkl ;dfa jkl ;adfs jkl;df asjkl; adfsl ;jk
-          </Text>
+        <Flex
+          flex={1}
+          direction='column'
+          justify='flex-end'
+          p='10px'
+          color='text-secondary'
+        >
+          <div style={{ flex: 1 }}>
+            <Text fontSize='20px' fontWeight='semibold'>
+              Welcome
+            </Text>
+            <Text fontSize='12px' marginTop='5px'>
+              Utilizing DEBT's Box's proprietary software, you can create a
+              portfolio of blockchain miners. By purchasing and managing
+              different software node licenses you can earn rewards from several
+              asset classes, all from the comfort and convenience of your own
+              home.
+            </Text>
+          </div>
+          <Button
+            fontSize='16px'
+            height='30px'
+            alignSelf='flex-end'
+            variant='white'
+          >
+            Connect Wallet
+          </Button>
         </Flex>
       )}
+      <CollectModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </Flex>
   )
 }

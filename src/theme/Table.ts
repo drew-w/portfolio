@@ -12,7 +12,7 @@ const baseStyle = definePartsStyle({
     borderSpacing: '0 10px'
   },
   caption: {
-    color: 'text-black',
+    color: 'text-primary',
     fontWeight: 600,
     textAlign: 'start'
   },
