@@ -1,12 +1,9 @@
 export const semanticTokens = {
   colors: {
-    fair: '#006BDB',
     'bg-default': {
-      // default: '#121212',
       default: '#FAFAFC'
     },
     'fg-default': {
-      // default: '##0C0C0C',
       default: '#FFFFFF'
     },
     'box-bg-primary': {
