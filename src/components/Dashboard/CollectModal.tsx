@@ -33,12 +33,11 @@ export function CollectModal ({ isOpen, setIsOpen }: Props) {
           <Box
             border='2px solid'
             borderRadius='8px'
-            borderColor='#f3f3f3'
-            paddingLeft='15px'
-            paddingRight='15px'
+            borderColor='box-border'
+            px='15px'
             paddingTop='10px'
             paddingBottom='16px'
-            boxShadow='0px 1px 2px rgba(0, 0, 0, 0.2)'
+            boxShadow='box-shadow-primary'
           >
             <Text fontSize='12px'>
               Collecting helps ensure that only legitimate data transactions are

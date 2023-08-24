@@ -33,7 +33,10 @@ export const semanticTokens = {
     },
     'icon-secondary': {
       default: '#6D6D6D'
-    }
+    },
+    'box-border': {
+      default: '#f3f3f3'
+    },
   },
   fonts: {
     body: 'poppins',
