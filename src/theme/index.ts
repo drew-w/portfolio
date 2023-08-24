@@ -2,13 +2,10 @@ import { Poppins } from 'next/font/google'
 import { semanticTokens } from '@theme/semanticTokens'
 import { extendTheme } from '@chakra-ui/react'
 import { mode, GlobalStyleProps } from '@chakra-ui/theme-tools'
-
-// import { Input } from 'theme/inputStyle'
-// import { Text, Heading, Link } from 'theme/textStyle'
 import { Button } from '@theme/Button'
 import { Table } from '@theme/Table'
 import { Modal } from '@theme/Modal'
-// import { Box } from 'theme/BoxStyle'
+import { Menu } from '@theme/Menu'
 
 const config = {
   useSystemColorMode: false,
@@ -39,7 +36,8 @@ const fonts = {
 const components = {
   Button,
   Table,
-  Modal
+  Modal,
+  Menu
 }
 
 const theme = extendTheme({

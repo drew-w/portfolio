@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react'
 import { BalanceCard } from '@components/Dashboard/BalanceCard'
 import { NFTCard } from '@components/Dashboard/NFTCard'
 import { TokenTable } from '@components/Dashboard/TokenTable'
+import { TokenCard } from '@components/Dashboard/TokenCard'
 
 export default function Home () {
   const [columnVisibility, setColumnVisibility] = useState({})
@@ -43,7 +44,11 @@ export default function Home () {
           </Flex>
         </GridItem>
 
-        <GridItem h='280px' colSpan={1} bg='green.300' />
+        <GridItem h='280px' colSpan={1} bg='green.300'>
+          <Flex as='span' w='full' justify='center'>
+            <TokenCard />
+          </Flex>
+        </GridItem>
         <GridItem h='620px' colSpan={3} bg='yellow.300'>
           <Flex as='span' w='full' justify='center' py='20px'>
             <TokenTable
