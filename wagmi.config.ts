@@ -1166,6 +1166,11 @@ export default defineConfig({
       name: 'RewardDistributor',
       abi: [
         {
+          inputs: [],
+          stateMutability: 'nonpayable',
+          type: 'constructor'
+        },
+        {
           anonymous: false,
           inputs: [
             {
@@ -1214,19 +1219,50 @@ export default defineConfig({
           anonymous: false,
           inputs: [
             {
-              indexed: true,
-              internalType: 'address',
-              name: 'staker',
-              type: 'address'
-            },
-            {
-              indexed: true,
+              indexed: false,
               internalType: 'uint256',
-              name: 'tokenId',
+              name: 'amount',
               type: 'uint256'
             }
           ],
-          name: 'NftStaked',
+          name: 'IntervalBurn',
+          type: 'event'
+        },
+        {
+          anonymous: false,
+          inputs: [],
+          name: 'LogInit',
+          type: 'event'
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: 'uint256',
+              name: 'lastRewardTime',
+              type: 'uint256'
+            },
+            {
+              indexed: false,
+              internalType: 'uint256',
+              name: 'totalRewardsPerSecond',
+              type: 'uint256'
+            },
+            {
+              indexed: false,
+              internalType: 'uint256',
+              name: 'accRewardsPerShare',
+              type: 'uint256'
+            },
+            {
+              indexed: false,
+              internalType: 'uint256',
+              name: 'totalRewardsWeight',
+              type: 'uint256'
+            }
+          ],
+          name: 'LogUpdatePool',
           type: 'event'
         },
         {
@@ -1235,17 +1271,74 @@ export default defineConfig({
             {
               indexed: true,
               internalType: 'address',
-              name: 'staker',
+              name: 'user',
               type: 'address'
             },
             {
-              indexed: true,
+              indexed: false,
               internalType: 'uint256',
-              name: 'tokenId',
+              name: 'amount',
               type: 'uint256'
             }
           ],
-          name: 'NftUnstaked',
+          name: 'MicrosStaked',
+          type: 'event'
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: 'address',
+              name: 'user',
+              type: 'address'
+            },
+            {
+              indexed: false,
+              internalType: 'uint256',
+              name: 'amount',
+              type: 'uint256'
+            }
+          ],
+          name: 'MicrosUnstaked',
+          type: 'event'
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: 'address',
+              name: 'user',
+              type: 'address'
+            },
+            {
+              indexed: false,
+              internalType: 'uint256[]',
+              name: 'tokenIds',
+              type: 'uint256[]'
+            }
+          ],
+          name: 'NftsStaked',
+          type: 'event'
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: 'address',
+              name: 'user',
+              type: 'address'
+            },
+            {
+              indexed: false,
+              internalType: 'uint256[]',
+              name: 'tokenIds',
+              type: 'uint256[]'
+            }
+          ],
+          name: 'NftsUnstaked',
           type: 'event'
         },
         {
@@ -1304,19 +1397,6 @@ export default defineConfig({
           inputs: [
             {
               indexed: false,
-              internalType: 'uint256',
-              name: 'rewardsPerSecond',
-              type: 'uint256'
-            }
-          ],
-          name: 'RewardsPerSecondUpdated',
-          type: 'event'
-        },
-        {
-          anonymous: false,
-          inputs: [
-            {
-              indexed: false,
               internalType: 'address',
               name: 'account',
               type: 'address'
@@ -1339,6 +1419,72 @@ export default defineConfig({
           type: 'event'
         },
         {
+          inputs: [
+            {
+              internalType: 'contract IERC20',
+              name: '_rewardsToken',
+              type: 'address'
+            },
+            {
+              internalType: 'contract IERC721Enumerable',
+              name: '_nft',
+              type: 'address'
+            },
+            {
+              internalType: 'contract IERC20',
+              name: '_microToken',
+              type: 'address'
+            },
+            {
+              internalType: 'uint256',
+              name: '_rewardsStartTime',
+              type: 'uint256'
+            },
+            {
+              internalType: 'uint256',
+              name: '_secondsBetweenBurns',
+              type: 'uint256'
+            },
+            {
+              internalType: 'uint8',
+              name: '_burnPercentage',
+              type: 'uint8'
+            }
+          ],
+          name: '__PerpetualIntervalBurnableRewardDistributor_init',
+          outputs: [],
+          stateMutability: 'nonpayable',
+          type: 'function'
+        },
+        {
+          inputs: [
+            {
+              internalType: 'contract IERC20',
+              name: '_rewardsToken',
+              type: 'address'
+            },
+            {
+              internalType: 'contract IERC721Enumerable',
+              name: '_nft',
+              type: 'address'
+            },
+            {
+              internalType: 'contract IERC20',
+              name: '_microToken',
+              type: 'address'
+            },
+            {
+              internalType: 'uint256',
+              name: '_rewardsStartTime',
+              type: 'uint256'
+            }
+          ],
+          name: '__RewardDistributor_init',
+          outputs: [],
+          stateMutability: 'nonpayable',
+          type: 'function'
+        },
+        {
           inputs: [],
           name: 'accRewardsPerShare',
           outputs: [
@@ -1346,6 +1492,32 @@ export default defineConfig({
               internalType: 'uint256',
               name: '',
               type: 'uint256'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          inputs: [
+            {
+              internalType: 'uint256',
+              name: 'amount',
+              type: 'uint256'
+            }
+          ],
+          name: 'burn',
+          outputs: [],
+          stateMutability: 'nonpayable',
+          type: 'function'
+        },
+        {
+          inputs: [],
+          name: 'burnPercentage',
+          outputs: [
+            {
+              internalType: 'uint8',
+              name: '',
+              type: 'uint8'
             }
           ],
           stateMutability: 'view',
@@ -1361,30 +1533,29 @@ export default defineConfig({
         {
           inputs: [
             {
-              internalType: 'uint256',
-              name: 'tokenId',
-              type: 'uint256'
+              internalType: 'contract IERC20',
+              name: '_rewardsToken',
+              type: 'address'
             },
             {
-              internalType: 'address',
-              name: 'user',
+              internalType: 'contract IERC721Enumerable',
+              name: '_nft',
+              type: 'address'
+            },
+            {
+              internalType: 'contract IERC20',
+              name: '_microToken',
               type: 'address'
             }
           ],
-          name: 'getTokenIndex',
-          outputs: [
-            {
-              internalType: 'uint256',
-              name: '',
-              type: 'uint256'
-            }
-          ],
-          stateMutability: 'view',
+          name: 'initialize',
+          outputs: [],
+          stateMutability: 'nonpayable',
           type: 'function'
         },
         {
           inputs: [],
-          name: 'getTotalStakedTokens',
+          name: 'lastIntervalBurnTime',
           outputs: [
             {
               internalType: 'uint256',
@@ -1410,6 +1581,19 @@ export default defineConfig({
         },
         {
           inputs: [],
+          name: 'microToken',
+          outputs: [
+            {
+              internalType: 'contract IERC20',
+              name: '',
+              type: 'address'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          inputs: [],
           name: 'nft',
           outputs: [
             {
@@ -1422,14 +1606,8 @@ export default defineConfig({
           type: 'function'
         },
         {
-          inputs: [
-            {
-              internalType: 'address',
-              name: '_user',
-              type: 'address'
-            }
-          ],
-          name: 'nftCount',
+          inputs: [],
+          name: 'nftWeight',
           outputs: [
             {
               internalType: 'uint256',
@@ -1547,8 +1725,40 @@ export default defineConfig({
           type: 'function'
         },
         {
+          inputs: [
+            {
+              internalType: 'address',
+              name: 'account',
+              type: 'address'
+            }
+          ],
+          name: 'rewardsPerSecond',
+          outputs: [
+            {
+              internalType: 'uint256',
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
           inputs: [],
           name: 'rewardsPerSecond',
+          outputs: [
+            {
+              internalType: 'uint256',
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          inputs: [],
+          name: 'rewardsStartTime',
           outputs: [
             {
               internalType: 'uint256',
@@ -1573,8 +1783,72 @@ export default defineConfig({
           type: 'function'
         },
         {
+          inputs: [
+            {
+              internalType: 'address',
+              name: 'account',
+              type: 'address'
+            }
+          ],
+          name: 'rewardsWeight',
+          outputs: [
+            {
+              internalType: 'uint256',
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
           inputs: [],
-          name: 'stakeAllTokens',
+          name: 'secondsBetweenBurns',
+          outputs: [
+            {
+              internalType: 'uint256',
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          inputs: [
+            {
+              internalType: 'uint256',
+              name: '_rewardsStartTime',
+              type: 'uint256'
+            }
+          ],
+          name: 'setRewardsStartTime',
+          outputs: [],
+          stateMutability: 'nonpayable',
+          type: 'function'
+        },
+        {
+          inputs: [],
+          name: 'shouldIntervalBurn',
+          outputs: [
+            {
+              internalType: 'bool',
+              name: '',
+              type: 'bool'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          inputs: [
+            {
+              internalType: 'uint256',
+              name: 'amount',
+              type: 'uint256'
+            }
+          ],
+          name: 'stakeMicroTokens',
           outputs: [],
           stateMutability: 'nonpayable',
           type: 'function'
@@ -1582,12 +1856,12 @@ export default defineConfig({
         {
           inputs: [
             {
-              internalType: 'uint256',
-              name: 'tokenId',
-              type: 'uint256'
+              internalType: 'uint256[]',
+              name: '_tokenIds',
+              type: 'uint256[]'
             }
           ],
-          name: 'stakeToken',
+          name: 'stakeTokens',
           outputs: [],
           stateMutability: 'nonpayable',
           type: 'function'
@@ -1596,7 +1870,7 @@ export default defineConfig({
           inputs: [
             {
               internalType: 'address',
-              name: 'user',
+              name: 'account',
               type: 'address'
             }
           ],
@@ -1615,7 +1889,26 @@ export default defineConfig({
           inputs: [
             {
               internalType: 'address',
-              name: 'owner',
+              name: 'account',
+              type: 'address'
+            }
+          ],
+          name: 'stakedMicroBalanceOf',
+          outputs: [
+            {
+              internalType: 'uint256',
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          inputs: [
+            {
+              internalType: 'address',
+              name: 'account',
               type: 'address'
             },
             {
@@ -1639,7 +1932,7 @@ export default defineConfig({
           inputs: [
             {
               internalType: 'address',
-              name: 'user',
+              name: 'account',
               type: 'address'
             }
           ],
@@ -1657,6 +1950,58 @@ export default defineConfig({
         {
           inputs: [],
           name: 'totalPendingRewards',
+          outputs: [
+            {
+              internalType: 'uint256',
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          inputs: [],
+          name: 'totalRewardsPerSecond',
+          outputs: [
+            {
+              internalType: 'uint256',
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          inputs: [],
+          name: 'totalRewardsWeight',
+          outputs: [
+            {
+              internalType: 'uint256',
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          inputs: [],
+          name: 'totalStakedMicros',
+          outputs: [
+            {
+              internalType: 'uint256',
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          inputs: [],
+          name: 'totalStakedNfts',
           outputs: [
             {
               internalType: 'uint256',
@@ -1688,8 +2033,14 @@ export default defineConfig({
           type: 'function'
         },
         {
-          inputs: [],
-          name: 'unstakeAllTokens',
+          inputs: [
+            {
+              internalType: 'uint256',
+              name: 'amount',
+              type: 'uint256'
+            }
+          ],
+          name: 'unstakeMicroTokens',
           outputs: [],
           stateMutability: 'nonpayable',
           type: 'function'
@@ -1697,25 +2048,12 @@ export default defineConfig({
         {
           inputs: [
             {
-              internalType: 'uint256',
-              name: 'tokenId',
-              type: 'uint256'
+              internalType: 'uint256[]',
+              name: '_tokenIds',
+              type: 'uint256[]'
             }
           ],
-          name: 'unstakeToken',
-          outputs: [],
-          stateMutability: 'nonpayable',
-          type: 'function'
-        },
-        {
-          inputs: [
-            {
-              internalType: 'uint256',
-              name: 'index',
-              type: 'uint256'
-            }
-          ],
-          name: 'unstakeTokenByIndex',
+          name: 'unstakeTokens',
           outputs: [],
           stateMutability: 'nonpayable',
           type: 'function'
@@ -1770,12 +2108,35 @@ export default defineConfig({
           outputs: [
             {
               internalType: 'uint256',
+              name: 'stakedNfts',
+              type: 'uint256'
+            },
+            {
+              internalType: 'uint256',
               name: 'rewardDebt',
               type: 'uint256'
             },
             {
               internalType: 'uint256',
               name: 'unpaidRewards',
+              type: 'uint256'
+            },
+            {
+              internalType: 'uint256',
+              name: 'stakedMicros',
+              type: 'uint256'
+            }
+          ],
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          inputs: [],
+          name: 'viabilityTime',
+          outputs: [
+            {
+              internalType: 'uint256',
+              name: '',
               type: 'uint256'
             }
           ],
