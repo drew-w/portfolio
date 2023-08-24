@@ -31,7 +31,6 @@ export const formatDelta = (
     change = 'positive'
   }
 
-  //   const delta = marketValueDelta.isLessThan(0) ? '-' : marketValueDelta.isEqualTo(0) ? '' : '+'
   const marketDelta = `${delta}${displayPercentage.toFixed(2)}`
   return {
     //@ts-ignore
@@ -39,18 +38,3 @@ export const formatDelta = (
     delta: marketDelta
   }
 }
-
-// const yesterday = new BigNumber(yesterdaysMarketValue)
-// const today = new BigNumber(marketValue)
-
-// const marketValueDelta = today.minus(yesterday)
-// const marketValuePercentage = marketValueDelta
-//   .dividedBy(yesterday)
-//   .multipliedBy(100)
-//   .absoluteValue()
-// const displayPercentage =
-//   typeof marketValuePercentage !== 'object'
-//     ? '0.00'
-//     : marketValuePercentage.toFixed(2)
-// const delta = marketValueDelta.isLessThan(0) ? '-' : '+'
-// const marketDelta = `${delta} ${displayPercentage}%`
