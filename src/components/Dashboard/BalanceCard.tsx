@@ -97,16 +97,33 @@ export const BalanceCard = () => {
           </Flex>
         </>
       ) : (
-        <Flex color='text-secondary' direction='column' p='15px'>
-          <Text fontSize='20px' fontWeight='semibold'>
-            Welcome
-          </Text>
-          <Text fontSize='12px' marginTop='5px'>
-            Utilizing DEBT's Box's proprietary software, you can create a
-            portfolio of blockchain miners. By purchasing and managing different
-            software node licenses you can earn rewards from several asset
-            classes, all from the comfort and convenience of your own home.
-          </Text>
+        <Flex
+          flex={1}
+          direction='column'
+          justify='flex-end'
+          p='10px'
+          color='text-secondary'
+        >
+          <div style={{ flex: 1 }}>
+            <Text fontSize='20px' fontWeight='semibold'>
+              Welcome
+            </Text>
+            <Text fontSize='12px' marginTop='5px'>
+              Utilizing DEBT's Box's proprietary software, you can create a
+              portfolio of blockchain miners. By purchasing and managing
+              different software node licenses you can earn rewards from several
+              asset classes, all from the comfort and convenience of your own
+              home.
+            </Text>
+          </div>
+          <Button
+            fontSize='16px'
+            height='30px'
+            alignSelf='flex-end'
+            variant='white'
+          >
+            Connect Wallet
+          </Button>
         </Flex>
       )}
       <CollectModal isOpen={isOpen} setIsOpen={setIsOpen} />
