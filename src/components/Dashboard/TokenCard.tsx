@@ -57,7 +57,6 @@ export const TokenCard = ({}) => {
       setFormattedBalances(formatted)
     }
   }, [isConnected])
-  console.log(top4Formatted)
 
   return (
     <Flex

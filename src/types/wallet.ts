@@ -3,5 +3,5 @@ import { TokenKeys } from './tokens'
 
 export interface WalletBalance {
   address: string
-  balances: Record<TokenKeys, BigNumber | number>
+  balances: Record<TokenKeys | string, BigNumber | number>
 }

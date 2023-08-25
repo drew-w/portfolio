@@ -10,7 +10,7 @@ export const formatCurrency = (number: number | string): string => {
 export const formatDelta = (
   current: string,
   previous: string
-): { change: 'neutral' | 'positive' | 'negative'; delta: string } => {
+): { change: 'neutral' | 'positive' | 'negative' | string; delta: string } => {
   const today = new BigNumber(current)
   const yesterday = new BigNumber(previous)
 
@@ -35,7 +35,6 @@ export const formatDelta = (
 
   const marketDelta = `${delta}${displayPercentage.toFixed(2)}`
   return {
-    //@ts-ignore
     change,
     delta: marketDelta
   }
@@ -46,7 +45,7 @@ interface TokenTotals {
   dollarAmount: BigNumber
   percent: BigNumber
 }
-type FormattedBalance = Record<TokenKeys, TokenTotals>
+type FormattedBalance = Record<TokenKeys | string, TokenTotals>
 export const formatBalancePercentage = (
   walletBalance: WalletBalance,
   tokens: Token[]
@@ -60,7 +59,6 @@ export const formatBalancePercentage = (
       const decimal = 1 / Math.pow(10, token?.decimals || 18)
 
       const balance = new BigNumber(
-        //@ts-ignore
         balances?.[key]?.toString() || balances?.[key]
       )
       if (token?.marketValueNow) {
@@ -77,7 +75,6 @@ export const formatBalancePercentage = (
       const decimal = 1 / Math.pow(10, token?.decimals || 18)
 
       const balance = new BigNumber(
-        //@ts-ignore
         balances?.[tokenKey]?.toString() || balances?.[tokenKey]
       )
       const tokenAmount = balance.times(decimal)
@@ -104,7 +101,6 @@ export const formatBalancePercentage = (
   //calculating the percentage and dollar amount of the rest of the tokens not in the top 4
   const otherFormatted = sortedByValue.reduce(
     (totals: TokenTotals, tokenKey: TokenKeys[any]) => {
-      //@ts-ignore
       const currentKey: TokenTotals = formatted[tokenKey]
       const newTokenAmount = totals.tokenAmount.plus(currentKey.tokenAmount)
       const newDollarAmount = totals.dollarAmount.plus(currentKey.dollarAmount)
@@ -124,10 +120,11 @@ export const formatBalancePercentage = (
   )
 
   //re formatting the total object based off the list of top 4 keys
-  const top4Formatted = Object.keys(formatted).reduce((acc, tokenKey) => {
+  const top4Formatted = Object.keys(formatted).reduce((acc: any, tokenKey) => {
     if (top4.includes(tokenKey)) {
-      //@ts-ignore
-      acc[tokenKey] = formatted[tokenKey]
+      if (formatted[tokenKey].tokenAmount.isGreaterThan(0)) {
+        acc[tokenKey] = formatted[tokenKey]
+      }
     }
     return acc
   }, {})
@@ -138,14 +135,14 @@ export const formatBalancePercentage = (
   }
 }
 const sortByValue = (formatted: FormattedBalance) =>
-  Object.keys(formatted).sort((a: TokenKeys[any], b: TokenKeys[any]) => {
-    //@ts-ignore
-    const aPercent = formatted[a].percent
-    //@ts-ignore
-    const bPercent = formatted[b].percent
-    return aPercent.isLessThan(bPercent)
-      ? 1
-      : aPercent.isGreaterThan(bPercent)
-      ? -1
-      : 0
-  })
+  Object.keys(formatted)
+    .filter(tokenKey => formatted[tokenKey].tokenAmount.isGreaterThan(0))
+    .sort((a: TokenKeys[any], b: TokenKeys[any]) => {
+      const aPercent = formatted[a].percent
+      const bPercent = formatted[b].percent
+      return aPercent.isLessThan(bPercent)
+        ? 1
+        : aPercent.isGreaterThan(bPercent)
+        ? -1
+        : 0
+    })
