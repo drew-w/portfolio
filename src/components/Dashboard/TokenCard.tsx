@@ -70,8 +70,6 @@ export const TokenCard = ({}) => {
       borderRadius='10px'
       shadow='box-shadow-primary'
       justify='space-between'
-      borderColor='#f3f3f3'
-      borderWidth='1px'
     >
       {isConnected ? (
         <>
