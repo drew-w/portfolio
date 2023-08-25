@@ -44,13 +44,13 @@ export const NFTCard = ({}) => {
         <>
           <Flex
             flex={1}
+            color='text-secondary'
+            direction='column'
             justify='space-between'
             w='full'
             h='135px'
             bg='box-bg-primary'
             borderRadius='10px'
-            color='text-primary'
-            direction='column'
             p='10px'
             mb='10px'
           >
