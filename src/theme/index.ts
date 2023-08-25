@@ -2,12 +2,12 @@ import { Poppins } from 'next/font/google'
 import { semanticTokens } from '@theme/semanticTokens'
 import { extendTheme } from '@chakra-ui/react'
 import { mode, GlobalStyleProps } from '@chakra-ui/theme-tools'
-import { menuTheme } from '@theme/Menu'
 
 // import { Input } from 'theme/inputStyle'
 // import { Text, Heading, Link } from 'theme/textStyle'
 import { Button } from '@theme/Button'
 import { Modal } from '@theme/Modal'
+import { Menu } from '@theme/Menu'
 // import { Box } from 'theme/BoxStyle'
 
 const config = {
@@ -19,7 +19,7 @@ const styles = {
   global: (props: GlobalStyleProps) => ({
     body: {
       bg: mode(
-        semanticTokens.colors['bg-default']._light,
+        semanticTokens.colors['bg-default'].default,
         semanticTokens.colors['bg-default'].default
       )(props)
     }
@@ -38,17 +38,15 @@ const fonts = {
 
 const components = {
   Button,
-  Modal
+  Modal,
+  Menu,
 }
 
 const theme = extendTheme({
-  
+  components,
   semanticTokens,
   config,
   styles,
-  components: {
-    Menu: menuTheme,
-  },
   fonts
 })
 export default theme

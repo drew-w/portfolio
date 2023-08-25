@@ -22,6 +22,8 @@ import Image from 'next/image'
 import appStore from '@public/images/appStore.svg'
 import playStore from '@public/images/playStore.svg'
 import qrCode from '@public/images/qrCode.png'
+import { Variants } from 'framer-motion'
+import { menuListAnimationVariants } from '@theme/Menu'
 
 //Types
 import { ContractAddress } from '@utils/constants'
@@ -35,6 +37,10 @@ export const TokenCard = ({}) => {
     address: ContractAddress.Nft,
     args: [account.address!]
   })
+
+  const customMotionProps = {
+    transition: { duration: 0.9 } // Animation duration
+  }
 
   return (
     <Flex
@@ -63,19 +69,17 @@ export const TokenCard = ({}) => {
             justify='space-between'
             p='10px'
           >
-<Menu gutter={0}>
-  <MenuButton>
-    Token Value
-  </MenuButton>
-  <MenuList>
-    <MenuItem>Download</MenuItem>
-    <MenuItem>Create a Copy</MenuItem>
-    <MenuItem>Mark as Draft</MenuItem>
-    <MenuItem>Delete</MenuItem>
-    <MenuItem>Attend a Workshop</MenuItem>
-  </MenuList>
-</Menu>
-            </Flex>
+            <Menu gutter={0}>
+              <MenuButton width='205px' paddingX='3'>
+                Token Value
+              </MenuButton>
+              <MenuList motionProps={{ variants: menuListAnimationVariants }}>
+                <MenuItem>Rewards Rate</MenuItem>
+                <MenuItem>Token Value</MenuItem>
+                <MenuItem>NFT Count</MenuItem>
+              </MenuList>
+            </Menu>
+          </Flex>
         </>
       ) : (
         <Flex
