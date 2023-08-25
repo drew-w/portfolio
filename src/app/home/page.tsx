@@ -1,13 +1,29 @@
 'use client'
 //Chakra
-import { Flex, Grid, GridItem } from '@chakra-ui/react'
+import { Flex, Grid, GridItem, useBreakpointValue } from '@chakra-ui/react'
+
+//Data
+import { data as tokenData } from '@hooks/tokens'
+import { allProjectsColumns, setAllProjectsColumnsVisibility } from './data'
+import { useState, useEffect } from 'react'
 
 //Style UI
 import { BalanceCard } from '@components/Dashboard/BalanceCard'
 import { NFTCard } from '@components/Dashboard/NFTCard'
-import { TokenCard } from '@components/Dashboard/TokenCard'
+import { TokenTable } from '@components/Dashboard/TokenTable'
 
 export default function Home () {
+  const [columnVisibility, setColumnVisibility] = useState({})
+  const screenSize =
+    useBreakpointValue(
+      { base: 'base', sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' },
+      { fallback: 'lg' }
+    ) || 'lg'
+
+  useEffect(() => {
+    setAllProjectsColumnsVisibility(setColumnVisibility, screenSize)
+  }, [screenSize])
+
   return (
     <Flex as='main' w='full' justify='center' py='20px'>
       <Grid
@@ -27,13 +43,18 @@ export default function Home () {
           </Flex>
         </GridItem>
 
-        <GridItem h='280px' colSpan={1} bg='green.300'>
-          <Flex as='span' w='full' justify='center'>
-            <TokenCard />
+        <GridItem h='280px' colSpan={1} bg='green.300' />
+        <GridItem h='620px' colSpan={3} bg='yellow.300'>
+          <Flex as='span' w='full' justify='center' py='20px'>
+            <TokenTable
+              data={tokenData}
+              caption='All Projects'
+              columns={allProjectsColumns}
+              columnVisibility={columnVisibility}
+              setColumnVisibility={setColumnVisibility}
+            />
           </Flex>
         </GridItem>
-
-        <GridItem h='620px' colSpan={3} bg='yellow.300' />
       </Grid>
     </Flex>
   )

@@ -6,6 +6,7 @@ import { mode, GlobalStyleProps } from '@chakra-ui/theme-tools'
 // import { Input } from 'theme/inputStyle'
 // import { Text, Heading, Link } from 'theme/textStyle'
 import { Button } from '@theme/Button'
+import { Table } from '@theme/Table'
 import { Modal } from '@theme/Modal'
 import { Menu } from '@theme/Menu'
 // import { Box } from 'theme/BoxStyle'
@@ -38,6 +39,7 @@ const fonts = {
 
 const components = {
   Button,
+  Table,
   Modal,
   Menu,
 }

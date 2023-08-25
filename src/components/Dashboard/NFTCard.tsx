@@ -44,13 +44,13 @@ export const NFTCard = ({}) => {
         <>
           <Flex
             flex={1}
+            color='text-secondary'
+            direction='column'
             justify='space-between'
             w='full'
             h='135px'
             bg='box-bg-primary'
             borderRadius='10px'
-            color='text-primary'
-            direction='column'
             p='10px'
             mb='10px'
           >
@@ -63,7 +63,7 @@ export const NFTCard = ({}) => {
             <Flex
               w='220px'
               h='49px'
-              bg='#F3F3F3'
+              bg='btn-secondary-bg'
               borderRadius='8px'
               color='text-primary'
               as='span'
@@ -72,7 +72,7 @@ export const NFTCard = ({}) => {
               <Flex
                 borderRadius='8px'
                 p='5px'
-                color='#000000'
+                color='btn-primary-bg'
                 w='115px'
                 h='49px'
               >
@@ -93,8 +93,8 @@ export const NFTCard = ({}) => {
               <Flex
                 borderRadius='8px'
                 p='5px'
-                bg='#000000'
-                color='#ffffff'
+                bg='box-bg-secondary'
+                color='box-bg-primary'
                 w='115px'
                 h='49px'
               >
@@ -144,7 +144,7 @@ export const NFTCard = ({}) => {
       ) : (
         <Flex
           color='text-primary'
-          bg='white'
+          bg='box-bg-primary'
           w='full'
           h='280px'
           borderRadius='10px'

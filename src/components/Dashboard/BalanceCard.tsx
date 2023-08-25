@@ -1,13 +1,18 @@
+//Chakra
 import { Button, Flex, Text } from '@chakra-ui/react'
+
+//Data
 import { useAccount } from 'wagmi'
 import {
   useRewardTokenBalanceOf,
   useRewardDistributorPendingRewards
 } from '@generated'
-import { InfoTooltip } from '@components/InfoTooltip'
-import { CollectModal } from './CollectModal'
 import { ContractAddress } from '@utils/constants'
 import { useState } from 'react'
+
+//Style UI
+import { InfoTooltip } from '@components/InfoTooltip'
+import { CollectModal } from './CollectModal'
 
 export const BalanceCard = () => {
   const account = useAccount()
