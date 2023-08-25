@@ -93,6 +93,7 @@ export const NFTCard = ({}) => {
               <Flex
                 borderRadius='8px'
                 p='5px'
+                // todo REPLACE THESE
                 bg='#000000'
                 color='#ffffff'
                 w='115px'

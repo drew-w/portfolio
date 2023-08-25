@@ -11,6 +11,9 @@ const baseStyle = definePartsStyle({
   // define the part you're going to style
   button: {
     // this will style the MenuButton component
+    w: '204px',
+    borderTopRadius: 8,
+    borderBottomRadius: 8,
     fontWeight: 'medium',
     fontSize: '16px',
     textAlign: 'left',
@@ -20,14 +23,20 @@ const baseStyle = definePartsStyle({
     _hover: {
       bg: 'box-bg-secondary',
       color: 'text-secondary'
+    },
+    _active: {
+      // bg: 'red.200',
+      borderBottomRadius: 0
     }
   },
   list: {
     // this will style the MenuList component
-    padding: '3',
+    padding: '15px',
     borderBottomRadius: 'xl',
     borderTopRadius: '0px',
     borderColor: 'box-bg-secondary',
+    minW: 'full',
+    maxW: '204px',
     bg: 'box-bg-secondary'
   },
   item: {
@@ -69,5 +78,9 @@ const baseStyle = definePartsStyle({
     borderBottom: '2px dotted'
   }
 })
+
+const defaultProps = definePartsStyle({
+  // button: {}
+})
 // export the base styles in the component theme
-export const Menu = defineMultiStyleConfig({ baseStyle })
+export const Menu = defineMultiStyleConfig({ baseStyle, defaultProps })

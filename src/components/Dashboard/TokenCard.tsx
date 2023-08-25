@@ -6,16 +6,22 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Stack,
   MenuItemOption,
   MenuGroup,
   MenuOptionGroup,
   MenuDivider,
-  Button
+  Button,
+  Box
 } from '@chakra-ui/react'
 
 //Data
 import { useAccount } from 'wagmi'
 import { useRewardNftBalanceOf } from '@generated'
+import { walletBalance } from '@hooks/wallets'
+import { data as tokenData } from '@hooks/tokens'
+import { formatBalancePercentage, formatCurrency } from '@utils/format'
+import { useEffect, useState } from 'react'
 
 //Style UI
 import Image from 'next/image'
@@ -25,16 +31,33 @@ import qrCode from '@public/images/qrCode.png'
 
 //Types
 import { ContractAddress } from '@utils/constants'
+import { TokenKeys } from '@./types/tokens'
 
 export const TokenCard = ({}) => {
   const account = useAccount(),
     { isConnected } = account
 
-  const { data: nftBalance } = useRewardNftBalanceOf({
-    enabled: account?.isConnected,
-    address: ContractAddress.Nft,
-    args: [account.address!]
-  })
+  const [top4Formatted, setFormattedBalances] = useState<{
+    order: string[]
+    data: {}
+  }>()
+  const [display, setDisplay] = useState<string>('Token Value')
+  const [symbol, setSymbol] = useState<'%' | '$'>('%')
+
+  // const { data: nftBalance } = useRewardNftBalanceOf({
+  //   enabled: account?.isConnected,
+  //   address: ContractAddress.Nft,
+  //   args: [account.address!]
+  // })
+
+  //todo this function will eventually be called in a useQuery hook so it can be refreshed
+  useEffect(() => {
+    if (isConnected) {
+      const formatted = formatBalancePercentage(walletBalance, tokenData)
+      setFormattedBalances(formatted)
+    }
+  }, [isConnected])
+  console.log(top4Formatted)
 
   return (
     <Flex
@@ -60,19 +83,92 @@ export const TokenCard = ({}) => {
             borderRadius='10px'
             color='text-primary'
             direction='column'
-            justify='space-between'
             p='10px'
           >
-            <Menu gutter={0}>
-              <MenuButton>Token Value</MenuButton>
-              <MenuList>
-                <MenuItem>Download</MenuItem>
-                <MenuItem>Create a Copy</MenuItem>
-                <MenuItem>Mark as Draft</MenuItem>
-                <MenuItem>Delete</MenuItem>
-                <MenuItem>Attend a Workshop</MenuItem>
-              </MenuList>
-            </Menu>
+            <Stack direction='row'>
+              <Menu gutter={0}>
+                <MenuButton>{display}</MenuButton>
+                <MenuList>
+                  <MenuItem onClick={() => setDisplay('Token Value')}>
+                    Token Value
+                  </MenuItem>
+                  <MenuItem onClick={() => setDisplay('NFT Count')}>
+                    NFT Count
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+
+              <Menu gutter={0}>
+                <MenuButton w='80px'>{symbol}</MenuButton>
+                <MenuList>
+                  <MenuItem onClick={() => setSymbol('%')}>%</MenuItem>
+                  <MenuItem onClick={() => setSymbol('$')}>$</MenuItem>
+                </MenuList>
+              </Menu>
+            </Stack>
+            <Stack spacing='20px' direction='column' w='full' py='10px'>
+              <Stack direction='row' spacing='2px' w='full'>
+                {top4Formatted?.order.map(
+                  (tokenKey: string | TokenKeys[any]) => {
+                    const token = tokenData.find(
+                      token => token.key === tokenKey
+                    )
+                    //@ts-ignore
+                    const percent = top4Formatted?.data?.[
+                      tokenKey
+                    ]?.percent?.toString()
+
+                    return (
+                      <Box
+                        borderRadius={15}
+                        h='20px'
+                        bg={token ? token.uiConfig.brandColor : 'text-primary'}
+                        w={`${percent}%`}
+                      />
+                    )
+                  }
+                )}
+              </Stack>
+              <Stack spacing='9px'>
+                {top4Formatted?.order.map(
+                  (tokenKey: TokenKeys[any] | string) => {
+                    const token = tokenData.find(
+                      token => token.key === tokenKey
+                    )
+                    //@ts-ignore
+                    const percent = top4Formatted?.data?.[tokenKey]?.percent
+                      .decimalPlaces(2)
+                      .toString()
+                    //@ts-ignore
+                    const dollar = top4Formatted?.data?.[
+                      tokenKey
+                    ]?.dollarAmount.toString()
+                    const formattedDollar = formatCurrency(dollar)
+                    return (
+                      <Flex
+                        direction='row'
+                        w='full'
+                        align='center'
+                        justify='space-between'
+                      >
+                        <Stack direction='row' align='center' fontSize='15px'>
+                          <Box
+                            w='12px'
+                            h='12px'
+                            borderRadius='full'
+                            bg={token?.uiConfig?.brandColor || 'text-primary'}
+                          />
+                          <Text>{token?.uiConfig?.name || 'Other'}</Text>
+                        </Stack>
+                        <Text as='h4' fontWeight={600} fontSize='16px'>
+                          {symbol === '%' ? percent + '%' : formattedDollar}
+                        </Text>
+                      </Flex>
+                    )
+                  }
+                )}
+              </Stack>
+            </Stack>
           </Flex>
         </>
       ) : (
