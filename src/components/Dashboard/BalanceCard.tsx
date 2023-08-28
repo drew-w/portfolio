@@ -63,7 +63,7 @@ export const BalanceCard = () => {
               <InfoTooltip label='hello' dark />
             </Flex>
             <Flex as='span' w='full' justify='space-between' align='baseline'>
-            <Button variant='secondary' onClick={() => setIsOpen(true)}>
+              <Button variant='secondary' onClick={() => setIsOpen(true)}>
                 COLLECT
               </Button>
               <Text fontSize='30px' fontWeight='semibold'>

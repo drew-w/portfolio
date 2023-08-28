@@ -22,10 +22,12 @@ const baseStyle = definePartsStyle({
   list: {
     // This will style the MenuList component
     minW: '205px',
-    borderBottomRadius: 'xl',
+    borderBottomRadius: '8px',
     borderTopRadius: '0px',
     borderColor: 'box-bg-secondary',
     bg: 'box-bg-secondary',
+    paddingX: '8px',
+    // paddingBottom: '4px',
   },
   item: {
     // This will style the MenuItem and MenuItemOption components
@@ -67,6 +69,7 @@ const baseStyle = definePartsStyle({
   },
 })
 
+//Animation for Menu
 export const menuListAnimationVariants: Variants = {
   enter: {
     visibility: "visible",

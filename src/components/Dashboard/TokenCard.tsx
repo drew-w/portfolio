@@ -1,4 +1,3 @@
-//Chakra
 import {
   Flex,
   Text,
@@ -6,31 +5,25 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Button
+  Box
 } from '@chakra-ui/react'
 
-//Data
+import { Icon } from '@components/Factory/Icon'
+
 import { useAccount } from 'wagmi'
 import { useRewardNftBalanceOf } from '@generated'
-
-//Style UI
 import Image from 'next/image'
 import appStore from '@public/images/appStore.svg'
 import playStore from '@public/images/playStore.svg'
 import qrCode from '@public/images/qrCode.png'
-import { Variants } from 'framer-motion'
 import { menuListAnimationVariants } from '@theme/Menu'
+import { useState } from 'react'
 
-//Types
 import { ContractAddress } from '@utils/constants'
 
 export const TokenCard = ({}) => {
-  const account = useAccount(),
-    { isConnected } = account
+  const account = useAccount()
+  const { isConnected } = account
 
   const { data: nftBalance } = useRewardNftBalanceOf({
     enabled: account?.isConnected,
@@ -38,9 +31,7 @@ export const TokenCard = ({}) => {
     args: [account.address!]
   })
 
-  const customMotionProps = {
-    transition: { duration: 0.9 } // Animation duration
-  }
+  const [isActive, setIsActive] = useState(false)
 
   return (
     <Flex
@@ -63,16 +54,42 @@ export const TokenCard = ({}) => {
             flex={1}
             w='full'
             bg='box-bg-primary'
-            borderRadius='10px'
             color='text-primary'
             direction='column'
             justify='space-between'
             p='10px'
           >
             <Menu gutter={0}>
-              <MenuButton width='205px' paddingX='3'>
-                Token Value
+              <MenuButton
+                w='205px'
+                h='40px'
+                borderRadius='8px'
+                paddingX='3'
+                position='relative'
+                _active={{
+                  borderBottomRadius: '0px'
+                }}
+                onClick={() => setIsActive(!isActive)}
+              >
+                <Flex justifyContent='space-between' alignItems='center'>
+                  Token Value
+                  <Icon
+                    prefix='far'
+                    name={isActive ? 'chevron-up' : 'chevron-down'}
+                  />
+                </Flex>
+                <Box
+                  position='absolute'
+                  bottom='0'
+                  left='50%'
+                  transform='translateX(-50%)'
+                  w='90%'
+                  h='1px'
+                  bg='btn-white-bg'
+                  visibility={isActive ? 'visible' : 'hidden'}
+                ></Box>
               </MenuButton>
+
               <MenuList motionProps={{ variants: menuListAnimationVariants }}>
                 <MenuItem>Rewards Rate</MenuItem>
                 <MenuItem>Token Value</MenuItem>

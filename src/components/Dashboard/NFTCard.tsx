@@ -54,7 +54,7 @@ export const NFTCard = ({}) => {
             p='10px'
             mb='10px'
           >
-            <Flex as='span' align='baseline' justify='space-between'>
+            <Flex as='span' align='baseline' justify='space-between' color='btn-primary-bg'>
               <Text fontSize='16px' fontWeight={500}>
                 Total NFTs
               </Text>

@@ -13,8 +13,9 @@ import { chains, config } from '../wagmi'
 //FONT AWESOME
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret, faCircleInfo } from '@fortawesome/pro-light-svg-icons'
+import { faChevronDown, faChevronUp } from '@fortawesome/pro-regular-svg-icons'
 
-library.add(faUserSecret, faCircleInfo)
+library.add(faUserSecret, faCircleInfo, faChevronUp, faChevronDown)
 
 export function Providers ({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false)
