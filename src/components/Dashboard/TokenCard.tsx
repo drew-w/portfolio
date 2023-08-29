@@ -5,7 +5,8 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Box
+  Box,
+  Button
 } from '@chakra-ui/react'
 
 import { Icon } from '@components/Factory/Icon'
@@ -31,13 +32,11 @@ export const TokenCard = ({}) => {
     args: [account.address!]
   })
 
-  const [isActive, setIsActive] = useState(false)
-
   return (
     <Flex
       as='section'
       direction='column'
-      p='5px'
+      p='15px'
       w='full'
       maxW='320px'
       h='280px'
@@ -53,48 +52,103 @@ export const TokenCard = ({}) => {
           <Flex
             flex={1}
             w='full'
-            bg='box-bg-primary'
+            bg='none'
             color='text-primary'
-            direction='column'
+            direction='row'
             justify='space-between'
-            p='10px'
           >
             <Menu gutter={0}>
-              <MenuButton
-                w='205px'
-                h='40px'
-                borderRadius='8px'
-                paddingX='3'
-                position='relative'
-                _active={{
-                  borderBottomRadius: '0px'
-                }}
-                onClick={() => setIsActive(!isActive)}
-              >
-                <Flex justifyContent='space-between' alignItems='center'>
-                  Token Value
-                  <Icon
-                    prefix='far'
-                    name={isActive ? 'chevron-up' : 'chevron-down'}
-                  />
-                </Flex>
-                <Box
-                  position='absolute'
-                  bottom='0'
-                  left='50%'
-                  transform='translateX(-50%)'
-                  w='90%'
-                  h='1px'
-                  bg='btn-white-bg'
-                  visibility={isActive ? 'visible' : 'hidden'}
-                ></Box>
-              </MenuButton>
+              {({ isOpen }) => (
+                <>
+                  <MenuButton
+                    w='205px'
+                    h='40px'
+                    borderRadius='8px'
+                    paddingX='3'
+                    position='relative'
+                    _active={{
+                      borderBottomRadius: '0px'
+                    }}
+                    isActive={isOpen}
+                    as={Button}
+                  >
+                    <Flex justifyContent='space-between' alignItems='center'>
+                      Token Value
+                      <Icon
+                        prefix='fas'
+                        name={isOpen ? 'chevron-up' : 'chevron-down'}
+                      />
+                    </Flex>
+                    <Box
+                      position='absolute'
+                      bottom='0'
+                      left='50%'
+                      transform='translateX(-50%)'
+                      w='90%'
+                      h='1px'
+                      bg='btn-white-bg'
+                      visibility={isOpen ? 'visible' : 'hidden'}
+                    ></Box>
+                  </MenuButton>
 
-              <MenuList motionProps={{ variants: menuListAnimationVariants }}>
-                <MenuItem>Rewards Rate</MenuItem>
-                <MenuItem>Token Value</MenuItem>
-                <MenuItem>NFT Count</MenuItem>
-              </MenuList>
+                  <MenuList
+                    motionProps={{ variants: menuListAnimationVariants }}
+                  >
+                    <MenuItem>Rewards Rate</MenuItem>
+                    <MenuItem>Token Value</MenuItem>
+                    <MenuItem>NFT Count</MenuItem>
+                  </MenuList>
+                </>
+              )}
+            </Menu>
+            <Menu gutter={0}>
+              {({ isOpen }) => (
+                <>
+                  <MenuButton
+                    w='80px'
+                    h='40px'
+                    borderRadius='8px'
+                    paddingX='3'
+                    position='relative'
+                    _active={{
+                      borderBottomRadius: '0px'
+                    }}
+                    isActive={isOpen}
+                    as={Button}
+                  >
+                    <Flex justifyContent='space-between' alignItems='center'>
+                      <Icon prefix='fas' name='percent' color='icon-white' />
+                      <Icon
+                        prefix='fas'
+                        name={isOpen ? 'chevron-up' : 'chevron-down'}
+                      />
+                    </Flex>
+                  </MenuButton>
+
+                  <MenuList
+                    minW='80px'
+                    motionProps={{ variants: menuListAnimationVariants }}
+                  >
+                    <MenuItem>
+                      <Icon
+                        _hover={{ color: 'box-bg-secondary' }}
+                        prefix='fas'
+                        name='dollar-sign'
+                      />
+                    </MenuItem>
+
+                    <MenuItem>
+                      <Icon
+                        prefix='fas'
+                        name='percent'
+                        _hover={{
+                          color: 'box-bg-secondary'
+                        }}
+                      />
+                    </MenuItem>
+                  </MenuList>
+                </>
+              )}
             </Menu>
           </Flex>
         </>
