@@ -14,9 +14,21 @@ import { chains, config } from '../wagmi'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret, faCircleInfo } from '@fortawesome/pro-light-svg-icons'
 // import { faChevronDown, faChevronUp } from '@fortawesome/pro-regular-svg-icons'
-import { faChevronDown, faChevronUp, faPercent, faDollarSign } from '@fortawesome/pro-solid-svg-icons'
+import {
+  faChevronDown,
+  faChevronUp,
+  faPercent,
+  faDollarSign
+} from '@fortawesome/pro-solid-svg-icons'
 
-library.add(faUserSecret, faCircleInfo, faChevronUp, faChevronDown, faPercent, faDollarSign)
+library.add(
+  faUserSecret,
+  faCircleInfo,
+  faChevronUp,
+  faChevronDown,
+  faPercent,
+  faDollarSign
+)
 
 export function Providers ({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false)

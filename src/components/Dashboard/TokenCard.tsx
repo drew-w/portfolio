@@ -1,3 +1,5 @@
+import React, { useState } from 'react'
+
 import {
   Flex,
   Text,
@@ -18,7 +20,6 @@ import appStore from '@public/images/appStore.svg'
 import playStore from '@public/images/playStore.svg'
 import qrCode from '@public/images/qrCode.png'
 import { menuListAnimationVariants } from '@theme/Menu'
-import { useState } from 'react'
 
 import { ContractAddress } from '@utils/constants'
 
@@ -31,6 +32,9 @@ export const TokenCard = ({}) => {
     address: ContractAddress.Nft,
     args: [account.address!]
   })
+
+  const [selectedMenuItem, setSelectedMenuItem] = useState('percent')
+  const [isMenuButtonDisabled, setIsMenuButtonDisabled] = useState(false)
 
   return (
     <Flex
@@ -61,24 +65,27 @@ export const TokenCard = ({}) => {
               {({ isOpen }) => (
                 <>
                   <MenuButton
+                    transition='all 0.2s'
                     w='205px'
                     h='40px'
                     borderRadius='8px'
                     paddingX='3'
                     position='relative'
-                    _active={{
+                    fontSize='16px'
+                    textAlign='left'
+                    _expanded={{
                       borderBottomRadius: '0px'
                     }}
                     isActive={isOpen}
                     as={Button}
-                  >
-                    <Flex justifyContent='space-between' alignItems='center'>
-                      Token Value
+                    rightIcon={
                       <Icon
                         prefix='fas'
                         name={isOpen ? 'chevron-up' : 'chevron-down'}
                       />
-                    </Flex>
+                    }
+                  >
+                    Token Value
                     <Box
                       position='absolute'
                       bottom='0'
@@ -88,7 +95,7 @@ export const TokenCard = ({}) => {
                       h='1px'
                       bg='btn-white-bg'
                       visibility={isOpen ? 'visible' : 'hidden'}
-                    ></Box>
+                    />
                   </MenuButton>
 
                   <MenuList
@@ -105,47 +112,52 @@ export const TokenCard = ({}) => {
               {({ isOpen }) => (
                 <>
                   <MenuButton
+                    transition='all 0.2s'
                     w='80px'
                     h='40px'
                     borderRadius='8px'
                     paddingX='3'
                     position='relative'
-                    _active={{
+                    _expanded={{
                       borderBottomRadius: '0px'
                     }}
                     isActive={isOpen}
                     as={Button}
-                  >
-                    <Flex justifyContent='space-between' alignItems='center'>
-                      <Icon prefix='fas' name='percent' color='icon-white' />
+                    rightIcon={
                       <Icon
                         prefix='fas'
                         name={isOpen ? 'chevron-up' : 'chevron-down'}
                       />
-                    </Flex>
+                    }
+                  >
+                    {selectedMenuItem === 'dollar' ? (
+                      <Icon
+                        prefix='fas'
+                        name='dollar-sign'
+                        color='icon-white'
+                      />
+                    ) : (
+                      <Icon prefix='fas' name='percent' color='icon-white' />
+                    )}
                   </MenuButton>
 
                   <MenuList
                     minW='80px'
                     motionProps={{ variants: menuListAnimationVariants }}
                   >
-                    <MenuItem>
-                      <Icon
-                        _hover={{ color: 'box-bg-secondary' }}
-                        prefix='fas'
-                        name='dollar-sign'
-                      />
-                    </MenuItem>
+                    <MenuItem
+                      color='icon-secondary'
+                      icon={
+                        <Icon prefix='fas' name='dollar-sign' color='auto' />
+                      }
+                      onClick={() => setSelectedMenuItem('dollar')}
+                    />
 
-                    <MenuItem>
-                      <Icon
-                        prefix='fas'
-                        name='percent'
-                        _hover={{
-                          color: 'box-bg-secondary'
-                        }}
-                      />
-                    </MenuItem>
+                    <MenuItem
+                      color='icon-secondary'
+                      icon={<Icon prefix='fas' name='percent' color='auto' />}
+                      onClick={() => setSelectedMenuItem('percent')}
+                    />
                   </MenuList>
                 </>
               )}
