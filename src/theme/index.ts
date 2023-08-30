@@ -8,6 +8,7 @@ import { mode, GlobalStyleProps } from '@chakra-ui/theme-tools'
 import { Button } from '@theme/Button'
 import { Table } from '@theme/Table'
 import { Modal } from '@theme/Modal'
+import { Menu } from '@theme/Menu'
 // import { Box } from 'theme/BoxStyle'
 
 const config = {
@@ -39,14 +40,15 @@ const fonts = {
 const components = {
   Button,
   Table,
-  Modal
+  Modal,
+  Menu,
 }
 
 const theme = extendTheme({
+  components,
   semanticTokens,
   config,
   styles,
-  components,
   fonts
 })
 export default theme
