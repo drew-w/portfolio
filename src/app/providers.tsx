@@ -13,7 +13,6 @@ import { chains, config } from '../wagmi'
 //FONT AWESOME
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret, faCircleInfo } from '@fortawesome/pro-light-svg-icons'
-// import { faChevronDown, faChevronUp } from '@fortawesome/pro-regular-svg-icons'
 import {
   faChevronDown,
   faChevronUp,
