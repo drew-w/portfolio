@@ -9,13 +9,16 @@ const {
 const variantAlwaysOpen = definePartsStyle({
   dialog: {
     pointerEvents: 'auto',
-    bg: 'blue.100',
-    h: 'calc(100vh - 81px)',
+    bg: 'box-bg-primary',
     position: 'fixed',
-    right: '20px'
+    h: 'calc(100vh - 101px)',
+    borderRadius: 10,
+    shaodw: 'box-shadow-primary'
+  },
+  body: {
+    padding: 0
   },
   dialogContainer: {
-    bg: '#f505',
     pointerEvents: 'none',
     align: 'center'
   }
