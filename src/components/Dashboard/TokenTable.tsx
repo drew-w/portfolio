@@ -25,7 +25,6 @@ import {
 } from '@tanstack/react-table'
 import { formatCurrency, formatDelta } from '@utils/format'
 import BigNumber from 'bignumber.js'
-import { useState } from 'react'
 
 //Types
 import { Token } from '@./types/tokens'
@@ -35,24 +34,23 @@ interface Props {
   columns: any[]
   columnVisibility: {}
   setColumnVisibility: (arg: {}) => void
+  rowSelection: {}
+  setRowSelection: (arg: {}) => void
+  setIsAllProjectsOpen: (open: boolean) => void
 }
 
 export const TokenTable = ({
   data,
   caption,
-  // columns,
   columnVisibility,
-  setColumnVisibility
+  setColumnVisibility,
+  rowSelection,
+  setRowSelection,
+  setIsAllProjectsOpen
 }: Props) => {
-  const [rowSelection, setRowSelection] = useState({})
   const columnHelper = createColumnHelper<Token>()
 
   const columns = [
-    // columnHelper.accessor(data => data, {
-    //   id: 'select',
-    //   header: '',
-    //   cell: ({ row }) => <div>{row.getIsSelected() ? 'yes' : 'no'}</div>
-    // }),
     columnHelper.accessor(row => row, {
       id: 'name',
       cell: info => {
@@ -210,7 +208,7 @@ export const TokenTable = ({
     onRowSelectionChange: setRowSelection,
     enableMultiRowSelection: false
   })
-  console.log(rowSelection)
+
   return (
     <Flex
       as='section'
@@ -244,6 +242,12 @@ export const TokenTable = ({
             {table.getRowModel().rows.map(row => {
               const isSelected = row.getIsSelected()
               const canSelect = row.getCanSelect()
+              // const clickHandler = () => {
+              //   if (canSelect) {
+              //     setIsAllProjectsOpen(true)
+              //     return row.getToggleSelectedHandler()
+              //   }
+              // }
               const clickHandler = canSelect
                 ? row.getToggleSelectedHandler()
                 : () => null
@@ -251,7 +255,6 @@ export const TokenTable = ({
                 <Tr
                   key={row.id}
                   onClick={clickHandler}
-                  // bg={isSelected ? 'box-bg-secondary' : 'auto'}
                   color={isSelected ? 'text-secondary' : 'auto'}
                 >
                   {row.getVisibleCells().map(cell => (
