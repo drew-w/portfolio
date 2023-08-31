@@ -20,10 +20,15 @@ import { TokenTable } from '@components/Dashboard/TokenTable'
 import { TokenCard } from '@components/Dashboard/TokenCard'
 import { AllProjectsDrawer } from '@components/AllProjectsDrawer'
 
+//Types
+import { Token } from '@./types/tokens'
+
 export default function Home () {
   const [columnVisibility, setColumnVisibility] = useState({})
   const [rowSelection, setRowSelection] = useState({})
   const [isAllProjectsOpen, setIsAllProjectsOpen] = useState<boolean>(false)
+  const [index] = Object.keys(rowSelection)
+  const token: Token = tokenData[parseInt(index)]
 
   const screenSize =
     useBreakpointValue(
@@ -94,7 +99,7 @@ export default function Home () {
       <AllProjectsDrawer
         isOpen={isAllProjectsOpen}
         setIsOpen={setIsAllProjectsOpen}
-        rowSelection={rowSelection}
+        token={token}
         setRowSelection={setRowSelection}
       />
     </Flex>
