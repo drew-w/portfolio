@@ -6,6 +6,7 @@ import { Button } from '@theme/Button'
 import { Table } from '@theme/Table'
 import { Modal } from '@theme/Modal'
 import { Menu } from '@theme/Menu'
+import { Drawer } from '@theme/Drawer'
 
 const config = {
   useSystemColorMode: false,
@@ -37,7 +38,8 @@ const components = {
   Button,
   Table,
   Modal,
-  Menu
+  Menu,
+  Drawer
 }
 
 const theme = extendTheme({
