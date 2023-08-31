@@ -40,7 +40,7 @@ export const AllProjectsDrawer = ({
 
   return (
     <Drawer
-      isOpen={isOpen}
+      isOpen={isOpen && !!token}
       onClose={onClose}
       variant='alwaysOpen'
       blockScrollOnMount={false}
