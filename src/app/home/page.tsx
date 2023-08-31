@@ -30,27 +30,30 @@ export default function Home () {
       <Grid
         w='1000px'
         templateRows='repeat(2, 1fr)'
-        templateColumns='repeat(3, 1fr)'
+        templateColumns={{
+          base: 'repeat(3, 1fr)',
+          md: 'repeat(4, 1fr)',
+          lg: 'repeat(3, 1fr)'
+        }}
+        rowGap={{ base: 5, lg: 0 }}
         maxH='900px'
       >
-        <GridItem h='280px' colSpan={1} bg='red.300'>
+        <GridItem h='280px' colSpan={{ base: 3, md: 2, lg: 1 }}>
           <Flex as='span' w='full' justify='center'>
             <BalanceCard />
           </Flex>
         </GridItem>
-        <GridItem h='280px' colSpan={1} bg='blue.300'>
+        <GridItem h='280px' colSpan={{ base: 3, md: 2, lg: 1 }}>
           <Flex as='span' w='full' justify='center'>
             <NFTCard />
           </Flex>
         </GridItem>
-
-        <GridItem h='280px' colSpan={1} bg='green.300'>
+        <GridItem h='280px' colSpan={{ base: 3, md: 4, lg: 1 }}>
           <Flex as='span' w='full' justify='center'>
             <TokenCard />
           </Flex>
         </GridItem>
-
-        <GridItem h='620px' colSpan={3} bg='yellow.300'>
+        <GridItem h='620px' colSpan={{ base: 3, md: 4, lg: 3 }}>
           <Flex as='span' w='full' justify='center' py='20px'>
             <TokenTable
               data={tokenData}

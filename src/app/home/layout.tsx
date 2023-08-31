@@ -1,8 +1,9 @@
 'use client'
 import logo from '@assets/debtlogo.svg'
+import smallLogo from '@assets/debt.svg'
 
 import '@rainbow-me/rainbowkit/styles.css'
-import { Flex, Stack, Button, Box } from '@chakra-ui/react'
+import { Flex, Stack, Button, Box, useBreakpointValue } from '@chakra-ui/react'
 import Image from 'next/image'
 import { ConnectButton } from '@components/ConnectButton'
 import styles from './Home.module.css'
@@ -12,6 +13,10 @@ export default function RootLayout ({
 }: {
   children: React.ReactNode
 }) {
+  const image = useBreakpointValue(
+    { base: smallLogo, md: logo },
+    { fallback: logo }
+  )
   return (
     <>
       <Flex
@@ -22,7 +27,7 @@ export default function RootLayout ({
         px='30px'
         h='61px'
       >
-        <Image src={logo} height={30} alt='debt' />
+        <Image src={image} height={30} alt='debt' draggable={false} />
         <Stack align='center' spacing={10} direction='row' h='full'>
           <ConnectButton />
         </Stack>
