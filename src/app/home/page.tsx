@@ -68,18 +68,21 @@ export default function Home () {
             <BalanceCard />
           </Flex>
         </GridItem>
+
         {/* Card showing active rate and number of licenses */}
         <GridItem h='280px' colSpan={{ base: 3, md: 2, lg: 1 }}>
           <Flex as='span' w='full' justify='center'>
             <NFTCard />
           </Flex>
         </GridItem>
+
         {/* card showing breakdown of tokens in your wallet */}
         <GridItem h='280px' colSpan={{ base: 3, md: 4, lg: 1 }}>
           <Flex as='span' w='full' justify='center'>
             <TokenCard />
           </Flex>
         </GridItem>
+
         {/* table showing all projects that are not in the wallet */}
         <GridItem h='620px' colSpan={{ base: 3, md: 4, lg: 3 }}>
           <Flex as='span' w='full' justify='center' py='20px'>
@@ -96,6 +99,8 @@ export default function Home () {
           </Flex>
         </GridItem>
       </Grid>
+
+      {/* token drawer that will appear on the right side */}
       <AllProjectsDrawer
         isOpen={isAllProjectsOpen}
         setIsOpen={setIsAllProjectsOpen}
