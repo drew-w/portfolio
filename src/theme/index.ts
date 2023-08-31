@@ -2,6 +2,7 @@ import { Poppins } from 'next/font/google'
 import { semanticTokens } from '@theme/semanticTokens'
 import { extendTheme } from '@chakra-ui/react'
 import { mode, GlobalStyleProps } from '@chakra-ui/theme-tools'
+
 import { Button } from '@theme/Button'
 import { Table } from '@theme/Table'
 import { Modal } from '@theme/Modal'
