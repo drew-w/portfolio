@@ -21,6 +21,10 @@ export const semanticTokens = {
     'text-gray': {
       default: '#9D9D9D'
     },
+    'text-light-gray': 
+    {
+      default: '#B4B4B4'
+    },
     'text-green': {
       default: '#00DE5C'
     },
