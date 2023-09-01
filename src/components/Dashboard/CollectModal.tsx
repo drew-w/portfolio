@@ -36,7 +36,7 @@ export function CollectModal ({ isOpen, setIsOpen }: Props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent minW='500px' h='570px' borderRadius='12px'>
         <ModalHeader>Collect Rewards</ModalHeader>
 
         <ModalBody>
@@ -120,7 +120,7 @@ export function CollectModal ({ isOpen, setIsOpen }: Props) {
           </VStack>
         </ModalBody>
 
-        <ModalFooter marginTop='60px'>
+        <ModalFooter>
           <Box flex='1' />
           <Button variant='square' onClick={onClose}>
             Done
