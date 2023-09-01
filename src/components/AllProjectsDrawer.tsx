@@ -132,7 +132,7 @@ export const AllProjectsDrawer = ({
                 <Text as='p' fontWeight={400} fontSize={12}>
                   D.E.B.T. (Decentralized Eco-Friendly Blockchain Technology)
                   revolutionizes the crypto industry as a space where crypto
-                  meets commodities. NFTs in the D.E.B.T. Ecosystem collection{' '}
+                  meets commodities. NFTs in the D.E.B.T. Ecosystem collection
                 </Text>
               </Stack>
             </Stack>
