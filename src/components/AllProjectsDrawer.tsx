@@ -20,22 +20,16 @@ import { Token } from '@./types/tokens'
 
 interface Props {
   isOpen: boolean
-  setIsOpen: (open: boolean) => void
   token: Token
-  setRowSelection: (arg: {}) => void
+  onClose: () => void
 }
 
 export const AllProjectsDrawer = ({
   isOpen,
-  setIsOpen,
   token,
-  setRowSelection,
+  onClose,
   ...rest
 }: Props) => {
-  const onClose = () => {
-    setIsOpen(false)
-    setRowSelection({})
-  }
   //todo this will be different when we get real token data
 
   return (

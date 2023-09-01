@@ -33,20 +33,18 @@ interface Props {
   caption: string
   columns: any[]
   columnVisibility: {}
-  setColumnVisibility: (arg: {}) => void
+  onPageResize: (arg: {}) => void
   rowSelection: {}
-  setRowSelection: (arg: {}) => void
-  setIsAllProjectsOpen: (open: boolean) => void
+  onRowSelect: (arg: {}) => void
 }
 
 export const TokenTable = ({
   data,
   caption,
   columnVisibility,
-  setColumnVisibility,
+  onPageResize,
   rowSelection,
-  setRowSelection,
-  setIsAllProjectsOpen
+  onRowSelect
 }: Props) => {
   const columnHelper = createColumnHelper<Token>()
 
@@ -204,8 +202,8 @@ export const TokenTable = ({
       columnVisibility,
       rowSelection
     },
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
+    onColumnVisibilityChange: onPageResize,
+    onRowSelectionChange: onRowSelect,
     enableMultiRowSelection: false
   })
 
@@ -242,15 +240,11 @@ export const TokenTable = ({
             {table.getRowModel().rows.map(row => {
               const isSelected = row.getIsSelected()
               const canSelect = row.getCanSelect()
-              // const clickHandler = () => {
-              //   if (canSelect) {
-              //     setIsAllProjectsOpen(true)
-              //     return row.getToggleSelectedHandler()
-              //   }
-              // }
+
               const clickHandler = canSelect
                 ? row.getToggleSelectedHandler()
                 : () => null
+
               return (
                 <Tr
                   key={row.id}

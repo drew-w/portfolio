@@ -49,6 +49,11 @@ export default function Home () {
     }
   }, [rowSelection])
 
+  const onDrawerClose = () => {
+    setIsAllProjectsOpen(false)
+    setRowSelection({})
+  }
+
   return (
     <Flex as='main' w='full' justify='center' py='20px'>
       <Grid
@@ -91,10 +96,9 @@ export default function Home () {
               caption='All Projects'
               columns={allProjectsColumns}
               columnVisibility={columnVisibility}
-              setColumnVisibility={setColumnVisibility}
+              onPageResize={setColumnVisibility}
               rowSelection={rowSelection}
-              setRowSelection={setRowSelection}
-              setIsAllProjectsOpen={setIsAllProjectsOpen}
+              onRowSelect={setRowSelection}
             />
           </Flex>
         </GridItem>
@@ -103,9 +107,8 @@ export default function Home () {
       {/* token drawer that will appear on the right side */}
       <AllProjectsDrawer
         isOpen={isAllProjectsOpen}
-        setIsOpen={setIsAllProjectsOpen}
         token={token}
-        setRowSelection={setRowSelection}
+        onClose={onDrawerClose}
       />
     </Flex>
   )
