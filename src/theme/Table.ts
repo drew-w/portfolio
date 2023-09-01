@@ -28,9 +28,13 @@ const baseStyle = definePartsStyle({
     fontSize: '15px',
     fontWeight: 600
   },
+
   tbody: {
+    tr: {
+      cursor: 'pointer'
+    },
     td: {
-      '&:first-child': {
+      '&:first-of-type': {
         borderWidth: '1px 0 1px 1px',
         borderTopLeftRadius: 8,
         borderBottomLeftRadius: 8

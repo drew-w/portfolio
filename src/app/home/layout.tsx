@@ -33,7 +33,6 @@ export default function RootLayout ({
         </Stack>
       </Flex>
       <Box
-        as='main'
         className={styles.mainBox}
         overflow='scroll'
         css={{
