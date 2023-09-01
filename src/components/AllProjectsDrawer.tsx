@@ -55,7 +55,8 @@ export const AllProjectsDrawer = ({
             css={{
               '&::-webkit-scrollbar': {
                 display: 'none'
-              }
+              },
+              scrollbarWidth: 'none'
             }}
           >
             <Stack spacing='20px'>
