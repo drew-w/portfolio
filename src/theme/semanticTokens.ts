@@ -40,6 +40,9 @@ export const semanticTokens = {
     'btn-white-bg': {
       default: '#FFFFFF'
     },
+    'btn-blue-bg': {
+      default: '#1175FF'
+    },
     'icon-primary': {
       default: '#CDCDCD'
     },
