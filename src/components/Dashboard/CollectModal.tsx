@@ -20,6 +20,7 @@ import {
 import { pendingBalance } from '@hooks/wallets'
 import { data } from '@hooks/tokens'
 import BigNumber from 'bignumber.js'
+import { formatBigNumber } from '@utils/format'
 
 interface Props {
   isOpen: boolean
@@ -63,18 +64,16 @@ export function CollectModal ({ isOpen, setIsOpen }: Props) {
             {Object.keys(pendingBalance.balances)
               .filter(tokenKey => {
                 const { balances } = pendingBalance
-                const balance = new BigNumber(
-                  balances?.[tokenKey]?.toString() || balances?.[tokenKey]
-                )
+                const balance = formatBigNumber(balances?.[tokenKey])
                 return balance.isGreaterThan(0)
               })
               .map(tokenKey => {
                 const token = data.find(token => token.key === tokenKey)
                 const decimal = 1 / Math.pow(10, token?.decimals || 18)
                 const { balances } = pendingBalance
-                const balance = new BigNumber(
-                  balances?.[tokenKey]?.toString() || balances?.[tokenKey]
-                ).times(decimal)
+                const balance = formatBigNumber(balances?.[tokenKey]).times(
+                  decimal
+                )
 
                 return (
                   <Flex

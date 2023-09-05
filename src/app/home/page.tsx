@@ -5,13 +5,21 @@ import {
   Grid,
   GridItem,
   useBreakpointValue,
-  Button
+  Button,
+  Stack
 } from '@chakra-ui/react'
 
 //Data
 import { data as tokenData } from '@hooks/tokens'
-import { allProjectsColumns, setAllProjectsColumnsVisibility } from './data'
+import {
+  allProjectsColumns,
+  setAllProjectsColumnsVisibility,
+  myProjectsColumns,
+  setMyProjectsColumnsVisibility
+} from './data'
 import { useState, useEffect } from 'react'
+import { getTokenOwnership } from '@utils/format'
+import { walletBalance } from '@hooks/wallets'
 
 //Style UI
 import { BalanceCard } from '@components/Dashboard/BalanceCard'
@@ -24,11 +32,18 @@ import { AllProjectsDrawer } from '@components/AllProjectsDrawer'
 import { Token } from '@./types/tokens'
 
 export default function Home () {
-  const [columnVisibility, setColumnVisibility] = useState({})
+  const [allColumnVisibility, setAllColumnVisibility] = useState({})
+  const [myColumnVisibility, setMyColumnVisibility] = useState({})
   const [rowSelection, setRowSelection] = useState({})
+  const [selectedTable, setSelectedTable] = useState<
+    'My Projects' | 'All Projects' | string
+  >()
   const [isAllProjectsOpen, setIsAllProjectsOpen] = useState<boolean>(false)
   const [index] = Object.keys(rowSelection)
-  const token: Token = tokenData[parseInt(index)]
+  const { myTokens, allTokens } = getTokenOwnership(walletBalance, tokenData)
+  const token: Token = (selectedTable === 'All Projects'
+    ? allTokens
+    : myTokens)[parseInt(index)]
 
   const screenSize =
     useBreakpointValue(
@@ -37,7 +52,8 @@ export default function Home () {
     ) || 'lg'
 
   useEffect(() => {
-    setAllProjectsColumnsVisibility(setColumnVisibility, screenSize)
+    setAllProjectsColumnsVisibility(setAllColumnVisibility, screenSize)
+    setMyProjectsColumnsVisibility(setMyColumnVisibility, screenSize)
   }, [screenSize])
 
   useEffect(() => {
@@ -52,6 +68,7 @@ export default function Home () {
   const onDrawerClose = () => {
     setIsAllProjectsOpen(false)
     setRowSelection({})
+    setSelectedTable(undefined)
   }
 
   return (
@@ -90,17 +107,35 @@ export default function Home () {
 
         {/* table showing all projects that are not in the wallet */}
         <GridItem h='620px' colSpan={{ base: 3, md: 4, lg: 3 }}>
-          <Flex as='span' w='full' justify='center' py='20px'>
+          <Stack as='span' w='full' justify='center' py='20px' spacing='20px'>
+            {myTokens.length > 0 && (
+              <TokenTable
+                data={myTokens}
+                caption='My Projects'
+                // we changed the columns array to a function requiring a boolean and
+                // returning an array in order to make sure our selected state
+                // only can have 1 object across all tables.
+                columns={myProjectsColumns(selectedTable === 'My Projects')}
+                columnVisibility={myColumnVisibility}
+                onPageResize={setMyColumnVisibility}
+                rowSelection={rowSelection}
+                onRowSelect={setRowSelection}
+                onTableSelect={setSelectedTable}
+                tableSelect={selectedTable}
+              />
+            )}
             <TokenTable
-              data={tokenData}
+              data={allTokens}
               caption='All Projects'
-              columns={allProjectsColumns}
-              columnVisibility={columnVisibility}
-              onPageResize={setColumnVisibility}
+              columns={allProjectsColumns(selectedTable === 'All Projects')}
+              columnVisibility={allColumnVisibility}
+              onPageResize={setAllColumnVisibility}
               rowSelection={rowSelection}
               onRowSelect={setRowSelection}
+              onTableSelect={setSelectedTable}
+              tableSelect={selectedTable}
             />
-          </Flex>
+          </Stack>
         </GridItem>
       </Grid>
 
