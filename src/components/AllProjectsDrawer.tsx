@@ -10,10 +10,15 @@ import {
   Flex,
   Stack,
   Box,
-  Image
+  Image,
+  Divider
 } from '@chakra-ui/react'
 
 //Data
+
+//Style UI
+import { InfoTooltip } from '@components/InfoTooltip'
+import { Icon } from '@components/Factory/Icon'
 
 //Types
 import { Token } from '@./types/tokens'
@@ -134,6 +139,118 @@ export const AllProjectsDrawer = ({
                   revolutionizes the crypto industry as a space where crypto
                   meets commodities. NFTs in the D.E.B.T. Ecosystem collection
                 </Text>
+              </Stack>
+
+              <Stack
+                spacing='12px'
+                p='20px'
+                shadow='box-shadow-primary'
+                borderWidth={1}
+                borderColor='box-border'
+                borderRadius={10}
+                direction='column'
+                bg='violet'
+              >
+                <Text as='h3' fontWeight={600}>
+                  Project Details
+                </Text>
+                <Divider />
+                <Stack spacing='23px'>
+                  <Flex alignItems='center' justifyContent='space-between'>
+                    <Flex alignItems='center'>
+                      <Text marginRight='5px' fontWeight={500} fontSize={14}>
+                        Current NFT Price
+                      </Text>
+                      <InfoTooltip label="when I'm with you " />
+                    </Flex>
+                    <Text as='p' fontWeight={600} fontSize={16}>
+                      $7,500
+                    </Text>
+                  </Flex>
+                  <Flex alignItems='center' justifyContent='space-between'>
+                    <Flex alignItems='center'>
+                      <Text marginRight='5px' fontWeight={500} fontSize={14}>
+                        Total NFTs
+                      </Text>
+                      <InfoTooltip label="when I'm with you " />
+                    </Flex>
+                    <Text as='p' fontWeight={600} fontSize={16}>
+                      50,000
+                    </Text>
+                  </Flex>
+                  <Flex alignItems='center' justifyContent='space-between'>
+                    <Flex alignItems='center'>
+                      <Text marginRight='5px' fontWeight={500} fontSize={14}>
+                        Sold NFTs
+                      </Text>
+                      <InfoTooltip label="when I'm with you " />
+                    </Flex>
+                    <Text as='p' fontWeight={600} fontSize={16}>
+                      50,000
+                    </Text>
+                  </Flex>
+                  <Divider />
+                  <Flex alignItems='center' justifyContent='space-between'>
+                    <Flex alignItems='center'>
+                      <Text marginRight='5px' fontWeight={500} fontSize={14}>
+                        NFT Reward Rate
+                      </Text>
+                      <InfoTooltip label="when I'm with you " />
+                    </Flex>
+                    <Text as='p' fontWeight={600} fontSize={16}>
+                      3.68 BGLD
+                    </Text>
+                  </Flex>
+                  <Divider />
+                  <Flex alignItems='center' justifyContent='space-between'>
+                    <Flex alignItems='center'>
+                      <Text marginRight='5px' fontWeight={500} fontSize={14}>
+                        Launch Date
+                      </Text>
+                      <InfoTooltip label="when I'm with you " />
+                    </Flex>
+                    <Text as='p' fontWeight={600} fontSize={16}>
+                      July 28, 2023
+                    </Text>
+                  </Flex>
+                </Stack>
+              </Stack>
+              <Stack bg='chartreuse'>
+                <Flex alignItems='center' justifyContent='space-between'>
+                  <Text marginRight='5px' fontWeight={500} fontSize={14}>
+                    Lite Paper
+                  </Text>
+                  <InfoTooltip label="when I'm with you " />
+                </Flex>
+              </Stack>
+              <Stack
+                p='20px'
+                shadow='box-shadow-primary'
+                borderWidth={1}
+                borderColor='box-border'
+                borderRadius={10}
+                bg='tan'
+              >
+                <Flex alignItems='center' justifyContent='space-between'>
+                  <Text fontWeight={400} fontSize={14}>
+                    Market Price
+                  </Text>
+                  <Flex textAlign='right' bg='red.100' direction='column'>
+                    <Text fontSize='16px' fontWeight={500}>
+                      $0.512
+                    </Text>
+                    <Text fontSize='13px' fontWeight={600} color='text-green'>
+                      <Icon
+                        size='14px'
+                        prefix='fas'
+                        name={'arrow-up-right'}
+                        color='text-green'
+                        marginRight='4px'
+                      />
+                      0.9%
+                    </Text>
+                  </Flex>
+                </Flex>
               </Stack>
             </Stack>
 
