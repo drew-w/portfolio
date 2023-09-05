@@ -20,6 +20,8 @@ import {
 import { pendingBalance } from '@hooks/wallets'
 import { data } from '@hooks/tokens'
 import BigNumber from 'bignumber.js'
+import { useState } from 'react'
+import { ApproveModal } from './ApproveModal'
 
 interface Props {
   isOpen: boolean
@@ -30,11 +32,11 @@ export function CollectModal ({ isOpen, setIsOpen }: Props) {
   const onClose = () => {
     setIsOpen(false)
   }
-
+  const [approveModalOpen, setApproveModalOpen] = useState(false)
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent minW='500px' h='570px' borderRadius='12px'>
         <ModalHeader>Collect Rewards</ModalHeader>
 
         <ModalBody>
@@ -108,6 +110,7 @@ export function CollectModal ({ isOpen, setIsOpen }: Props) {
                       h='24px'
                       w='72px'
                       fontSize='12px'
+                      onClick={() => setApproveModalOpen(true)}
                     >
                       Approve
                     </Button>
@@ -117,13 +120,14 @@ export function CollectModal ({ isOpen, setIsOpen }: Props) {
           </VStack>
         </ModalBody>
 
-        <ModalFooter marginTop='60px'>
+        <ModalFooter>
           <Box flex='1' />
           <Button variant='square' onClick={onClose}>
             Done
           </Button>
         </ModalFooter>
       </ModalContent>
+      <ApproveModal isOpen={approveModalOpen} setIsOpen={setApproveModalOpen} />
     </Modal>
   )
 }
