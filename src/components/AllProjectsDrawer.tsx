@@ -12,7 +12,8 @@ import {
   Stack,
   Box,
   Image,
-  Divider
+  Divider,
+  HStack
 } from '@chakra-ui/react'
 
 //Data
@@ -254,6 +255,66 @@ export const AllProjectsDrawer = ({
                 </Flex>
               </Stack>
               //todo graph for tokens
+              <Stack
+                p='20px'
+                shadow='box-shadow-primary'
+                borderWidth={1}
+                borderColor='box-border'
+                borderRadius={10}
+              >
+                <Flex alignItems='center' direction='column'>
+                  <Image src={token.uiConfig.tokenLogo} w='80px' h='80px' />
+                  <Flex direction='column' alignItems='center' marginBottom='27px'>
+                    <Text
+                      fontWeight={600}
+                      as='h1'
+                      fontSize={22}
+                      marginTop='11px'
+                    >
+                      {token.uiConfig.name}
+                    </Text>
+                    <Text fontWeight={400} fontSize={14}>
+                      {token.uiConfig.symbol}
+                    </Text>
+                  </Flex>
+                  <HStack>
+                    <Button
+                      minW='125'
+                      h='38px'
+                      padding='20px'
+                      variant='squareBlue'
+                    >
+                      Collect
+                    </Button>
+                    <Button
+                      minW='125'
+                      h='38px'
+                      padding='20px'
+                      variant='squareGray'
+                    >
+                      Mint
+                    </Button>
+                  </HStack>
+                  <HStack marginTop='8px'>
+                    <Button
+                      minW='125'
+                      h='38px'
+                      padding='20px'
+                      variant='squareGray'
+                    >
+                      Unstake
+                    </Button>
+                    <Button
+                      minW='125'
+                      h='38px'
+                      padding='20px'
+                      variant='squareGray'
+                    >
+                      Stake
+                    </Button>
+                  </HStack>
+                </Flex>
+              </Stack>
             </Stack>
             <Text mt='1000px'>scroll test</Text>
           </DrawerBody>
