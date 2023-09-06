@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 //Chakra
 import {
   Drawer,
@@ -82,7 +83,6 @@ export const AllProjectsDrawer = ({
                   position='absolute'
                   bottom='-40px'
                   px='20px'
-                  // bg='red.300'
                   w='full'
                   align='flex-end'
                   justify='space-between'
@@ -102,7 +102,6 @@ export const AllProjectsDrawer = ({
                   </Button>
                 </Flex>
               </Flex>
-
               {/* token name and symbol */}
               <Stack
                 direction='row'
@@ -120,7 +119,6 @@ export const AllProjectsDrawer = ({
                   {token.name}
                 </Text>
               </Stack>
-
               {/* description box */}
               <Stack
                 spacing='12px'
@@ -140,7 +138,6 @@ export const AllProjectsDrawer = ({
                   meets commodities. NFTs in the D.E.B.T. Ecosystem collection
                 </Text>
               </Stack>
-
               <Stack
                 spacing='12px'
                 p='20px'
@@ -149,7 +146,6 @@ export const AllProjectsDrawer = ({
                 borderColor='box-border'
                 borderRadius={10}
                 direction='column'
-                bg='violet'
               >
                 <Text as='h3' fontWeight={600}>
                   Project Details
@@ -215,7 +211,13 @@ export const AllProjectsDrawer = ({
                   </Flex>
                 </Stack>
               </Stack>
-              <Stack bg='chartreuse'>
+              <Stack
+                p='20px'
+                shadow='box-shadow-primary'
+                borderWidth={1}
+                borderColor='box-border'
+                borderRadius={10}
+              >
                 <Flex alignItems='center' justifyContent='space-between'>
                   <Text marginRight='5px' fontWeight={500} fontSize={14}>
                     Lite Paper
@@ -229,13 +231,12 @@ export const AllProjectsDrawer = ({
                 borderWidth={1}
                 borderColor='box-border'
                 borderRadius={10}
-                bg='tan'
               >
                 <Flex alignItems='center' justifyContent='space-between'>
                   <Text fontWeight={400} fontSize={14}>
                     Market Price
                   </Text>
-                  <Flex textAlign='right' bg='red.100' direction='column'>
+                  <Flex textAlign='right' direction='column'>
                     <Text fontSize='16px' fontWeight={500}>
                       $0.512
                     </Text>
@@ -252,8 +253,8 @@ export const AllProjectsDrawer = ({
                   </Flex>
                 </Flex>
               </Stack>
+              //todo graph for tokens
             </Stack>
-
             <Text mt='1000px'>scroll test</Text>
           </DrawerBody>
 
