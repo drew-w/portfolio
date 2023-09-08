@@ -1,6 +1,5 @@
 //Chakra
 import {
-  Flex,
   Table,
   Thead,
   Tbody,
@@ -9,70 +8,99 @@ import {
   Th,
   Td,
   TableCaption,
-  TableContainer
+  TableContainer,
+  useBreakpointValue,
+  Stack
 } from '@chakra-ui/react'
+
 //Data
+import { useEffect, useState } from 'react'
 import {
   flexRender,
   getCoreRowModel,
   useReactTable
 } from '@tanstack/react-table'
+import {
+  allProjectsColumns,
+  setAllProjectsColumnsVisibility,
+  myProjectsColumns,
+  setMyProjectsColumnsVisibility
+} from '@app/home/data'
+import { Token } from '@./types/tokens'
 
 //Types
 interface Props {
-  data: any
-  caption: string
-  columns: any[]
-  columnVisibility: {}
-  onPageResize: (arg: {}) => void
+  data: {
+    myTokens: Token[]
+    allTokens: Token[]
+  }
   rowSelection: {}
   onRowSelect: (arg: {}) => void
-  onTableSelect: (table: 'All Projects' | 'My Projexts' | string) => void
-  tableSelect: 'All Projects' | 'My Projexts' | string | undefined
+  onTableSelect: (table: 'all' | 'my' | string) => void
+  tableSelect: 'all' | 'my' | string | undefined
 }
 
 export const TokenTable = ({
-  data,
-  caption,
-  columnVisibility,
-  onPageResize,
+  data: { allTokens, myTokens },
   rowSelection,
   onRowSelect,
-  columns,
   onTableSelect,
   tableSelect
 }: Props) => {
-  const table = useReactTable({
-    data,
-    columns,
+  const [allColumnVisibility, setAllColumnVisibility] = useState({})
+  const [myColumnVisibility, setMyColumnVisibility] = useState({})
+
+  const allTokensTable = useReactTable({
+    data: allTokens,
+    columns: allProjectsColumns(tableSelect === 'all'),
     getCoreRowModel: getCoreRowModel(),
     state: {
-      columnVisibility,
+      columnVisibility: allColumnVisibility,
       rowSelection
     },
-    onColumnVisibilityChange: onPageResize,
+    onColumnVisibilityChange: setAllColumnVisibility,
     onRowSelectionChange: onRowSelect,
     enableMultiRowSelection: false
   })
-  console.log(rowSelection)
+
+  const myTokensTable = useReactTable({
+    data: myTokens,
+    columns: myProjectsColumns(tableSelect === 'all'),
+    getCoreRowModel: getCoreRowModel(),
+    state: {
+      columnVisibility: myColumnVisibility,
+      rowSelection
+    },
+    onColumnVisibilityChange: setMyColumnVisibility,
+    onRowSelectionChange: onRowSelect,
+    enableMultiRowSelection: false
+  })
+
+  const screenSize =
+    useBreakpointValue(
+      { base: 'base', sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' },
+      { fallback: 'lg' }
+    ) || 'lg'
+
+  useEffect(() => {
+    setAllProjectsColumnsVisibility(setAllColumnVisibility, screenSize)
+    setMyProjectsColumnsVisibility(setMyColumnVisibility, screenSize)
+  }, [screenSize])
 
   return (
-    <Flex
-      as='section'
-      direction='column'
-      px='15px'
-      w='full'
-      bg='box-bg-primary'
-      borderRadius='10px'
-      shadow='box-shadow-primary'
-    >
-      <TableContainer>
+    <Stack as='section' direction='column' spacing='20px' w='full'>
+      <TableContainer
+        px='15px'
+        bg='box-bg-primary'
+        borderRadius='10px'
+        shadow='box-shadow-primary'
+      >
         <Table>
           <TableCaption p='0' placement='top'>
-            {caption}
+            My Projects
           </TableCaption>
           <Thead>
-            {table.getHeaderGroups().map(headerGroup => (
+            {myTokensTable.getHeaderGroups().map(headerGroup => (
               <Tr key={headerGroup.id}>
                 {headerGroup.headers.map(header => (
                   <Th key={header.id}>
@@ -88,8 +116,8 @@ export const TokenTable = ({
             ))}
           </Thead>
           <Tbody>
-            {table.getRowModel().rows.map(row => {
-              const isSelected = row.getIsSelected() && tableSelect === caption
+            {myTokensTable.getRowModel().rows.map(row => {
+              const isSelected = row.getIsSelected() && tableSelect === 'my'
               const canSelect = row.getCanSelect()
 
               const clickHandler = canSelect
@@ -100,7 +128,7 @@ export const TokenTable = ({
                 <Tr
                   key={row.id}
                   onClick={e => {
-                    onTableSelect(caption)
+                    onTableSelect('my')
                     clickHandler(e)
                   }}
                   color={isSelected ? 'text-secondary' : 'auto'}
@@ -122,7 +150,7 @@ export const TokenTable = ({
             })}
           </Tbody>
           <Tfoot>
-            {table.getFooterGroups().map(footerGroup => (
+            {myTokensTable.getFooterGroups().map(footerGroup => (
               <Tr key={footerGroup.id}>
                 {footerGroup.headers.map(header => (
                   <Th key={header.id}>
@@ -139,6 +167,84 @@ export const TokenTable = ({
           </Tfoot>
         </Table>
       </TableContainer>
-    </Flex>
+      <TableContainer
+        px='15px'
+        bg='box-bg-primary'
+        borderRadius='10px'
+        shadow='box-shadow-primary'
+      >
+        <Table>
+          <TableCaption p='0' placement='top'>
+            All Projects
+          </TableCaption>
+          <Thead>
+            {allTokensTable.getHeaderGroups().map(headerGroup => (
+              <Tr key={headerGroup.id}>
+                {headerGroup.headers.map(header => (
+                  <Th key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </Th>
+                ))}
+              </Tr>
+            ))}
+          </Thead>
+          <Tbody>
+            {allTokensTable.getRowModel().rows.map(row => {
+              const isSelected = row.getIsSelected() && tableSelect === 'all'
+              const canSelect = row.getCanSelect()
+
+              const clickHandler = canSelect
+                ? row.getToggleSelectedHandler()
+                : () => null
+
+              return (
+                <Tr
+                  key={row.id}
+                  onClick={e => {
+                    onTableSelect('all')
+                    clickHandler(e)
+                  }}
+                  color={isSelected ? 'text-secondary' : 'auto'}
+                >
+                  {row.getVisibleCells().map(cell => (
+                    <Td
+                      key={cell.id}
+                      bg={isSelected ? 'box-bg-secondary' : 'auto'}
+                      borderColor={isSelected ? 'box-bg-secondary' : 'auto'}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </Td>
+                  ))}
+                </Tr>
+              )
+            })}
+          </Tbody>
+          <Tfoot>
+            {allTokensTable.getFooterGroups().map(footerGroup => (
+              <Tr key={footerGroup.id}>
+                {footerGroup.headers.map(header => (
+                  <Th key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.footer,
+                          header.getContext()
+                        )}
+                  </Th>
+                ))}
+              </Tr>
+            ))}
+          </Tfoot>
+        </Table>
+      </TableContainer>
+    </Stack>
   )
 }

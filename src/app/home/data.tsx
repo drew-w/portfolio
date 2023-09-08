@@ -3,7 +3,7 @@ import { Stack, Image, Flex, Text, Button, Box } from '@chakra-ui/react'
 
 //Data
 import BigNumber from 'bignumber.js'
-import { createColumnHelper } from '@tanstack/react-table'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { formatBigNumber, formatCurrency, formatDelta } from '@utils/format'
 import { pendingBalance, walletBalance } from '@hooks/wallets'
 
