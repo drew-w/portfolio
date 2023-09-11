@@ -3,7 +3,7 @@ import logo from '@assets/debtlogo.svg'
 import smallLogo from '@assets/debt.svg'
 
 import '@rainbow-me/rainbowkit/styles.css'
-import { Flex, Stack, Button, Box, useBreakpointValue } from '@chakra-ui/react'
+import { Flex, Stack, Box, useBreakpointValue } from '@chakra-ui/react'
 import Image from 'next/image'
 import { ConnectButton } from '@components/ConnectButton'
 import styles from './Home.module.css'
@@ -38,7 +38,8 @@ export default function RootLayout ({
         css={{
           '&::-webkit-scrollbar': {
             display: 'none'
-          }
+          },
+          scrollbarWidth: 'none'
         }}
       >
         {children}

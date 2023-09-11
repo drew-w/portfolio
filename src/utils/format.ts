@@ -2,10 +2,18 @@ import { Token, TokenKeys } from '@./types/tokens'
 import { WalletBalance } from '@./types/wallet'
 import BigNumber from 'bignumber.js'
 
-export const formatCurrency = (number: number | string): string => {
-  const bigNumber = new BigNumber(number)
-  return `$${bigNumber.toNumber().toFixed(2)}`
+export const formatCurrency = (number: number): string => {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  })
+  return formatter.format(number)
 }
+
+//if a variable can be either a number OR big number object, makes sure that it is a big number object
+export const formatBigNumber = (
+  value: number | string | BigNumber
+): BigNumber => new BigNumber(value?.toString() || value)
 
 export const formatDelta = (
   current: string,
@@ -58,9 +66,7 @@ export const formatBalancePercentage = (
       const token = tokens.find(token => token.key === key)
       const decimal = 1 / Math.pow(10, token?.decimals || 18)
 
-      const balance = new BigNumber(
-        balances?.[key]?.toString() || balances?.[key]
-      )
+      const balance = formatBigNumber(balances?.[key])
       if (token?.marketValueNow) {
         return total.plus(balance.times(decimal).times(token?.marketValueNow))
       } else return total
@@ -74,9 +80,7 @@ export const formatBalancePercentage = (
       const token = tokens.find(token => token.key === tokenKey)
       const decimal = 1 / Math.pow(10, token?.decimals || 18)
 
-      const balance = new BigNumber(
-        balances?.[tokenKey]?.toString() || balances?.[tokenKey]
-      )
+      const balance = formatBigNumber(balances?.[tokenKey])
       const tokenAmount = balance.times(decimal)
       if (token?.marketValueNow) {
         const dollarAmount = tokenAmount.times(token?.marketValueNow)
@@ -146,3 +150,28 @@ const sortByValue = (formatted: FormattedBalance) =>
         ? -1
         : 0
     })
+
+interface TokenTypes {
+  allTokens: Token[]
+  myTokens: Token[]
+}
+export const getTokenOwnership = (
+  { balances }: WalletBalance,
+  tokens: Token[]
+): TokenTypes => {
+  const [myTokens, allTokens] = tokens.reduce(
+    // Use "deconstruction" style assignment
+    (result: Token[][], token) => {
+      const balance = formatBigNumber(balances?.[token.key])
+
+      result[balance.isGreaterThan(0) ? 0 : 1].push(token) // Determine and push to small/large arr
+      return result
+    },
+    [[], []]
+  )
+
+  return {
+    allTokens,
+    myTokens
+  }
+}
