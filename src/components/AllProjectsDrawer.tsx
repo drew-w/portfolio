@@ -283,7 +283,7 @@ export const AllProjectsDrawer = ({
                   </Flex>
                   <HStack>
                     <Button
-                      minW='125'
+                      minW='145'
                       h='38px'
                       padding='20px'
                       variant='squareBlue'
@@ -291,7 +291,7 @@ export const AllProjectsDrawer = ({
                       Collect
                     </Button>
                     <Button
-                      minW='125'
+                      minW='145'
                       h='38px'
                       padding='20px'
                       variant='squareGray'
@@ -301,7 +301,7 @@ export const AllProjectsDrawer = ({
                   </HStack>
                   <HStack marginTop='8px'>
                     <Button
-                      minW='125'
+                      minW='145'
                       h='38px'
                       padding='20px'
                       variant='squareGray'
@@ -309,7 +309,7 @@ export const AllProjectsDrawer = ({
                       Unstake
                     </Button>
                     <Button
-                      minW='125'
+                      minW='145'
                       h='38px'
                       padding='20px'
                       variant='squareGray'
@@ -424,18 +424,22 @@ export const AllProjectsDrawer = ({
                 </Text>
                 <Divider />
                 <Stack spacing='23px'>
-                  <Flex alignItems='center' justifyContent='space-between'>
+                  <Flex alignItems='flex-start' justifyContent='space-between'>
                     <Flex alignItems='center'>
                       <Text marginRight='5px' fontWeight={400} fontSize={14}>
                         Rewards Rate
                       </Text>
                       <InfoTooltip label="when I'm with you " />
                     </Flex>
-                    <Text as='p' fontWeight={600} fontSize={16}>
-                      $100,000
-                    </Text>
+                    <Flex alignItems='end' direction='column'>
+                      <Text as='p' fontWeight={600} fontSize={16}>
+                        682.72 {token.name}
+                      </Text>
+                      <Text color='text-gray' fontWeight={500} fontSize={12}>
+                        $40.82
+                      </Text>
+                    </Flex>
                   </Flex>
-
                   <Flex alignItems='center' justifyContent='space-between'>
                     <Flex alignItems='center'>
                       <Text marginRight='5px' fontWeight={400} fontSize={14}>
@@ -444,20 +448,25 @@ export const AllProjectsDrawer = ({
                       <InfoTooltip label="when I'm with you " />
                     </Flex>
                     <Text as='p' fontWeight={600} fontSize={16}>
-                      50,000
+                      8
                     </Text>
                   </Flex>
                   <Divider />
-                  <Flex alignItems='center' justifyContent='space-between'>
+                  <Flex alignItems='flex-start' justifyContent='space-between'>
                     <Flex alignItems='center'>
                       <Text marginRight='5px' fontWeight={400} fontSize={14}>
                         Total Project Rate
                       </Text>
                       <InfoTooltip label="when I'm with you " />
                     </Flex>
-                    <Text as='p' fontWeight={600} fontSize={16}>
-                      50,000
-                    </Text>
+                    <Flex alignItems='end' direction='column'>
+                      <Text as='p' fontWeight={600} fontSize={16}>
+                        5,461.76 {token.name}
+                      </Text>
+                      <Text color='text-gray' fontWeight={500} fontSize={12}>
+                        $326.56
+                      </Text>
+                    </Flex>
                   </Flex>
                 </Stack>
               </Stack>
