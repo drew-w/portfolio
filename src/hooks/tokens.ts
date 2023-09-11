@@ -489,3 +489,26 @@ export const data: Token[] = [
   //   marketValue24HrsAgo: '0.00001'
   // }
 ]
+
+export const tokenValues = [
+  {
+    name: 'Page A',
+    tokenPrice: 400
+  },
+  {
+    name: 'Page B',
+    tokenPrice: 300
+  },
+  {
+    name: 'Page B',
+    tokenPrice: 15
+  },
+  {
+    name: 'Page B',
+    tokenPrice: 100
+  },
+  {
+    name: 'Page B',
+    tokenPrice: 1
+  }
+]
