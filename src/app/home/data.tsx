@@ -6,6 +6,7 @@ import BigNumber from 'bignumber.js'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { formatBigNumber, formatCurrency, formatDelta } from '@utils/format'
 import { pendingBalance, walletBalance } from '@hooks/wallets'
+import TableGraph from '@components/Charts/TableChart'
 
 //Types
 import { Token } from '@./types/tokens'
@@ -419,7 +420,7 @@ export const myProjectsColumns = (selectedTable: boolean) => [
       const data = info.getValue()
 
       const { brandColor } = data.uiConfig
-      return <Text color={brandColor}>graph</Text>
+      return <TableGraph token={data} />
     }
   })
 ]
