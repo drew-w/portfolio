@@ -278,7 +278,7 @@ export const AllProjectsDrawer = ({
                       {token.uiConfig.name}
                     </Text>
                     <Text fontWeight={400} fontSize={14}>
-                      {token.uiConfig.symbol}
+                      {token.name}
                     </Text>
                   </Flex>
                   <HStack>
@@ -333,91 +333,52 @@ export const AllProjectsDrawer = ({
                 </Text>
                 <Divider />
                 <Stack spacing='23px'>
-                  <Flex alignItems='center' justifyContent='space-between'>
+                  <Flex alignItems='flex-start' justifyContent='space-between'>
                     <Flex alignItems='center'>
-                      <Text marginRight='5px' fontWeight={500} fontSize={14}>
+                      <Text marginRight='5px' fontWeight={400} fontSize={14}>
                         Wallet Balance
                       </Text>
                     </Flex>
-                    <Text as='p' fontWeight={600} fontSize={16}>
-                      $100,000
-                    </Text>
+                    <Flex alignItems='end' direction='column'>
+                      <Text as='p' fontWeight={600} fontSize={16}>
+                        140,210 {token.name}
+                      </Text>
+                      <Text color='text-gray' fontWeight={500} fontSize={12}>
+                        $29,600
+                      </Text>
+                    </Flex>
                   </Flex>
 
-                  <Flex alignItems='center' justifyContent='space-between'>
+                  <Flex alignItems='flex-start' justifyContent='space-between'>
                     <Flex alignItems='center'>
-                      <Text marginRight='5px' fontWeight={500} fontSize={14}>
+                      <Text marginRight='5px' fontWeight={400} fontSize={14}>
                         Rewards Balance
                       </Text>
                     </Flex>
-                    <Text as='p' fontWeight={600} fontSize={16}>
-                      50,000
-                    </Text>
+                    <Flex alignItems='end' direction='column'>
+                      <Text as='p' fontWeight={600} fontSize={16}>
+                        1,828 {token.name}
+                      </Text>
+                      <Text color='text-gray' fontWeight={500} fontSize={12}>
+                        $29,600
+                      </Text>
+                    </Flex>
                   </Flex>
                   <Divider />
-                  <Flex alignItems='center' justifyContent='space-between'>
+                  <Flex alignItems='flex-start' justifyContent='space-between'>
                     <Flex alignItems='center'>
-                      <Text marginRight='5px' fontWeight={500} fontSize={14}>
+                      <Text marginRight='5px' fontWeight={400} fontSize={14}>
                         Total Available
                       </Text>
                     </Flex>
-                    <Text as='p' fontWeight={600} fontSize={16}>
-                      50,000
-                    </Text>
-                  </Flex>
-                </Stack>
-              </Stack>
-              <Stack
-                spacing='12px'
-                p='20px'
-                shadow='box-shadow-primary'
-                borderWidth={1}
-                borderColor='box-border'
-                borderRadius={10}
-                direction='column'
-              >
-                <Text as='h3' fontWeight={600}>
-                  Rewards
-                </Text>
-                <Divider />
-                <Stack spacing='23px'>
-                  <Flex alignItems='center' justifyContent='space-between'>
-                    <Flex alignItems='center'>
-                      <Text marginRight='5px' fontWeight={500} fontSize={14}>
-                        Rewards Rate
+                    <Flex alignItems='end' direction='column'>
+                      <Text as='p' fontWeight={600} fontSize={16}>
+                        142,038 {token.name}
                       </Text>
-                      <InfoTooltip label="when I'm with you " />
-
-                    </Flex>
-                    <Text as='p' fontWeight={600} fontSize={16}>
-                      $100,000
-                    </Text>
-                  </Flex>
-
-                  <Flex alignItems='center' justifyContent='space-between'>
-                    <Flex alignItems='center'>
-                      <Text marginRight='5px' fontWeight={500} fontSize={14}>
-                        NFTs Staked
+                      <Text color='text-gray' fontWeight={500} fontSize={12}>
+                        $29,600
                       </Text>
-                      <InfoTooltip label="when I'm with you " />
-
                     </Flex>
-                    <Text as='p' fontWeight={600} fontSize={16}>
-                      50,000
-                    </Text>
-                  </Flex>
-                  <Divider />
-                  <Flex alignItems='center' justifyContent='space-between'>
-                    <Flex alignItems='center'>
-                      <Text marginRight='5px' fontWeight={500} fontSize={14}>
-                        Total Project Rate
-                      </Text>
-                      <InfoTooltip label="when I'm with you " />
-
-                    </Flex>
-                    <Text as='p' fontWeight={600} fontSize={16}>
-                      50,000
-                    </Text>
                   </Flex>
                 </Stack>
               </Stack>
@@ -448,6 +409,57 @@ export const AllProjectsDrawer = ({
                     </Text>
                   </Flex>
                 </Flex>
+              </Stack>
+              <Stack
+                spacing='12px'
+                p='20px'
+                shadow='box-shadow-primary'
+                borderWidth={1}
+                borderColor='box-border'
+                borderRadius={10}
+                direction='column'
+              >
+                <Text as='h3' fontWeight={600}>
+                  Rewards
+                </Text>
+                <Divider />
+                <Stack spacing='23px'>
+                  <Flex alignItems='center' justifyContent='space-between'>
+                    <Flex alignItems='center'>
+                      <Text marginRight='5px' fontWeight={400} fontSize={14}>
+                        Rewards Rate
+                      </Text>
+                      <InfoTooltip label="when I'm with you " />
+                    </Flex>
+                    <Text as='p' fontWeight={600} fontSize={16}>
+                      $100,000
+                    </Text>
+                  </Flex>
+
+                  <Flex alignItems='center' justifyContent='space-between'>
+                    <Flex alignItems='center'>
+                      <Text marginRight='5px' fontWeight={400} fontSize={14}>
+                        NFTs Staked
+                      </Text>
+                      <InfoTooltip label="when I'm with you " />
+                    </Flex>
+                    <Text as='p' fontWeight={600} fontSize={16}>
+                      50,000
+                    </Text>
+                  </Flex>
+                  <Divider />
+                  <Flex alignItems='center' justifyContent='space-between'>
+                    <Flex alignItems='center'>
+                      <Text marginRight='5px' fontWeight={400} fontSize={14}>
+                        Total Project Rate
+                      </Text>
+                      <InfoTooltip label="when I'm with you " />
+                    </Flex>
+                    <Text as='p' fontWeight={600} fontSize={16}>
+                      50,000
+                    </Text>
+                  </Flex>
+                </Stack>
               </Stack>
             </Stack>
             <Text mt='1000px'>scroll test</Text>
