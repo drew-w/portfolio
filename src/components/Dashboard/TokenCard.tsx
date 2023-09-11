@@ -193,7 +193,13 @@ export const TokenCard = ({}) => {
                 )}
               </Menu>
             </Flex>
-            <Stack spacing='20px' direction='column' w='full' py='10px'>
+            <Stack
+              h='full'
+              spacing='20px'
+              direction='column'
+              w='full'
+              py='10px'
+            >
               <Stack direction='row' spacing='2px' w='full'>
                 {top4Formatted?.order.map(
                   (tokenKey: string | TokenKeys[any]) => {
@@ -201,8 +207,9 @@ export const TokenCard = ({}) => {
                       token => token.key === tokenKey
                     )
                     //@ts-ignore
-                    const percent =
-                      top4Formatted?.data?.[tokenKey]?.percent?.toString()
+                    const percent = top4Formatted?.data?.[
+                      tokenKey
+                    ]?.percent?.toString()
 
                     return (
                       <Box
@@ -226,8 +233,9 @@ export const TokenCard = ({}) => {
                       .decimalPlaces(2)
                       .toString()
                     //@ts-ignore
-                    const dollar =
-                      top4Formatted?.data?.[tokenKey]?.dollarAmount.toString()
+                    const dollar = top4Formatted?.data?.[
+                      tokenKey
+                    ]?.dollarAmount.toString()
                     const formattedDollar = formatCurrency(dollar)
                     return (
                       <Flex

@@ -1,17 +1,12 @@
 'use client'
 //Chakra
-import {
-  Flex,
-  Grid,
-  GridItem,
-  useBreakpointValue,
-  Button
-} from '@chakra-ui/react'
+import { Flex, Grid, GridItem } from '@chakra-ui/react'
 
 //Data
 import { data as tokenData } from '@hooks/tokens'
-import { allProjectsColumns, setAllProjectsColumnsVisibility } from './data'
 import { useState, useEffect } from 'react'
+import { getTokenOwnership } from '@utils/format'
+import { walletBalance } from '@hooks/wallets'
 
 //Style UI
 import { BalanceCard } from '@components/Dashboard/BalanceCard'
@@ -24,21 +19,15 @@ import { AllProjectsDrawer } from '@components/AllProjectsDrawer'
 import { Token } from '@./types/tokens'
 
 export default function Home () {
-  const [columnVisibility, setColumnVisibility] = useState({})
   const [rowSelection, setRowSelection] = useState({})
+  const [selectedTable, setSelectedTable] = useState<'all' | 'my' | string>()
   const [isAllProjectsOpen, setIsAllProjectsOpen] = useState<boolean>(false)
   const [index] = Object.keys(rowSelection)
-  const token: Token = tokenData[parseInt(index)]
-
-  const screenSize =
-    useBreakpointValue(
-      { base: 'base', sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' },
-      { fallback: 'lg' }
-    ) || 'lg'
-
-  useEffect(() => {
-    setAllProjectsColumnsVisibility(setColumnVisibility, screenSize)
-  }, [screenSize])
+  const dataOfTokens = getTokenOwnership(walletBalance, tokenData),
+    { allTokens, myTokens } = dataOfTokens
+  const token: Token = (selectedTable === 'all' ? allTokens : myTokens)[
+    parseInt(index)
+  ]
 
   useEffect(() => {
     const tokenIndex = Object.keys(rowSelection)
@@ -52,6 +41,7 @@ export default function Home () {
   const onDrawerClose = () => {
     setIsAllProjectsOpen(false)
     setRowSelection({})
+    setSelectedTable(undefined)
   }
 
   return (
@@ -92,13 +82,11 @@ export default function Home () {
         <GridItem h='620px' colSpan={{ base: 3, md: 4, lg: 3 }}>
           <Flex as='span' w='full' justify='center' py='20px'>
             <TokenTable
-              data={tokenData}
-              caption='All Projects'
-              columns={allProjectsColumns}
-              columnVisibility={columnVisibility}
-              onPageResize={setColumnVisibility}
+              data={dataOfTokens}
+              tableSelect={selectedTable}
               rowSelection={rowSelection}
               onRowSelect={setRowSelection}
+              onTableSelect={setSelectedTable}
             />
           </Flex>
         </GridItem>
