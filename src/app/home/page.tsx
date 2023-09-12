@@ -94,11 +94,6 @@ export default function Home () {
       </Grid>
 
       {/* token drawer that will appear on the right side */}
-      {/* <AllProjectsDrawer
-        isOpen={isAllProjectsOpen}
-        token={token}
-        onClose={onDrawerClose}
-      /> */}
       <Drawer
         isOpen={isAllProjectsOpen && !!token}
         onClose={onDrawerClose}
