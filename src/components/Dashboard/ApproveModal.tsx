@@ -8,7 +8,8 @@ import {
   ModalCloseButton,
   Button,
   Text,
-  Box
+  Box,
+  useBreakpointValue
 } from '@chakra-ui/react'
 
 interface Props {
@@ -21,13 +22,30 @@ export function ApproveModal ({ isOpen, setIsOpen }: Props) {
     setIsOpen(false)
   }
 
+  const topStyle = useBreakpointValue({
+    base: 'auto', // Apply 'auto' on small screens
+    md: '20px' // Apply '20px' on medium and larger screens
+  })
+
+  const leftStyle = useBreakpointValue({
+    base: 'auto', // Apply 'auto' on small screens
+    md: '20px' // Apply '20px' on medium and larger screens
+  })
+
   return (
-    <Modal  isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent minW='500px' h='248px' style={{ top: '20px', left: '20px' }} borderRadius='12px'>
+      <ModalContent
+        minW={{ base: '200px', md: '350px', lg: '500px' }}
+        borderRadius='12px'
+        style={{
+          top: topStyle,
+          left: leftStyle
+        }}
+      >
         <ModalHeader>Approve Wallet</ModalHeader>
 
-        <ModalBody >
+        <ModalBody>
           <Box
             border='2px solid'
             borderRadius='8px'
@@ -36,8 +54,8 @@ export function ApproveModal ({ isOpen, setIsOpen }: Props) {
             paddingTop='10px'
             paddingBottom='16px'
             boxShadow='box-shadow-primary'
-            w='440px'
-            h='94px'
+            minW={{ base: '200px', md: '350px', lg: '440px' }}
+            minH='94px'
           >
             <Text>
               Collecting helps ensure that only legitimate data transactions are
