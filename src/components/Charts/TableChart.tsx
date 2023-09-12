@@ -13,7 +13,7 @@ interface Props {
   token: Token
 }
 
-export default function TableGraph ({ token }: Props) {
+export const TableChart = ({ token }: Props) => {
   const { brandColor } = token.uiConfig
   return (
     <LineChart width={60} height={50} data={tokenValues}>
@@ -23,7 +23,7 @@ export default function TableGraph ({ token }: Props) {
         dataKey='tokenPrice'
         stroke={brandColor}
         dot={false}
-        strokeWidth={3}
+        strokeWidth={2}
       />
     </LineChart>
   )
