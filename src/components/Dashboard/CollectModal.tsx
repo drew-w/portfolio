@@ -33,7 +33,11 @@ export function CollectModal ({ isOpen, setIsOpen }: Props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent minW='500px' h='570px' borderRadius='12px'>
+      <ModalContent
+        minW={{ base: '200px', md: '350px', lg: '500px' }}
+        h='570px'
+        borderRadius='12px'
+      >
         <ModalHeader>Collect Rewards</ModalHeader>
 
         <ModalBody>
@@ -84,7 +88,10 @@ export function CollectModal ({ isOpen, setIsOpen }: Props) {
                     padding='10px'
                     marginBottom='8px'
                   >
-                    <Flex alignItems='center'>
+                    <Flex
+                      direction={['column', 'column', 'row']}
+                      alignItems='center'
+                    >
                       <Image
                         src={token?.uiConfig.tokenLogo}
                         height={30}

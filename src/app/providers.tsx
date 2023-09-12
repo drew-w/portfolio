@@ -17,7 +17,8 @@ import {
   faChevronDown,
   faChevronUp,
   faPercent,
-  faDollarSign
+  faDollarSign,
+  faArrowUpRight
 } from '@fortawesome/pro-solid-svg-icons'
 
 library.add(
@@ -26,7 +27,8 @@ library.add(
   faChevronUp,
   faChevronDown,
   faPercent,
-  faDollarSign
+  faDollarSign,
+  faArrowUpRight
 )
 
 export function Providers ({ children }: { children: React.ReactNode }) {
