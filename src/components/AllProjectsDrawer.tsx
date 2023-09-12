@@ -15,6 +15,9 @@ import {
 
 //Data
 
+//Style UI
+import { DrawerChart } from '@components/Charts/DrawerChart'
+
 //Types
 import { Token } from '@./types/tokens'
 
@@ -73,26 +76,31 @@ export const AllProjectsDrawer = ({
                   objectFit='cover'
                 />
                 <Flex
-                  maxW='270px'
+                  maxW='300px'
                   h='80px'
                   position='absolute'
                   bottom='-40px'
                   px='20px'
-                  // bg='red.300'
                   w='full'
                   align='flex-end'
                   justify='space-between'
                 >
                   <Box
-                    borderRadius={8}
-                    borderWidth={2}
-                    borderColor='box-primary-bg'
                     w='80px'
                     h='80px'
-                    backgroundImage={token.uiConfig.tokenLogo}
-                    backgroundPosition='center'
-                    backgroundSize='150%'
-                  />
+                    borderWidth={2}
+                    borderRadius={8}
+                    bg='box-bg-primary'
+                    borderColor='box-bg-primary'
+                  >
+                    <Image
+                      src={token.uiConfig.tokenLogoSquare}
+                      w='full'
+                      borderRadius='md'
+                      draggable={false}
+                    />
+                  </Box>
+
                   <Button variant='square' h='22px' p='3px 6px' fontSize='12px'>
                     Buy Now
                   </Button>
@@ -136,6 +144,8 @@ export const AllProjectsDrawer = ({
                   meets commodities. NFTs in the D.E.B.T. Ecosystem collection
                 </Text>
               </Stack>
+
+              <DrawerChart token={token} />
             </Stack>
 
             <Text mt='1000px'>scroll test</Text>
