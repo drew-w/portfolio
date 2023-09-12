@@ -1,6 +1,6 @@
 'use client'
 //Chakra
-import { Flex, Grid, GridItem } from '@chakra-ui/react'
+import { Flex, Grid, GridItem, Drawer } from '@chakra-ui/react'
 
 //Data
 import { data as tokenData } from '@hooks/tokens'
@@ -14,6 +14,7 @@ import { NFTCard } from '@components/Dashboard/NFTCard'
 import { TokenTable } from '@components/Dashboard/TokenTable'
 import { TokenCard } from '@components/Dashboard/TokenCard'
 import { AllProjectsDrawer } from '@components/AllProjectsDrawer'
+import { MyProjectsDrawer } from '@components/MyProjectsDrawer'
 
 //Types
 import { Token } from '@./types/tokens'
@@ -93,11 +94,24 @@ export default function Home () {
       </Grid>
 
       {/* token drawer that will appear on the right side */}
-      <AllProjectsDrawer
+      {/* <AllProjectsDrawer
         isOpen={isAllProjectsOpen}
         token={token}
         onClose={onDrawerClose}
-      />
+      /> */}
+      <Drawer
+        isOpen={isAllProjectsOpen && !!token}
+        onClose={onDrawerClose}
+        variant='alwaysOpen'
+        blockScrollOnMount={false}
+      >
+        {selectedTable === 'all' && (
+          <AllProjectsDrawer token={token} onClose={onDrawerClose} />
+        )}
+        {selectedTable === 'my' && (
+          <MyProjectsDrawer token={token} onClose={onDrawerClose} />
+        )}
+      </Drawer>
     </Flex>
   )
 }
