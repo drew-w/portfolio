@@ -16,6 +16,7 @@ export interface Token {
     onPancake?: boolean
     symbol: string
     tokenLogo: string
+    tokenLogoSquare?: string
     unitLabel: string
     unitLabelAbbr: string
     valueHidden: boolean
