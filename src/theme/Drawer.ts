@@ -14,7 +14,8 @@ const variantAlwaysOpen = definePartsStyle({
     h: 'calc(100vh - 101px)',
     minW: '350px',
     borderRadius: 10,
-    shaodw: 'box-shadow-primary'
+    shadow: 'box-shadow-primary',
+    maxW: '350px'
   },
   body: {
     padding: 0

@@ -1,12 +1,13 @@
 'use client'
 //Chakra
-import { Flex, Grid, GridItem } from '@chakra-ui/react'
+import { Flex, Grid, GridItem, Drawer } from '@chakra-ui/react'
 
 //Data
 import { data as tokenData } from '@hooks/tokens'
 import { useState, useEffect } from 'react'
 import { getTokenOwnership } from '@utils/format'
 import { walletBalance } from '@hooks/wallets'
+import { useAccount } from 'wagmi'
 
 //Style UI
 import { BalanceCard } from '@components/Dashboard/BalanceCard'
@@ -14,32 +15,37 @@ import { NFTCard } from '@components/Dashboard/NFTCard'
 import { TokenTable } from '@components/Dashboard/TokenTable'
 import { TokenCard } from '@components/Dashboard/TokenCard'
 import { AllProjectsDrawer } from '@components/AllProjectsDrawer'
+import { MyProjectsDrawer } from '@components/MyProjectsDrawer'
 
 //Types
 import { Token } from '@./types/tokens'
 
 export default function Home () {
+  const account = useAccount(),
+    { isConnected } = account
+
   const [rowSelection, setRowSelection] = useState({})
   const [selectedTable, setSelectedTable] = useState<'all' | 'my' | string>()
-  const [isAllProjectsOpen, setIsAllProjectsOpen] = useState<boolean>(false)
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false)
   const [index] = Object.keys(rowSelection)
-  const dataOfTokens = getTokenOwnership(walletBalance, tokenData),
+  const dataOfTokens = isConnected
+      ? getTokenOwnership(walletBalance, tokenData)
+      : { allTokens: tokenData, myTokens: [] },
     { allTokens, myTokens } = dataOfTokens
   const token: Token = (selectedTable === 'all' ? allTokens : myTokens)[
     parseInt(index)
   ]
 
   useEffect(() => {
+    setIsDrawerOpen(false)
     const tokenIndex = Object.keys(rowSelection)
-    if (tokenIndex.length <= 0) {
-      setIsAllProjectsOpen(false)
-    } else {
-      setIsAllProjectsOpen(true)
+    if (tokenIndex.length > 0) {
+      setIsDrawerOpen(true)
     }
   }, [rowSelection])
 
   const onDrawerClose = () => {
-    setIsAllProjectsOpen(false)
+    setIsDrawerOpen(false)
     setRowSelection({})
     setSelectedTable(undefined)
   }
@@ -93,11 +99,19 @@ export default function Home () {
       </Grid>
 
       {/* token drawer that will appear on the right side */}
-      <AllProjectsDrawer
-        isOpen={isAllProjectsOpen}
-        token={token}
+      <Drawer
+        isOpen={isDrawerOpen && !!token}
         onClose={onDrawerClose}
-      />
+        variant='alwaysOpen'
+        blockScrollOnMount={false}
+      >
+        {selectedTable === 'all' && (
+          <AllProjectsDrawer token={token} onClose={onDrawerClose} />
+        )}
+        {selectedTable === 'my' && (
+          <MyProjectsDrawer token={token} onClose={onDrawerClose} />
+        )}
+      </Drawer>
     </Flex>
   )
 }

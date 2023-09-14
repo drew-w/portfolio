@@ -213,6 +213,7 @@ export const TokenCard = ({}) => {
 
                     return (
                       <Box
+                        key={tokenKey}
                         borderRadius={15}
                         h='20px'
                         bg={token ? token.uiConfig.brandColor : 'text-primary'}
@@ -239,6 +240,7 @@ export const TokenCard = ({}) => {
                     const formattedDollar = formatCurrency(dollar)
                     return (
                       <Flex
+                        key={tokenKey}
                         direction='row'
                         w='full'
                         align='center'
