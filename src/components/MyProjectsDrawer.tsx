@@ -68,7 +68,12 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
                 borderRadius={10}
               >
                 <Flex alignItems='center' direction='column'>
-                  <Image src={token.uiConfig.tokenLogo} w='80px' h='80px' />
+                  <Image
+                    src={token.uiConfig.tokenLogo}
+                    w='80px'
+                    h='80px'
+                    alt='token logo'
+                  />
                   <Flex
                     direction='column'
                     alignItems='center'
