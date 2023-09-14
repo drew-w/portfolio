@@ -46,7 +46,8 @@ const variantSquare = defineStyle(() => {
       _disabled: {
         bg: 'btn-secondary-bg'
       }
-    }
+    },
+    _active: { opacity: 0.8 }
   }
 })
 
@@ -63,7 +64,8 @@ const variantSquareBlue = defineStyle(() => {
       _disabled: {
         bg: 'btn-secondary-bg'
       }
-    }
+    },
+    _active: { opacity: 0.8 }
   }
 })
 
@@ -80,7 +82,8 @@ const variantSquareGray = defineStyle(() => {
       _disabled: {
         bg: 'btn-secondary-bg'
       }
-    }
+    },
+    _active: { opacity: 0.8 }
   }
 })
 

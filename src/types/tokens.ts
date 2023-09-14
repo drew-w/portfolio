@@ -11,6 +11,7 @@ export interface Token {
     brandColor: string
     brandColorAltShade?: string
     comingSoon?: boolean
+    headerImage: string
     hideMarketValue?: boolean
     name: string
     onPancake?: boolean

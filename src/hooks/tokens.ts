@@ -63,6 +63,8 @@ export const data: Token[] = [
       name: 'Aluminum',
       symbol: 'ALUM',
       onPancake: false,
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/alum/ALUM-header.png',
       tokenLogo:
         'https://debt-static.s3.amazonaws.com/web/tokens/alum/ALUM-360x360.png',
       tokenLogoSquare:
@@ -94,6 +96,8 @@ export const data: Token[] = [
       name: 'Grow',
       symbol: 'GROW',
       onPancake: true,
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/grow/GROW-header.png',
       tokenLogo:
         'https://debt-static.s3.amazonaws.com/web/tokens/grow/GROW-360x360.png',
       tokenLogoSquare:
@@ -124,6 +128,8 @@ export const data: Token[] = [
       name: 'NaturalGas',
       symbol: 'NATG',
       onPancake: true,
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/natg/NATG-header.png',
       tokenLogo:
         'https://debt-static.s3.amazonaws.com/web/tokens/natg/NATG-360x360.png',
       tokenLogoSquare:
@@ -152,6 +158,8 @@ export const data: Token[] = [
       name: 'DEBT',
       symbol: 'DEBT',
       onPancake: true,
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/debt/DEBT-header.png',
       tokenLogo:
         'https://debt-static.s3.amazonaws.com/web/tokens/debt/DEBT-360x360.png',
       tokenLogoSquare:
@@ -233,6 +241,8 @@ export const data: Token[] = [
       name: 'BlackGold',
       symbol: 'BGLD',
       onPancake: true,
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/bgld/BGLD-header.png',
       tokenLogo:
         'https://debt-static.s3.amazonaws.com/web/tokens/bgld/BGLD-360x360.png',
       tokenLogoSquare:
@@ -286,6 +296,8 @@ export const data: Token[] = [
       name: 'Explore',
       symbol: 'XPLR',
       onPancake: false,
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/xplr/XPLR-header.png',
       tokenLogo:
         'https://debt-static.s3.amazonaws.com/web/tokens/xplr/XPLR-360x360.png',
       tokenLogoSquare:
@@ -316,6 +328,8 @@ export const data: Token[] = [
     uiConfig: {
       name: 'Beverage',
       symbol: 'BEV',
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/bev/BEV-header.png',
       tokenLogo: 'https://assets.thedebtbox.com/web/tokens/bev/BEV-360x360.png',
       tokenLogoSquare:
         'https://assets.thedebtbox.com/web/tokens/bev/BEV-square-80x80.png',
@@ -347,6 +361,8 @@ export const data: Token[] = [
       name: 'Data Center Mining',
       symbol: 'DCM',
       onPancake: true,
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/dcm/DCM-header.png',
       tokenLogo: 'https://assets.thedebtbox.com/web/tokens/dcm/DCM-360x360.png',
       tokenLogoSquare:
         'https://assets.thedebtbox.com/web/tokens/dcm/DCM-square-80x80.png',
@@ -376,6 +392,8 @@ export const data: Token[] = [
     uiConfig: {
       name: 'BloxRealEstate',
       symbol: 'BLOX',
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/blox/BLOX-header.png',
       tokenLogo:
         'https://assets.thedebtbox.com/web/tokens/blox/BLOX-360x360.png',
       tokenLogoSquare:
@@ -407,6 +425,8 @@ export const data: Token[] = [
     uiConfig: {
       name: 'Digital Gold',
       symbol: 'DLG',
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/dlg/DLG-header.png',
       tokenLogo: 'https://assets.thedebtbox.com/web/tokens/dlg/DLG-360x360.png',
       tokenLogoSquare:
         'https://assets.thedebtbox.com/web/tokens/dlg/DLG-square-80x80.png',
@@ -461,6 +481,8 @@ export const data: Token[] = [
     uiConfig: {
       name: 'Drip',
       symbol: 'DRIP',
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/drip/DRIP-header.png',
       tokenLogo:
         'https://assets.thedebtbox.com/web/tokens/drip/DRIP-360x360.png',
       tokenLogoSquare:
@@ -481,35 +503,39 @@ export const data: Token[] = [
     pair: null,
     marketValueNow: '0.5',
     marketValue24HrsAgo: '0.5'
+  },
+  {
+    id: 1032,
+    name: 'REV',
+    key: 'rev',
+    decimals: 8,
+    contractAddress: '0x0A327dF3CB50fc6067ed68273192E49443549824',
+    type: 'bep20',
+    uiConfig: {
+      name: 'Rev Exotic Vehicles',
+      symbol: 'REV',
+      headerImage:
+        'https://assets.thedebtbox.com/web/tokens/rev/REV-header.png',
+      tokenLogo: 'https://assets.thedebtbox.com/web/tokens/rev/REV-360x360.png',
+      tokenLogoSquare:
+        'https://assets.thedebtbox.com/web/tokens/rev/REV-square-80x80.png',
+      unitLabel: 'rev',
+      brandColor: '#E22030',
+      comingSoon: false,
+      valueHidden: true,
+      unitLabelAbbr: 'rev',
+      atomicUnitLabel: 'rpms',
+      hideMarketValue: true,
+      comingSoonHidden: false,
+      brandColorAltShade: '#DC063A',
+      atomicUnitLabelAbbr: 'rpms'
+    },
+    tax: 10,
+    routeToDebt: ['rev', 'debt'],
+    pair: null,
+    marketValueNow: '0.00001',
+    marketValue24HrsAgo: '0.00001'
   }
-  // {
-  //   id: 1032,
-  //   name: 'REV',
-  //   key: 'rev',
-  //   decimals: 8,
-  //   contractAddress: '0x0A327dF3CB50fc6067ed68273192E49443549824',
-  //   type: 'bep20',
-  //   uiConfig: {
-  //     name: 'Rev Exotic Vehicles',
-  //     symbol: 'REV',
-  //     tokenLogo: 'https://assets.thedebtbox.com/web/tokens/rev/REV-360x360.png',
-  //     unitLabel: 'rev',
-  //     brandColor: '#E22030',
-  //     comingSoon: false,
-  //     valueHidden: true,
-  //     unitLabelAbbr: 'rev',
-  //     atomicUnitLabel: 'rpms',
-  //     hideMarketValue: true,
-  //     comingSoonHidden: false,
-  //     brandColorAltShade: '#DC063A',
-  //     atomicUnitLabelAbbr: 'rpms'
-  //   },
-  //   tax: 10,
-  //   routeToDebt: ['rev', 'debt'],
-  //   pair: null,
-  //   marketValueNow: '0.00001',
-  //   marketValue24HrsAgo: '0.00001'
-  // }
 ]
 
 export const tokenValues = [
