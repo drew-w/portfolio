@@ -7,6 +7,7 @@ import { data as tokenData } from '@hooks/tokens'
 import { useState, useEffect } from 'react'
 import { getTokenOwnership } from '@utils/format'
 import { walletBalance } from '@hooks/wallets'
+import { useAccount } from 'wagmi'
 
 //Style UI
 import { BalanceCard } from '@components/Dashboard/BalanceCard'
@@ -20,11 +21,16 @@ import { MyProjectsDrawer } from '@components/MyProjectsDrawer'
 import { Token } from '@./types/tokens'
 
 export default function Home () {
+  const account = useAccount(),
+    { isConnected } = account
+
   const [rowSelection, setRowSelection] = useState({})
   const [selectedTable, setSelectedTable] = useState<'all' | 'my' | string>()
   const [isAllProjectsOpen, setIsAllProjectsOpen] = useState<boolean>(false)
   const [index] = Object.keys(rowSelection)
-  const dataOfTokens = getTokenOwnership(walletBalance, tokenData),
+  const dataOfTokens = isConnected
+      ? getTokenOwnership(walletBalance, tokenData)
+      : { allTokens: tokenData, myTokens: [] },
     { allTokens, myTokens } = dataOfTokens
   const token: Token = (selectedTable === 'all' ? allTokens : myTokens)[
     parseInt(index)

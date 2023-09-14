@@ -61,9 +61,8 @@ export const AllProjectsDrawer = ({ token, onClose }: Props) => {
                 <Image
                   w='300px'
                   h='150px'
-                  bg='black'
                   borderRadius={10}
-                  src='https://www.thedebtbox.com/_next/image?url=%2Fimages%2FHomeHero.png&w=1920&q=75'
+                  src={token.uiConfig.headerImage}
                   alt='qr code'
                   draggable={false}
                   objectFit='cover'
