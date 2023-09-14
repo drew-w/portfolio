@@ -89,84 +89,86 @@ export const TokenTable = ({
 
   return (
     <Stack as='section' direction='column' spacing='20px' w='full'>
-      <TableContainer
-        px='15px'
-        bg='box-bg-primary'
-        borderRadius='10px'
-        shadow='box-shadow-primary'
-      >
-        <Table>
-          <TableCaption p='0' placement='top'>
-            My Projects
-          </TableCaption>
-          <Thead>
-            {myTokensTable.getHeaderGroups().map(headerGroup => (
-              <Tr key={headerGroup.id}>
-                {headerGroup.headers.map(header => (
-                  <Th key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </Th>
-                ))}
-              </Tr>
-            ))}
-          </Thead>
-          <Tbody>
-            {myTokensTable.getRowModel().rows.map(row => {
-              const isSelected = row.getIsSelected() && tableSelect === 'my'
-              const canSelect = row.getCanSelect()
-
-              const clickHandler = canSelect
-                ? row.getToggleSelectedHandler()
-                : () => null
-
-              return (
-                <Tr
-                  key={row.id}
-                  onClick={e => {
-                    onTableSelect('my')
-                    clickHandler(e)
-                  }}
-                  color={isSelected ? 'text-secondary' : 'auto'}
-                >
-                  {row.getVisibleCells().map(cell => (
-                    <Td
-                      key={cell.id}
-                      bg={isSelected ? 'box-bg-secondary' : 'auto'}
-                      borderColor={isSelected ? 'box-bg-secondary' : 'auto'}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </Td>
+      {myTokens.length > 0 && (
+        <TableContainer
+          px='15px'
+          bg='box-bg-primary'
+          borderRadius='10px'
+          shadow='box-shadow-primary'
+        >
+          <Table>
+            <TableCaption p='0' placement='top'>
+              My Projects
+            </TableCaption>
+            <Thead>
+              {myTokensTable.getHeaderGroups().map(headerGroup => (
+                <Tr key={headerGroup.id}>
+                  {headerGroup.headers.map(header => (
+                    <Th key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </Th>
                   ))}
                 </Tr>
-              )
-            })}
-          </Tbody>
-          <Tfoot>
-            {myTokensTable.getFooterGroups().map(footerGroup => (
-              <Tr key={footerGroup.id}>
-                {footerGroup.headers.map(header => (
-                  <Th key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.footer,
-                          header.getContext()
+              ))}
+            </Thead>
+            <Tbody>
+              {myTokensTable.getRowModel().rows.map(row => {
+                const isSelected = row.getIsSelected() && tableSelect === 'my'
+                const canSelect = row.getCanSelect()
+
+                const clickHandler = canSelect
+                  ? row.getToggleSelectedHandler()
+                  : () => null
+
+                return (
+                  <Tr
+                    key={row.id}
+                    onClick={e => {
+                      onTableSelect('my')
+                      clickHandler(e)
+                    }}
+                    color={isSelected ? 'text-secondary' : 'auto'}
+                  >
+                    {row.getVisibleCells().map(cell => (
+                      <Td
+                        key={cell.id}
+                        bg={isSelected ? 'box-bg-secondary' : 'auto'}
+                        borderColor={isSelected ? 'box-bg-secondary' : 'auto'}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
                         )}
-                  </Th>
-                ))}
-              </Tr>
-            ))}
-          </Tfoot>
-        </Table>
-      </TableContainer>
+                      </Td>
+                    ))}
+                  </Tr>
+                )
+              })}
+            </Tbody>
+            <Tfoot>
+              {myTokensTable.getFooterGroups().map(footerGroup => (
+                <Tr key={footerGroup.id}>
+                  {footerGroup.headers.map(header => (
+                    <Th key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.footer,
+                            header.getContext()
+                          )}
+                    </Th>
+                  ))}
+                </Tr>
+              ))}
+            </Tfoot>
+          </Table>
+        </TableContainer>
+      )}
       <TableContainer
         px='15px'
         bg='box-bg-primary'
