@@ -34,7 +34,6 @@ export const DrawerChart = ({ token }: Props) => {
     onChange: setTimePeriod
   })
 
-  console.log(timePeriod)
   const group = getRootProps()
   return (
     <Stack>
@@ -102,9 +101,6 @@ function RadioCard (props: any) {
           bg: 'box-bg-secondary',
           color: 'text-secondary'
         }}
-        // _focus={{
-        //   boxShadow: 'outline'
-        //}}
         px='24px'
         py='11px'
       >
