@@ -21,6 +21,8 @@ import {
 //Style UI
 import { InfoTooltip } from '@components/InfoTooltip'
 import { Icon } from '@components/Factory/Icon'
+import { useState } from 'react'
+import { MintNFTModal } from './Modals/MintNFTModal'
 
 //Types
 import { Token } from '@./types/tokens'
@@ -38,6 +40,8 @@ export const AllProjectsDrawer = ({
   ...rest
 }: Props) => {
   //todo this will be different when we get real token data
+
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false)
 
   return (
     <Drawer
@@ -296,6 +300,7 @@ export const AllProjectsDrawer = ({
                       h='38px'
                       padding='20px'
                       variant='squareGray'
+                      onClick={() => setIsOpen(true)}
                     >
                       Mint
                     </Button>
@@ -483,6 +488,7 @@ export const AllProjectsDrawer = ({
           </DrawerFooter>
         </DrawerContent>
       )}
+      <MintNFTModal token={token} isOpen={modalIsOpen} setIsOpen={setIsOpen} />
     </Drawer>
   )
 }

@@ -12,7 +12,7 @@ import { useState } from 'react'
 
 //Style UI
 import { InfoTooltip } from '@components/InfoTooltip'
-import { CollectModal } from './CollectModal'
+import { CollectModal } from '../Modals/CollectModal'
 
 export const BalanceCard = () => {
   const account = useAccount()
