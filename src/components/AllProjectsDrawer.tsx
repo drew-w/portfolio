@@ -264,8 +264,6 @@ export const AllProjectsDrawer = ({ token, onClose }: Props) => {
           </DrawerFooter>
         </DrawerContent>
       )}
-      
-    
     </>
   )
 }
