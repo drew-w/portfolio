@@ -26,7 +26,7 @@ export default function Home () {
 
   const [rowSelection, setRowSelection] = useState({})
   const [selectedTable, setSelectedTable] = useState<'all' | 'my' | string>()
-  const [isAllProjectsOpen, setIsAllProjectsOpen] = useState<boolean>(false)
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false)
   const [index] = Object.keys(rowSelection)
   const dataOfTokens = isConnected
       ? getTokenOwnership(walletBalance, tokenData)
@@ -37,16 +37,15 @@ export default function Home () {
   ]
 
   useEffect(() => {
+    setIsDrawerOpen(false)
     const tokenIndex = Object.keys(rowSelection)
-    if (tokenIndex.length <= 0) {
-      setIsAllProjectsOpen(false)
-    } else {
-      setIsAllProjectsOpen(true)
+    if (tokenIndex.length > 0) {
+      setIsDrawerOpen(true)
     }
   }, [rowSelection])
 
   const onDrawerClose = () => {
-    setIsAllProjectsOpen(false)
+    setIsDrawerOpen(false)
     setRowSelection({})
     setSelectedTable(undefined)
   }
@@ -101,7 +100,7 @@ export default function Home () {
 
       {/* token drawer that will appear on the right side */}
       <Drawer
-        isOpen={isAllProjectsOpen && !!token}
+        isOpen={isDrawerOpen && !!token}
         onClose={onDrawerClose}
         variant='alwaysOpen'
         blockScrollOnMount={false}
