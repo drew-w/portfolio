@@ -92,6 +92,7 @@ export const AllProjectsDrawer = ({ token, onClose }: Props) => {
                       w='full'
                       borderRadius='md'
                       draggable={false}
+                      alt='token logo'
                     />
                   </Box>
 
