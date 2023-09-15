@@ -13,14 +13,20 @@ import {
   Flex,
   Image,
   Stack,
-  HStack
+  HStack,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Divider
 } from '@chakra-ui/react'
 
 import { pendingBalance } from '@hooks/wallets'
 import { data } from '@hooks/tokens'
 import { formatBigNumber } from '@utils/format'
 import { useState } from 'react'
-import { ApproveModal } from './ApproveModal'
+import { Icon } from '@components/Factory/Icon'
 
 import { Token } from '@./types/tokens'
 
@@ -40,13 +46,13 @@ export function MintNFTModal ({ isOpen, token, setIsOpen }: Props) {
       <ModalOverlay />
       <ModalContent
         minW={{ base: '200px', md: '350px', lg: '500px' }}
-        h='570px'
+        minH='781px'
         borderRadius='12px'
       >
         <ModalHeader>Mint NFT</ModalHeader>
 
         <ModalBody>
-          <Stack spacing={7}>
+          <Stack spacing={5}>
             <Box
               border='1px solid'
               borderRadius='8px'
@@ -94,26 +100,163 @@ export function MintNFTModal ({ isOpen, token, setIsOpen }: Props) {
               </Flex>
             </Box>
           </Stack>
-
-          <HStack justifyContent='space-between'>
-            <Box
-              border='1px solid'
-              borderColor='box-border'
-              borderRadius='6'
-              padding='10px'
-              marginBottom='8px'
-            >
-              <Flex alignItems='flex-start' justifyContent='space-between'>
-                <Flex alignItems='center'>
-                  <Text marginRight='5px' fontWeight={400} fontSize={14}>
-                    Total USD
+          <Stack>
+            <Flex alignItems='center' w='full' justifyContent='flex-end'>
+              <Icon
+                size='15px'
+                prefix='fas'
+                name={'timer'}
+                color='text-gray'
+                marginRight='6px'
+              />
+              <Text color='text-gray' fontWeight={500} fontSize={14}>
+                Values update in 10s
+              </Text>
+            </Flex>
+            <HStack spacing={3} justifyContent='space-between'>
+              <Box
+                border='1px solid'
+                borderColor='box-border'
+                borderRadius='6'
+                padding='10px'
+                marginBottom='8px'
+                w='full'
+              >
+                <Flex alignItems='flex-start' justifyContent='space-between'>
+                  <Text
+                    marginRight='5px'
+                    color='text-gray'
+                    fontWeight={500}
+                    fontSize={14}
+                  >
+                    Quantity
+                  </Text>
+                  <NumberInput
+                    size='xs'
+                    focusBorderColor='transparent'
+                    maxW={20}
+                    defaultValue={1}
+                    min={1}
+                  >
+                    <NumberInputField
+                      fontWeight={500}
+                      fontSize={14}
+                      borderWidth='0px'
+                    />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+                </Flex>
+              </Box>
+              <Box
+                border='1px solid'
+                borderColor='box-border'
+                borderRadius='6'
+                padding='10px'
+                marginBottom='8px'
+                w='full'
+              >
+                <Flex alignItems='flex-start' justifyContent='space-between'>
+                  <Text
+                    marginRight='5px'
+                    color='text-gray'
+                    fontWeight={500}
+                    fontSize={14}
+                  >
+                    Price
+                  </Text>
+                  <Text fontWeight={500} fontSize={14}>
+                    $1,500
                   </Text>
                 </Flex>
-                <Flex alignItems='end' direction='column'>
-                  <Text as='p' fontWeight={600} fontSize={16}>
+              </Box>
+            </HStack>
+            <HStack spacing={3} justifyContent='space-between'>
+              <Box
+                border='1px solid'
+                borderColor='box-border'
+                borderRadius='6'
+                padding='10px'
+                marginBottom='8px'
+                w='full'
+              >
+                <Flex
+                  direction={['column', 'column', 'row']}
+                  alignItems='flex-start'
+                  justifyContent='space-between'
+                >
+                  <Text
+                    marginRight='5px'
+                    color='text-gray'
+                    fontWeight={500}
+                    fontSize={14}
+                  >
+                    Total USD
+                  </Text>
+                  <Text fontWeight={500} fontSize={14}>
                     $6,000
                   </Text>
                 </Flex>
+              </Box>
+              <Box
+                border='1px solid'
+                borderColor='box-border'
+                borderRadius='6'
+                padding='10px'
+                marginBottom='8px'
+                w='full'
+              >
+                <Flex
+                  direction={['column', 'column', 'row']}
+                  alignItems='flex-start'
+                  justifyContent='space-between'
+                >
+                  <Text
+                    marginRight='5px'
+                    color='text-gray'
+                    fontWeight={500}
+                    fontSize={14}
+                  >
+                    Total DEBT
+                  </Text>
+                  <Text fontWeight={500} fontSize={14}>
+                    1,690.16
+                  </Text>
+                </Flex>
+              </Box>
+            </HStack>
+            <Box
+              border='1px solid'
+              borderColor='box-border'
+              borderRadius='6'
+              padding='10px'
+              marginBottom='8px'
+              w='full'
+            >
+              <Flex alignItems='flex-start' justifyContent='space-between'>
+                <Flex direction='column'>
+                  <Text
+                    marginRight='5px'
+                    color='text-gray'
+                    fontWeight={500}
+                    fontSize={14}
+                  >
+                    Available
+                  </Text>
+                  <Text color='text-red' fontWeight={500} fontSize={12}>
+                    Insufficient Funds
+                  </Text>
+                </Flex>
+                <Flex alignItems='end' direction='column'>
+                  <Text fontWeight={500} fontSize={14}>
+                    $67,804.10
+                  </Text>
+                  <Text color='text-gray' fontWeight={500} fontSize={12}>
+                    (14,870.22 DEBT)
+                  </Text>
+                </Flex>
               </Flex>
             </Box>
             <Box
@@ -122,21 +265,71 @@ export function MintNFTModal ({ isOpen, token, setIsOpen }: Props) {
               borderRadius='6'
               padding='10px'
               marginBottom='8px'
+              w='full'
             >
-              <Flex alignItems='flex-start' justifyContent='space-between'>
-                <Flex alignItems='center'>
-                  <Text marginRight='5px' fontWeight={400} fontSize={14}>
-                    Total DEBT
-                  </Text>
-                </Flex>
-                <Flex alignItems='end' direction='column'>
-                  <Text as='p' fontWeight={600} fontSize={16}>
-                    1,690.16
-                  </Text>
-                </Flex>
+              <Flex justifyContent='space-between'>
+                <Text color='text-gray' fontWeight={500} fontSize={14}>
+                  Payment Method
+                </Text>
+                <Text fontWeight={500} fontSize={14}>
+                  DEBT
+                </Text>
               </Flex>
             </Box>
-          </HStack>
+            <Box
+              border='1px solid'
+              borderColor='box-border'
+              borderRadius='6'
+              padding='10px'
+              marginBottom='8px'
+              w='full'
+            >
+              <Flex
+                direction={['column', 'column', 'row']}
+                justifyContent={'space-between'}
+              >
+                <Text color='text-gray' fontWeight={500} fontSize={14}>
+                  Total
+                </Text>
+                <Stack w='200px' spacing={1}>
+                  <Flex justifyContent='space-between'>
+                    <Text color='text-gray' fontWeight={500} fontSize={14}>
+                      NFTs
+                    </Text>
+                    <Text fontWeight={500} fontSize={14}>
+                      $6,000
+                    </Text>
+                  </Flex>
+                  <Flex justifyContent='flex-end'>
+                    <Text color='text-gray'>(1,690.16 DEBT)</Text>
+                  </Flex>
+                  <Flex justifyContent='space-between'>
+                    <Text color='text-gray' fontWeight={500} fontSize={14}>
+                      Mint Fee
+                    </Text>
+                    <Text fontWeight={500} fontSize={14}>
+                      $6,000
+                    </Text>
+                  </Flex>
+                  <Flex justifyContent='flex-end'>
+                    <Text color='text-gray'>($25 x 4)</Text>
+                  </Flex>
+                  <Divider />
+                  <Flex justifyContent='space-between'>
+                    <Text color='text-gray' fontWeight={500} fontSize={14}>
+                      Total Cost
+                    </Text>
+                    <Text fontWeight={500} fontSize={14}>
+                      $6,100
+                    </Text>
+                  </Flex>
+                  <Flex justifyContent='flex-end'>
+                    <Text color='text-gray'>(1,820.13 DEBT)</Text>
+                  </Flex>
+                </Stack>
+              </Flex>
+            </Box>
+          </Stack>
         </ModalBody>
 
         <ModalFooter justifyContent='space-between'>
@@ -148,7 +341,6 @@ export function MintNFTModal ({ isOpen, token, setIsOpen }: Props) {
           </Button>
         </ModalFooter>
       </ModalContent>
-      <ApproveModal isOpen={approveModalOpen} setIsOpen={setApproveModalOpen} />
     </Modal>
   )
 }
