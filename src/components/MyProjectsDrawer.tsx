@@ -296,7 +296,9 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
       <MintNFTModal
         token={token}
         isOpen={isMintOpen}
-        setIsOpen={setIsMintOpen}
+        onClose={() => {
+          setIsMintOpen(false)
+        }}
       />
     </>
   )
