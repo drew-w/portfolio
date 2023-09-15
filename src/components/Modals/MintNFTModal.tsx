@@ -33,18 +33,13 @@ import { Token } from '@./types/tokens'
 interface Props {
   isOpen: boolean
   token: Token
-  onClose: (result: any) => void
+  onClose: () => void
 }
 
 export function MintNFTModal ({ isOpen, token, onClose }: Props) {
-  const [internalIsOpen, setInternalIsOpen] = useState(isOpen)
-  const handleCloseModal = () => {
-    const result = internalIsOpen ? 'Modal was open' : 'Modal was closed'
-    onClose(result)
-    setInternalIsOpen(false)
-  }
+  
   return (
-    <Modal isOpen={isOpen} onClose={handleCloseModal}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent
         minW={{ base: '200px', md: '350px', lg: '500px' }}
@@ -334,10 +329,10 @@ export function MintNFTModal ({ isOpen, token, onClose }: Props) {
         </ModalBody>
 
         <ModalFooter justifyContent='space-between'>
-          <Button variant='squareGray' onClick={handleCloseModal}>
+          <Button variant='squareGray' onClick={onClose}>
             Cancel
           </Button>
-          <Button variant='squareBlue' onClick={handleCloseModal}>
+          <Button variant='squareBlue' onClick={onClose}>
             Approve
           </Button>
         </ModalFooter>
