@@ -15,6 +15,7 @@ import {
   Divider,
   HStack
 } from '@chakra-ui/react'
+import { useState } from 'react'
 
 //Data
 
@@ -22,6 +23,7 @@ import {
 import { DrawerChart } from '@components/Charts/DrawerChart'
 import { InfoTooltip } from '@components/InfoTooltip'
 import { Icon } from '@components/Factory/Icon'
+import { MintNFTModal } from './Modals/MintNFTModal'
 
 //Types
 import { Token } from '@./types/tokens'
@@ -33,6 +35,8 @@ interface Props {
 
 export const MyProjectsDrawer = ({ token, onClose }: Props) => {
   //todo this will be different when we get real token data
+
+  const [isMintOpen, setIsMintOpen] = useState<boolean>(false)
 
   return (
     <>
@@ -64,7 +68,12 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
                 borderRadius={10}
               >
                 <Flex alignItems='center' direction='column'>
-                  <Image src={token.uiConfig.tokenLogo} w='80px' h='80px' />
+                  <Image
+                    src={token.uiConfig.tokenLogo}
+                    w='80px'
+                    h='80px'
+                    alt='token logo'
+                  />
                   <Flex
                     direction='column'
                     alignItems='center'
@@ -96,6 +105,7 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
                       h='38px'
                       padding='20px'
                       variant='squareGray'
+                      onClick={() => setIsMintOpen(true)}
                     >
                       Mint
                     </Button>
@@ -283,6 +293,13 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
           </DrawerFooter>
         </DrawerContent>
       )}
+      <MintNFTModal
+        token={token}
+        isOpen={isMintOpen}
+        onClose={() => {
+          setIsMintOpen(false)
+        }}
+      />
     </>
   )
 }

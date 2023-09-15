@@ -22,6 +22,8 @@ import {
 import { DrawerChart } from '@components/Charts/DrawerChart'
 import { InfoTooltip } from '@components/InfoTooltip'
 import { Icon } from '@components/Factory/Icon'
+import { useState } from 'react'
+import { MintNFTModal } from './Modals/MintNFTModal'
 
 //Types
 import { Token } from '@./types/tokens'
@@ -90,6 +92,7 @@ export const AllProjectsDrawer = ({ token, onClose }: Props) => {
                       w='full'
                       borderRadius='md'
                       draggable={false}
+                      alt='token logo'
                     />
                   </Box>
 
