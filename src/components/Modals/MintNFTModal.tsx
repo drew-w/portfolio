@@ -40,7 +40,6 @@ export function MintNFTModal ({ isOpen, token, setIsOpen }: Props) {
   const onClose = () => {
     setIsOpen(false)
   }
-  const [approveModalOpen, setApproveModalOpen] = useState(false)
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -50,7 +49,6 @@ export function MintNFTModal ({ isOpen, token, setIsOpen }: Props) {
         borderRadius='12px'
       >
         <ModalHeader>Mint NFT</ModalHeader>
-
         <ModalBody>
           <Stack spacing={5}>
             <Box
