@@ -1,9 +1,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 //Chakra
 import {
-  Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerContent,
   DrawerCloseButton,
   Button,
@@ -12,8 +10,7 @@ import {
   Stack,
   Box,
   Image,
-  Divider,
-  HStack
+  Divider
 } from '@chakra-ui/react'
 
 //Data
@@ -24,20 +21,25 @@ import { InfoTooltip } from '@components/InfoTooltip'
 import { Icon } from '@components/Factory/Icon'
 
 //Types
-import { Token } from '@./types/tokens'
+import { Project } from '@./types/projects'
 
 interface Props {
-  token: Token
+  project: Project
   onClose: () => void
 }
 
-export const AllProjectsDrawer = ({ token, onClose }: Props) => {
+export const AllProjectsDrawer = ({ project, onClose }: Props) => {
   //todo this will be different when we get real token data
-
+  const { token } = project
   return (
     <>
       {token && (
-        <DrawerContent mt='81px' mr={{ base: 0, md: '20px' }} px='10px'>
+        <DrawerContent
+          mt='81px'
+          mr={{ base: 0, md: '20px' }}
+          px='10px'
+          py='5px'
+        >
           <DrawerCloseButton
             borderRadius='full'
             bg='btn-white-bg'
@@ -57,12 +59,12 @@ export const AllProjectsDrawer = ({ token, onClose }: Props) => {
           >
             <Stack spacing='20px'>
               {/* hero image with token image and buy more button */}
-              <Flex px='15px' pt='25px' direction='column' position='relative'>
+              <Flex px='15px' pt='20px' direction='column' position='relative'>
                 <Image
                   w='300px'
                   h='150px'
                   borderRadius={10}
-                  src={token.uiConfig.headerImage}
+                  src={project.uiConfig.bannerUri}
                   alt='qr code'
                   draggable={false}
                   objectFit='cover'
@@ -86,7 +88,7 @@ export const AllProjectsDrawer = ({ token, onClose }: Props) => {
                     borderColor='box-bg-primary'
                   >
                     <Image
-                      src={token.uiConfig.tokenLogoSquare}
+                      src={project.uiConfig.logoUri}
                       w='full'
                       borderRadius='md'
                       draggable={false}
@@ -109,7 +111,7 @@ export const AllProjectsDrawer = ({ token, onClose }: Props) => {
                 fontWeight={600}
               >
                 <Text as='h1' fontSize={22}>
-                  {token.uiConfig.name}
+                  {project.name}
                 </Text>
                 <Text color='text-gray' fontSize={14}>
                   {token.name}
@@ -253,13 +255,6 @@ export const AllProjectsDrawer = ({ token, onClose }: Props) => {
               <DrawerChart token={token} />
             </Stack>
           </DrawerBody>
-
-          <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Save</Button>
-          </DrawerFooter>
         </DrawerContent>
       )}
     </>

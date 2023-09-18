@@ -6,10 +6,6 @@ import {
   MenuList,
   MenuItem,
   Stack,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   Button,
   Box
 } from '@chakra-ui/react'
@@ -19,7 +15,6 @@ import { Icon } from '@components/Factory/Icon'
 import { useAccount } from 'wagmi'
 import { useRewardNftBalanceOf } from '@generated'
 import { walletBalance } from '@hooks/wallets'
-import { data as tokenData } from '@hooks/tokens'
 import { formatBalancePercentage, formatCurrency } from '@utils/format'
 import { useEffect, useState } from 'react'
 
@@ -32,8 +27,14 @@ import { menuListAnimationVariants } from '@theme/Menu'
 
 import { ContractAddress } from '@utils/constants'
 import { TokenKeys } from '@./types/tokens'
+import { Project } from '@./types/projects'
 
-export const TokenCard = ({}) => {
+//Types
+interface Props {
+  projects: Project[]
+}
+
+export const TokenCard = ({ projects }: Props) => {
   const account = useAccount()
   const { isConnected } = account
 
@@ -52,7 +53,7 @@ export const TokenCard = ({}) => {
   //todo this function will eventually be called in a useQuery hook so it can be refreshed
   useEffect(() => {
     if (isConnected) {
-      const formatted = formatBalancePercentage(walletBalance, tokenData)
+      const formatted = formatBalancePercentage(walletBalance, projects)
       setFormattedBalances(formatted)
     }
   }, [isConnected])
@@ -203,8 +204,8 @@ export const TokenCard = ({}) => {
               <Stack direction='row' spacing='2px' w='full'>
                 {top4Formatted?.order.map(
                   (tokenKey: string | TokenKeys[any]) => {
-                    const token = tokenData.find(
-                      token => token.key === tokenKey
+                    const project = projects.find(
+                      project => project.token.symbol === tokenKey
                     )
                     //@ts-ignore
                     const percent = top4Formatted?.data?.[
@@ -216,7 +217,11 @@ export const TokenCard = ({}) => {
                         key={tokenKey}
                         borderRadius={15}
                         h='20px'
-                        bg={token ? token.uiConfig.brandColor : 'text-primary'}
+                        bg={
+                          project
+                            ? project.uiConfig.primaryColor
+                            : 'text-primary'
+                        }
                         w={`${percent}%`}
                       />
                     )
@@ -226,8 +231,8 @@ export const TokenCard = ({}) => {
               <Stack spacing='9px'>
                 {top4Formatted?.order.map(
                   (tokenKey: TokenKeys[any] | string) => {
-                    const token = tokenData.find(
-                      token => token.key === tokenKey
+                    const project = projects.find(
+                      project => project.token.symbol === tokenKey
                     )
                     //@ts-ignore
                     const percent = top4Formatted?.data?.[tokenKey]?.percent
@@ -251,9 +256,11 @@ export const TokenCard = ({}) => {
                             w='12px'
                             h='12px'
                             borderRadius='full'
-                            bg={token?.uiConfig?.brandColor || 'text-primary'}
+                            bg={
+                              project?.uiConfig.primaryColor || 'text-primary'
+                            }
                           />
-                          <Text>{token?.uiConfig?.name || 'Other'}</Text>
+                          <Text>{project?.name || 'Other'}</Text>
                         </Stack>
                         <Text as='h4' fontWeight={600} fontSize='16px'>
                           {selectedMenuItem === 'percent'

@@ -1,16 +1,12 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
 //Chakra
 import {
-  Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerContent,
   DrawerCloseButton,
   Button,
   Text,
   Flex,
   Stack,
-  Box,
   Image,
   Divider,
   HStack
@@ -24,20 +20,25 @@ import { InfoTooltip } from '@components/InfoTooltip'
 import { Icon } from '@components/Factory/Icon'
 
 //Types
-import { Token } from '@./types/tokens'
+import { Project } from '@./types/projects'
 
 interface Props {
-  token: Token
+  project: Project
   onClose: () => void
 }
 
-export const MyProjectsDrawer = ({ token, onClose }: Props) => {
+export const MyProjectsDrawer = ({ project, onClose }: Props) => {
   //todo this will be different when we get real token data
-
+  const { token } = project
   return (
     <>
-      {token && (
-        <DrawerContent mt='81px' mr={{ base: 0, md: '20px' }} px='10px'>
+      {project && (
+        <DrawerContent
+          mt='81px'
+          mr={{ base: 0, md: '20px' }}
+          px='10px'
+          py='5px'
+        >
           <DrawerCloseButton
             borderRadius='full'
             bg='btn-white-bg'
@@ -64,7 +65,7 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
                 borderRadius={10}
               >
                 <Flex alignItems='center' direction='column'>
-                  <Image src={token.uiConfig.tokenLogo} w='80px' h='80px' />
+                  <Image src={token.uiConfig.logoUri} w='80px' h='80px' />
                   <Flex
                     direction='column'
                     alignItems='center'
@@ -76,10 +77,10 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
                       fontSize={22}
                       marginTop='11px'
                     >
-                      {token.uiConfig.name}
+                      {project.name}
                     </Text>
                     <Text fontWeight={400} fontSize={14}>
-                      {token.name}
+                      {token.symbol.toUpperCase()}
                     </Text>
                   </Flex>
                   <HStack>
@@ -130,7 +131,7 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
                 direction='column'
               >
                 <Text as='h3' fontWeight={600}>
-                  My {token.uiConfig.name}
+                  My {project.name}
                 </Text>
                 <Divider />
                 <Stack spacing='23px'>
@@ -142,7 +143,7 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
                     </Flex>
                     <Flex alignItems='end' direction='column'>
                       <Text as='p' fontWeight={600} fontSize={16}>
-                        140,210 {token.name}
+                        140,210 {token.symbol.toUpperCase()}
                       </Text>
                       <Text color='text-gray' fontWeight={500} fontSize={12}>
                         $29,600
@@ -158,7 +159,7 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
                     </Flex>
                     <Flex alignItems='end' direction='column'>
                       <Text as='p' fontWeight={600} fontSize={16}>
-                        1,828 {token.name}
+                        1,828 {token.symbol.toUpperCase()}
                       </Text>
                       <Text color='text-gray' fontWeight={500} fontSize={12}>
                         $29,600
@@ -174,7 +175,7 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
                     </Flex>
                     <Flex alignItems='end' direction='column'>
                       <Text as='p' fontWeight={600} fontSize={16}>
-                        142,038 {token.name}
+                        142,038 {token.symbol.toUpperCase()}
                       </Text>
                       <Text color='text-gray' fontWeight={500} fontSize={12}>
                         $29,600
@@ -234,7 +235,7 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
                     </Flex>
                     <Flex alignItems='end' direction='column'>
                       <Text as='p' fontWeight={600} fontSize={16}>
-                        682.72 {token.name}
+                        682.72 {token.symbol.toUpperCase()}
                       </Text>
                       <Text color='text-gray' fontWeight={500} fontSize={12}>
                         $40.82
@@ -262,7 +263,7 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
                     </Flex>
                     <Flex alignItems='end' direction='column'>
                       <Text as='p' fontWeight={600} fontSize={16}>
-                        5,461.76 {token.name}
+                        5,461.76 {token.symbol.toUpperCase()}
                       </Text>
                       <Text color='text-gray' fontWeight={500} fontSize={12}>
                         $326.56
@@ -274,13 +275,6 @@ export const MyProjectsDrawer = ({ token, onClose }: Props) => {
               <DrawerChart token={token} />
             </Stack>
           </DrawerBody>
-
-          <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Save</Button>
-          </DrawerFooter>
         </DrawerContent>
       )}
     </>
