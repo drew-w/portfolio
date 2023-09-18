@@ -9,9 +9,9 @@ import { pendingBalance, walletBalance } from '@hooks/wallets'
 import { TableChart } from '@components/Charts/TableChart'
 
 //Types
-import { Token } from '@./types/tokens'
+import { Project } from '@./types/projects'
 
-const columnHelper = createColumnHelper<Token>()
+const columnHelper = createColumnHelper<Project>()
 
 //this function determines what columns are rendered based on current screen width
 export const setAllProjectsColumnsVisibility = (
@@ -78,52 +78,47 @@ export const setMyProjectsColumnsVisibility = (
   if (screenSize === 'xl') {
     setColumnVisibility({
       name: true,
-      nftPrice: true,
-      nftsMinted: true,
-      nftsStaked: true,
-      nftRewardsRate: true,
+      totalAvailable: true,
+      rewardsRate: true,
+      rewards: true,
       marketPrice: true,
       buyMoreGraph: true
     })
   } else if (screenSize === 'lg') {
     setColumnVisibility({
       name: true,
-      nftPrice: true,
-      nftsMinted: true,
-      nftsStaked: false,
-      nftRewardsRate: true,
+      totalAvailable: true,
+      rewardsRate: false,
+      rewards: true,
       marketPrice: true,
       buyMoreGraph: true
     })
   } else if (screenSize === 'md') {
     setColumnVisibility({
       name: true,
-      nftPrice: true,
-      nftsMinted: false,
-      nftsStaked: false,
-      nftRewardsRate: true,
+      totalAvailable: true,
+      rewardsRate: false,
+      rewards: false,
       marketPrice: true,
       buyMoreGraph: true
     })
   } else if (screenSize === 'sm') {
     setColumnVisibility({
       name: true,
-      nftPrice: false,
-      nftsMinted: false,
-      nftsStaked: false,
-      nftRewardsRate: false,
+      totalAvailable: false,
+      rewardsRate: false,
+      rewards: false,
       marketPrice: true,
       buyMoreGraph: true
     })
   } else if (screenSize === 'base') {
     setColumnVisibility({
       name: true,
-      nftPrice: false,
-      nftsMinted: false,
-      nftsStaked: false,
-      nftRewardsRate: false,
-      marketPrice: true,
-      buyMoreGraph: false
+      totalAvailable: false,
+      rewardsRate: false,
+      rewards: false,
+      marketPrice: false,
+      buyMoreGraph: true
     })
   }
 }
@@ -134,6 +129,7 @@ export const allProjectsColumns = (selectedTable: boolean) => [
     id: 'name',
     cell: info => {
       const data = info.getValue()
+      const { token } = data
       const { row } = info
       const isSelected = row.getIsSelected() && selectedTable
       return (
@@ -144,10 +140,10 @@ export const allProjectsColumns = (selectedTable: boolean) => [
           maxW='175px'
           w='full'
         >
-          <Image src={data.uiConfig.tokenLogo} w='30px' h='30px' />
+          <Image src={token.uiConfig.logoUri} w='30px' h='30px' />
           <Flex direction='column'>
             <Text as='h3' fontWeight={600} fontSize='15px'>
-              {data.uiConfig.name}
+              {data.name}
             </Text>
             <Stack
               direction='row'
@@ -156,14 +152,21 @@ export const allProjectsColumns = (selectedTable: boolean) => [
               fontWeight={500}
               fontSize='12px'
             >
-              <Text>{data.name}</Text>
+              <Text>{token.symbol.toUpperCase()}</Text>
               <Box
                 w='4px'
                 h='4px'
                 borderRadius='full'
                 bg={isSelected ? 'box-bg-primary' : 'box-bg-secondary'}
               />
-              <Text>{data.id}</Text>
+              <Text>
+                {new Date(data.createdAt)
+                  .toLocaleDateString('en-us', {
+                    month: 'short',
+                    year: 'numeric'
+                  })
+                  .toUpperCase()}
+              </Text>
             </Stack>
           </Flex>
         </Stack>
@@ -175,29 +178,35 @@ export const allProjectsColumns = (selectedTable: boolean) => [
       </Flex>
     )
   }),
-  columnHelper.accessor(row => parseFloat(row.marketValue24HrsAgo) * 100, {
+  columnHelper.accessor(row => row, {
     id: 'nftPrice',
     header: 'NFT Price',
     cell: ({ getValue }) => (
       <Text as='h3'>
-        {getValue().toLocaleString('en-US', {
+        {/* {getValue().toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'USD'
+        })} */}
+        {(6000).toLocaleString('en-US', {
           style: 'currency',
           currency: 'USD'
         })}
       </Text>
     )
   }),
-  columnHelper.accessor(row => row.decimals * 137, {
+  columnHelper.accessor(row => row, {
     id: 'nftsMinted',
     header: 'NFTs Minted',
-    cell: info => <Text>{info.getValue().toLocaleString('en-US')}</Text>
+    // cell: info => <Text>{info.getValue().toLocaleString('en-US')}</Text>
+    cell: info => <Text>{(20000).toLocaleString('en-US')}</Text>
   }),
-  columnHelper.accessor(row => row.tax, {
+  columnHelper.accessor(row => row, {
     id: 'nftsStaked',
     header: 'NFTs Staked',
     cell: info => (
       <Text>
-        {info.getValue() != 0 ? info.getValue().toLocaleString('en-US') : '-'}
+        {(103410).toLocaleString('en-US')}
+        {/* {info.getValue() != 0 ? info.getValue().toLocaleString('en-US') : '-'} */}
       </Text>
     )
   }),
@@ -206,8 +215,13 @@ export const allProjectsColumns = (selectedTable: boolean) => [
     header: 'NFT Rewards Rate',
     cell: info => {
       const data = info.getValue()
-      const { name, marketValueNow } = data
-      const rate = Math.floor(Math.random() * 5)
+      const {
+        token: { symbol }
+      } = data
+      //WE DONT HAVE MARKET VALUE ATM
+      const marketValueNow = '.00412'
+      // const { name, marketValueNow } = data
+      const rate = 922
       const dollarValue = new BigNumber(marketValueNow).times(rate).toNumber()
 
       const formatted = formatCurrency(dollarValue)
@@ -215,7 +229,7 @@ export const allProjectsColumns = (selectedTable: boolean) => [
       return (
         <Flex as='span' direction='column'>
           <Text as='h3'>
-            {rate} {name}
+            {rate} {symbol.toUpperCase()}
           </Text>
           <Text fontWeight={500} fontSize='12px' color='text-gray'>
             {formatted}
@@ -229,7 +243,12 @@ export const allProjectsColumns = (selectedTable: boolean) => [
     header: 'Market Price',
     cell: info => {
       const data = info.getValue()
-      const { marketValueNow, marketValue24HrsAgo } = data
+      const { token } = data
+
+      //WE DONT HAVE MARKET VALUES ATM
+      const marketValueNow = '.00412'
+      const marketValue24HrsAgo = '.00498'
+      // const { marketValueNow, marketValue24HrsAgo } = token
 
       const { delta, change } = formatDelta(marketValueNow, marketValue24HrsAgo)
 
@@ -276,6 +295,7 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     id: 'name',
     cell: info => {
       const data = info.getValue()
+      const { token } = data
       return (
         <Stack
           spacing='10px'
@@ -284,14 +304,14 @@ export const myProjectsColumns = (selectedTable: boolean) => [
           maxW='175px'
           w='full'
         >
-          <Image src={data.uiConfig.tokenLogo} w='30px' h='30px' />
+          <Image src={token.uiConfig.logoUri} w='30px' h='30px' />
           <Flex direction='column'>
             <Text as='h3' fontWeight={600} fontSize='15px'>
-              {data.uiConfig.name}
+              {data.name}
             </Text>
 
             <Text fontWeight={500} fontSize='12px' color='text-gray'>
-              {data.name}
+              {token.symbol.toUpperCase()}
             </Text>
           </Flex>
         </Stack>
@@ -308,10 +328,15 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     header: 'Total Available',
     cell: info => {
       const data = info.getValue()
-      const { name, marketValueNow, key, decimals } = data
+      const { token } = data
+      const { symbol, decimals } = token
+      //WE DONT HAVE MARKET VALUES ATM
+      const marketValueNow = '.00412'
+      const marketValue24HrsAgo = '.00498'
+      // const { name, marketValueNow, key, decimals } = data
       const { balances } = walletBalance
       const decimal = 1 / Math.pow(10, decimals || 18)
-      const balance = formatBigNumber(balances[key]).times(decimal)
+      const balance = formatBigNumber(balances[symbol]).times(decimal)
       const dollarValue = new BigNumber(marketValueNow)
         .times(balance)
         .toNumber()
@@ -321,7 +346,7 @@ export const myProjectsColumns = (selectedTable: boolean) => [
       return (
         <Flex as='span' direction='column'>
           <Text as='h3'>
-            {balance.decimalPlaces(4).toFormat()} {name}
+            {balance.decimalPlaces(4).toFormat()} {symbol.toUpperCase()}
           </Text>
           <Text fontWeight={500} fontSize='12px' color='text-gray'>
             {formatted}
@@ -335,8 +360,14 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     header: 'Rewards Rate',
     cell: info => {
       const data = info.getValue()
-      const { name, marketValueNow } = data
-      const rate = Math.floor(Math.random() * 5)
+      const {
+        token: { symbol }
+      } = data
+      //WE DONT HAVE MARKET VALUES ATM
+      const marketValueNow = '.00412'
+      const marketValue24HrsAgo = '.00498'
+      // const { name, marketValueNow } = data
+      const rate = 922
       const dollarValue = new BigNumber(marketValueNow).times(rate).toNumber()
 
       const formatted = formatCurrency(dollarValue)
@@ -344,7 +375,7 @@ export const myProjectsColumns = (selectedTable: boolean) => [
       return (
         <Flex as='span' direction='column'>
           <Text as='h3'>
-            {rate} {name}
+            {rate} {symbol.toUpperCase()}
           </Text>
           <Text fontWeight={500} fontSize='12px' color='text-gray'>
             {formatted}
@@ -358,10 +389,14 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     header: 'Rewards',
     cell: info => {
       const data = info.getValue()
-      const { name, marketValueNow, key, decimals } = data
+      //WE DONT HAVE MARKET VALUES ATM
+      const marketValueNow = '.00412'
+      const marketValue24HrsAgo = '.00498'
+      const { token } = data
+      const { symbol, decimals } = token
       const { balances } = pendingBalance
       const decimal = 1 / Math.pow(10, decimals || 18)
-      const balance = formatBigNumber(balances[key]).times(decimal)
+      const balance = formatBigNumber(balances[symbol]).times(decimal)
       const dollarValue = new BigNumber(marketValueNow)
         .times(balance)
         .toNumber()
@@ -371,7 +406,7 @@ export const myProjectsColumns = (selectedTable: boolean) => [
       return (
         <Flex as='span' direction='column'>
           <Text as='h3'>
-            {balance.decimalPlaces(4).toFormat()} {name}
+            {balance.decimalPlaces(4).toFormat()} {symbol.toUpperCase()}
           </Text>
           <Text fontWeight={500} fontSize='12px' color='text-gray'>
             {formatted}
@@ -386,7 +421,11 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     header: 'Market Price',
     cell: info => {
       const data = info.getValue()
-      const { marketValueNow, marketValue24HrsAgo } = data
+
+      //WE DONT HAVE MARKET VALUES ATM
+      const marketValueNow = '.00412'
+      const marketValue24HrsAgo = '.00498'
+      // const { marketValueNow, marketValue24HrsAgo } = data
 
       const { delta, change } = formatDelta(marketValueNow, marketValue24HrsAgo)
 
@@ -419,8 +458,7 @@ export const myProjectsColumns = (selectedTable: boolean) => [
       //todo this button needs to do something
       const data = info.getValue()
 
-      const { brandColor } = data.uiConfig
-      return <TableChart token={data} />
+      return <TableChart token={data.token} />
     }
   })
 ]
