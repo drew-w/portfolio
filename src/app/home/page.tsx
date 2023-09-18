@@ -16,6 +16,7 @@ import { TokenTable } from '@components/Dashboard/TokenTable'
 import { TokenCard } from '@components/Dashboard/TokenCard'
 import { AllProjectsDrawer } from '@components/AllProjectsDrawer'
 import { MyProjectsDrawer } from '@components/MyProjectsDrawer'
+import { DownloadCard } from '@components/Dashboard/DownloadCard'
 
 //Types
 
@@ -67,7 +68,7 @@ export default function Home () {
           >
             {/* Card with rewards balance and wallet totals */}
             <GridItem h='280px' colSpan={{ base: 3, md: 2, lg: 1 }}>
-              <Flex as='span' w='full' justify={{ base: 'center', md: 'left' }}>
+              <Flex as='span' w='full' justify={{ base: 'center', lg: 'left' }}>
                 <BalanceCard projects={projects || []} />
               </Flex>
             </GridItem>
@@ -80,19 +81,45 @@ export default function Home () {
             </GridItem>
 
             {/* card showing breakdown of tokens in your wallet */}
-            <GridItem h='280px' colSpan={{ base: 3, md: 4, lg: 1 }}>
+            <GridItem h='280px' colSpan={{ base: 3, md: 2, lg: 1 }}>
               <Flex
                 as='span'
                 w='full'
-                justify={{ base: 'center', md: 'right' }}
+                justify={{ base: 'center', lg: 'right' }}
+                display={{
+                  base: 'flex',
+                  md: isConnected ? 'flex' : 'none',
+                  lg: 'flex'
+                }}
               >
                 <TokenCard projects={projects!!} />
               </Flex>
             </GridItem>
 
+            {/* card that we will only display in tablet mode, encouraging mobile download */}
+            <GridItem
+              h='280px'
+              colSpan={2}
+              display={{
+                base: 'none',
+                md: isConnected ? 'flex' : 'none',
+                lg: 'none'
+              }}
+            >
+              <Flex as='span' w='full' justify='center'>
+                <DownloadCard />
+              </Flex>
+            </GridItem>
+
             {/* table showing all projects that are not in the wallet */}
             <GridItem h='620px' colSpan={{ base: 3, md: 4, lg: 3 }}>
-              <Flex as='span' w='full' justify='center' py='20px'>
+              <Flex
+                as='span'
+                w='full'
+                justify='center'
+                py='20px'
+                px={{ base: '15px', lg: 0 }}
+              >
                 <TokenTable
                   allProjects={projects!!}
                   myProjects={myProjects}
