@@ -1,34 +1,19 @@
 export interface Token {
-  contractAddress: string
-  decimals: number
-  id: number
-  key: string
+  id: string
   name: string
-  routeToDebt: string[]
-  tax: number
-  type: string
+  symbol: TokenKeys
+  address: string
+  decimals: number
+  chainId: number
   uiConfig: {
-    brandColor: string
-    brandColorAltShade?: string
-    comingSoon?: boolean
-    headerImage: string
-    hideMarketValue?: boolean
-    name: string
-    onPancake?: boolean
-    symbol: string
-    tokenLogo: string
-    tokenLogoSquare?: string
-    unitLabel: string
-    unitLabelAbbr: string
-    valueHidden: boolean
-    comingSoonHidden?: boolean
-    atomicUnitLabel?: string
-    atomicUnitLabelAbbr?: string
-    rewardsUnitToDisplay?: string | null
+    logoUri: string
+    primaryColor: string
   }
-  pair: string | null
-  marketValueNow: string
-  marketValue24HrsAgo: string
+  type: string
+  createdAt: Date
+  updatedAt: Date
+  marketValueNow?: string
+  marketValue24HrsAgo?: string
 }
 
 export enum TokenKeys {

@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   env: {
-    AIRTABLE_API_TOKEN: process.env.AIRTABLE_API_TOKEN
+    AIRTABLE_API_TOKEN: process.env.AIRTABLE_API_TOKEN,
+    BASE_URL: process.env.BASE_URL
   },
   images: {
     domains: ['v5.airtableusercontent.com']
