@@ -242,8 +242,8 @@ export const allProjectsColumns = (selectedTable: boolean) => [
     id: 'marketPrice',
     header: 'Market Price',
     cell: info => {
-      const data = info.getValue()
-      const { token } = data
+      const project = info.getValue()
+      const { token } = project
 
       //WE DONT HAVE MARKET VALUES ATM
       const marketValueNow = '.00412'
@@ -279,7 +279,7 @@ export const allProjectsColumns = (selectedTable: boolean) => [
     header: '',
     cell: info => {
       //todo this button needs to do something
-      const data = info.getValue()
+      const project = info.getValue()
       const { row } = info
       const isSelected = row.getIsSelected() && selectedTable
       return (
@@ -294,8 +294,8 @@ export const myProjectsColumns = (selectedTable: boolean) => [
   columnHelper.accessor(row => row, {
     id: 'name',
     cell: info => {
-      const data = info.getValue()
-      const { token } = data
+      const project = info.getValue()
+      const { token, name } = project
       return (
         <Stack
           spacing='10px'
@@ -307,7 +307,7 @@ export const myProjectsColumns = (selectedTable: boolean) => [
           <Image src={token.uiConfig.logoUri} w='30px' h='30px' />
           <Flex direction='column'>
             <Text as='h3' fontWeight={600} fontSize='15px'>
-              {data.name}
+              {name}
             </Text>
 
             <Text fontWeight={500} fontSize='12px' color='text-gray'>
@@ -327,8 +327,8 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     id: 'totalAvailable',
     header: 'Total Available',
     cell: info => {
-      const data = info.getValue()
-      const { token } = data
+      const project = info.getValue()
+      const { token } = project
       const { symbol, decimals } = token
       //WE DONT HAVE MARKET VALUES ATM
       const marketValueNow = '.00412'
@@ -359,10 +359,10 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     id: 'rewardsRate',
     header: 'Rewards Rate',
     cell: info => {
-      const data = info.getValue()
+      const project = info.getValue()
       const {
         token: { symbol }
-      } = data
+      } = project
       //WE DONT HAVE MARKET VALUES ATM
       const marketValueNow = '.00412'
       const marketValue24HrsAgo = '.00498'
@@ -388,11 +388,11 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     id: 'rewards',
     header: 'Rewards',
     cell: info => {
-      const data = info.getValue()
+      const project = info.getValue()
       //WE DONT HAVE MARKET VALUES ATM
       const marketValueNow = '.00412'
       const marketValue24HrsAgo = '.00498'
-      const { token } = data
+      const { token } = project
       const { symbol, decimals } = token
       const { balances } = pendingBalance
       const decimal = 1 / Math.pow(10, decimals || 18)
@@ -420,12 +420,12 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     id: 'marketPrice',
     header: 'Market Price',
     cell: info => {
-      const data = info.getValue()
+      const project = info.getValue()
 
       //WE DONT HAVE MARKET VALUES ATM
       const marketValueNow = '.00412'
       const marketValue24HrsAgo = '.00498'
-      // const { marketValueNow, marketValue24HrsAgo } = data
+      // const { marketValueNow, marketValue24HrsAgo } = project
 
       const { delta, change } = formatDelta(marketValueNow, marketValue24HrsAgo)
 
@@ -456,9 +456,9 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     header: '',
     cell: info => {
       //todo this button needs to do something
-      const data = info.getValue()
+      const project = info.getValue()
 
-      return <TableChart token={data.token} />
+      return <TableChart token={project.token} />
     }
   })
 ]
