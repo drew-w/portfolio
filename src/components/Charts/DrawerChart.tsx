@@ -24,7 +24,7 @@ type TimePeriod = '24H' | '1W' | '1Y' | 'All' | string
 
 export const DrawerChart = ({ token }: Props) => {
   const [timePeriod, setTimePeriod] = useState<TimePeriod>('24H')
-  const { brandColor } = token.uiConfig
+  const { primaryColor } = token.uiConfig
 
   const options = ['24H', '1W', '1Y', 'All']
 
@@ -50,7 +50,7 @@ export const DrawerChart = ({ token }: Props) => {
           <Line
             type='monotone'
             dataKey='tokenPrice'
-            stroke={brandColor}
+            stroke={primaryColor}
             dot={false}
             strokeWidth={3}
           />

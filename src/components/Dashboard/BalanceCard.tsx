@@ -14,7 +14,13 @@ import { useState } from 'react'
 import { InfoTooltip } from '@components/InfoTooltip'
 import { CollectModal } from '../Modals/CollectModal'
 
-export const BalanceCard = () => {
+//Types
+import { Project } from '@./types/projects'
+interface Props {
+  projects: Project[]
+}
+
+export const BalanceCard = ({ projects }: Props) => {
   const account = useAccount()
   const { isConnected } = account
 
@@ -131,7 +137,7 @@ export const BalanceCard = () => {
           </Button>
         </Flex>
       )}
-      <CollectModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <CollectModal isOpen={isOpen} setIsOpen={setIsOpen} projects={projects} />
     </Flex>
   )
 }

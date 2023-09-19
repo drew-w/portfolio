@@ -14,14 +14,14 @@ interface Props {
 }
 
 export const TableChart = ({ token }: Props) => {
-  const { brandColor } = token.uiConfig
+  const { primaryColor } = token.uiConfig
   return (
     <LineChart width={60} height={50} data={tokenValues}>
       <Line
         isAnimationActive={false}
         type='monotone'
         dataKey='tokenPrice'
-        stroke={brandColor}
+        stroke={primaryColor}
         dot={false}
         strokeWidth={2}
       />

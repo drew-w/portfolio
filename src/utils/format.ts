@@ -1,5 +1,6 @@
-import { Token, TokenKeys } from '@./types/tokens'
+import { TokenKeys } from '@./types/tokens'
 import { WalletBalance } from '@./types/wallet'
+import { Project } from '@./types/projects'
 import BigNumber from 'bignumber.js'
 
 export const formatCurrency = (number: number): string => {
@@ -56,16 +57,21 @@ interface TokenTotals {
 type FormattedBalance = Record<TokenKeys | string, TokenTotals>
 export const formatBalancePercentage = (
   walletBalance: WalletBalance,
-  tokens: Token[]
+  projects: Project[]
 ) => {
   const { balances } = walletBalance
 
   //gets the total dollar value balance across all tokens
   const totalBalance: BigNumber = Object.keys(balances).reduce(
     (total: any, key: TokenKeys[any]) => {
-      const token = tokens.find(token => token.key === key)
+      const project = projects.find(project => project.token.symbol === key)
+      const token = project?.token
       const decimal = 1 / Math.pow(10, token?.decimals || 18)
 
+      //adding this because we dont have a market value right now
+      if (token) {
+        token.marketValueNow = '.00412'
+      }
       const balance = formatBigNumber(balances?.[key])
       if (token?.marketValueNow) {
         return total.plus(balance.times(decimal).times(token?.marketValueNow))
@@ -73,11 +79,15 @@ export const formatBalancePercentage = (
     },
     new BigNumber(0)
   )
+
   //gets the amount of tokens, the dollar amount and percentage of total dollar amount
   //per token
   const formatted: FormattedBalance = Object.keys(balances).reduce(
     (acc: any, tokenKey: string | TokenKeys[any]) => {
-      const token = tokens.find(token => token.key === tokenKey)
+      const project = projects.find(
+        project => project.token.symbol === tokenKey
+      )
+      const token = project?.token
       const decimal = 1 / Math.pow(10, token?.decimals || 18)
 
       const balance = formatBigNumber(balances?.[tokenKey])
@@ -152,19 +162,19 @@ const sortByValue = (formatted: FormattedBalance) =>
     })
 
 interface TokenTypes {
-  allTokens: Token[]
-  myTokens: Token[]
+  allTokens: Project[]
+  myTokens: Project[]
 }
-export const getTokenOwnership = (
+export const partitionProjects = (
   { balances }: WalletBalance,
-  tokens: Token[]
+  tokens: Project[]
 ): TokenTypes => {
   const [myTokens, allTokens] = tokens.reduce(
     // Use "deconstruction" style assignment
-    (result: Token[][], token) => {
-      const balance = formatBigNumber(balances?.[token.key])
+    (result: Project[][], project) => {
+      const balance = formatBigNumber(balances?.[project.token.symbol])
 
-      result[balance.isGreaterThan(0) ? 0 : 1].push(token) // Determine and push to small/large arr
+      result[balance.isGreaterThan(0) ? 0 : 1].push(project) // Determine and push to small/large arr
       return result
     },
     [[], []]
@@ -174,4 +184,14 @@ export const getTokenOwnership = (
     allTokens,
     myTokens
   }
+}
+
+export const getTokenOwnership = (
+  { balances }: WalletBalance,
+  projects: Project[]
+): Project[] => {
+  return projects.filter(project => {
+    const balance = formatBigNumber(balances?.[project.token.symbol])
+    return balance.isGreaterThan(0)
+  })
 }

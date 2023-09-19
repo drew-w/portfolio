@@ -27,13 +27,12 @@ import {
   setMyProjectsColumnsVisibility
 } from '@app/home/data'
 import { Token } from '@./types/tokens'
+import { Project } from '@./types/projects'
 
 //Types
 interface Props {
-  data: {
-    myTokens: Token[]
-    allTokens: Token[]
-  }
+  allProjects: Project[]
+  myProjects: Project[]
   rowSelection: {}
   onRowSelect: (arg: {}) => void
   onTableSelect: (table: 'all' | 'my' | string) => void
@@ -41,7 +40,8 @@ interface Props {
 }
 
 export const TokenTable = ({
-  data: { allTokens, myTokens },
+  allProjects,
+  myProjects,
   rowSelection,
   onRowSelect,
   onTableSelect,
@@ -51,7 +51,7 @@ export const TokenTable = ({
   const [myColumnVisibility, setMyColumnVisibility] = useState({})
 
   const allTokensTable = useReactTable({
-    data: allTokens,
+    data: allProjects,
     columns: allProjectsColumns(tableSelect === 'all'),
     getCoreRowModel: getCoreRowModel(),
     state: {
@@ -64,7 +64,7 @@ export const TokenTable = ({
   })
 
   const myTokensTable = useReactTable({
-    data: myTokens,
+    data: myProjects,
     columns: myProjectsColumns(tableSelect === 'all'),
     getCoreRowModel: getCoreRowModel(),
     state: {
@@ -89,7 +89,7 @@ export const TokenTable = ({
 
   return (
     <Stack as='section' direction='column' spacing='20px' w='full'>
-      {myTokens.length > 0 && (
+      {myProjects.length > 0 && (
         <TableContainer
           px='15px'
           bg='box-bg-primary'

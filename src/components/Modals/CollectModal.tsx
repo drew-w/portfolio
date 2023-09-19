@@ -1,3 +1,4 @@
+//Chakra
 import {
   Modal,
   ModalOverlay,
@@ -14,18 +15,23 @@ import {
   Image
 } from '@chakra-ui/react'
 
+//Data
 import { pendingBalance } from '@hooks/wallets'
-import { data } from '@hooks/tokens'
 import { formatBigNumber } from '@utils/format'
 import { useState } from 'react'
+
+//Style UI
 import { ApproveModal } from './ApproveModal'
 
+//Types
+import { Project } from '@./types/projects'
 interface Props {
+  projects: Project[]
   isOpen: boolean
   setIsOpen: (open: boolean) => void
 }
 
-export function CollectModal ({ isOpen, setIsOpen }: Props) {
+export function CollectModal ({ isOpen, setIsOpen, projects }: Props) {
   const onClose = () => {
     setIsOpen(false)
   }
@@ -70,7 +76,10 @@ export function CollectModal ({ isOpen, setIsOpen }: Props) {
                 return balance.isGreaterThan(0)
               })
               .map(tokenKey => {
-                const token = data.find(token => token.key === tokenKey)
+                const project = projects.find(
+                  project => project.token.symbol === tokenKey
+                )
+                const token = project?.token
                 const decimal = 1 / Math.pow(10, token?.decimals || 18)
                 const { balances } = pendingBalance
                 const balance = formatBigNumber(balances?.[tokenKey]).times(
@@ -93,14 +102,14 @@ export function CollectModal ({ isOpen, setIsOpen }: Props) {
                       alignItems='center'
                     >
                       <Image
-                        src={token?.uiConfig.tokenLogo}
+                        src={token?.uiConfig.logoUri}
                         height={30}
                         width={30}
                         alt='token image'
                         marginRight='8px'
                       />
                       <Text fontSize='12px' fontWeight='500' marginRight='5px'>
-                        {token?.uiConfig.name}
+                        {project?.name}
                       </Text>
                       <Text color='text-light-gray'>{token?.name}</Text>
                     </Flex>
