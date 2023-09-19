@@ -128,8 +128,8 @@ export const allProjectsColumns = (selectedTable: boolean) => [
   columnHelper.accessor(row => row, {
     id: 'name',
     cell: info => {
-      const data = info.getValue()
-      const { token } = data
+      const project = info.getValue()
+      const { token, name, createdAt } = project
       const { row } = info
       const isSelected = row.getIsSelected() && selectedTable
       return (
@@ -143,7 +143,7 @@ export const allProjectsColumns = (selectedTable: boolean) => [
           <Image src={token.uiConfig.logoUri} w='30px' h='30px' />
           <Flex direction='column'>
             <Text as='h3' fontWeight={600} fontSize='15px'>
-              {data.name}
+              {name}
             </Text>
             <Stack
               direction='row'
@@ -160,7 +160,7 @@ export const allProjectsColumns = (selectedTable: boolean) => [
                 bg={isSelected ? 'box-bg-primary' : 'box-bg-secondary'}
               />
               <Text>
-                {new Date(data.createdAt)
+                {new Date(createdAt)
                   .toLocaleDateString('en-us', {
                     month: 'short',
                     year: 'numeric'
@@ -214,10 +214,10 @@ export const allProjectsColumns = (selectedTable: boolean) => [
     id: 'nftRewardsRate',
     header: 'NFT Rewards Rate',
     cell: info => {
-      const data = info.getValue()
+      const project = info.getValue()
       const {
         token: { symbol }
-      } = data
+      } = project
       //WE DONT HAVE MARKET VALUE ATM
       const marketValueNow = '.00412'
       // const { name, marketValueNow } = data
