@@ -1,6 +1,6 @@
 'use client'
 //Chakra
-import { Flex, Grid, GridItem, Drawer } from '@chakra-ui/react'
+import { Flex, Grid, GridItem, Drawer, Skeleton } from '@chakra-ui/react'
 
 //Data
 import { useState, useEffect } from 'react'
@@ -17,6 +17,8 @@ import { TokenCard } from '@components/Dashboard/TokenCard'
 import { AllProjectsDrawer } from '@components/AllProjectsDrawer'
 import { MyProjectsDrawer } from '@components/MyProjectsDrawer'
 import { DownloadCard } from '@components/Dashboard/DownloadCard'
+import { HomeSkeleton } from '@components/HomeSkeleton'
+import Page from '@app/page'
 
 //Types
 
@@ -33,9 +35,9 @@ export default function Home () {
   const myProjects =
     isConnected && !!projects ? getTokenOwnership(walletBalance, projects) : []
   const [index] = Object.keys(rowSelection)
-  const selectedProject = (selectedTable === 'all'
-    ? projects || []
-    : myProjects)[parseInt(index)]
+  const selectedProject = (
+    selectedTable === 'all' ? projects || [] : myProjects
+  )[parseInt(index)]
 
   useEffect(() => {
     setIsDrawerOpen(false)
@@ -154,6 +156,7 @@ export default function Home () {
           </Drawer>
         </>
       )}
+      {projectsQuery.isLoading && <HomeSkeleton />}
     </Flex>
   )
 }
