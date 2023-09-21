@@ -26,10 +26,11 @@ import {
   myProjectsColumns,
   setMyProjectsColumnsVisibility
 } from '@app/home/data'
-import { Token } from '@./types/tokens'
-import { Project } from '@./types/projects'
+import { useAccount } from 'wagmi'
 
 //Types
+import { Token } from '@./types/tokens'
+import { Project } from '@./types/projects'
 interface Props {
   allProjects: Project[]
   myProjects: Project[]
@@ -49,6 +50,8 @@ export const TokenTable = ({
 }: Props) => {
   const [allColumnVisibility, setAllColumnVisibility] = useState({})
   const [myColumnVisibility, setMyColumnVisibility] = useState({})
+  const account = useAccount(),
+    { isConnected, address } = account
 
   const allTokensTable = useReactTable({
     data: allProjects,
@@ -65,7 +68,7 @@ export const TokenTable = ({
 
   const myTokensTable = useReactTable({
     data: myProjects,
-    columns: myProjectsColumns(tableSelect === 'all'),
+    columns: myProjectsColumns(tableSelect === 'all', isConnected, address!),
     getCoreRowModel: getCoreRowModel(),
     state: {
       columnVisibility: myColumnVisibility,

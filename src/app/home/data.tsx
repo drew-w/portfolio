@@ -7,9 +7,18 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { formatBigNumber, formatCurrency, formatDelta } from '@utils/format'
 import { pendingBalance, walletBalance } from '@hooks/wallets'
 import { TableChart } from '@components/Charts/TableChart'
+import {
+  useRewardDistributorRewardsPerSecond,
+  useRewardDistributorPendingRewards,
+  useRewardTokenBalanceOf,
+  useRewardNftTotalSupply,
+  useRewardDistributorTotalStakedNfts
+} from '@generated'
 
 //Types
+import { Address } from 'wagmi'
 import { Project } from '@./types/projects'
+import { ContractAddress } from '@utils/constants'
 
 const columnHelper = createColumnHelper<Project>()
 
@@ -198,17 +207,40 @@ export const allProjectsColumns = (selectedTable: boolean) => [
     id: 'nftsMinted',
     header: 'NFTs Minted',
     // cell: info => <Text>{info.getValue().toLocaleString('en-US')}</Text>
-    cell: info => <Text>{(20000).toLocaleString('en-US')}</Text>
+    cell: info => {
+      const project = info.getValue()
+      const mintedQuery = useRewardNftTotalSupply({
+          // address: project.rewardsDistributerAddress
+          address: ContractAddress.Nft
+        }),
+        { data: mintedNfts } = mintedQuery
+      if (mintedQuery.isSuccess) {
+        return <Text>{mintedNfts?.toLocaleString('en-US')}</Text>
+      } else if (mintedQuery.isLoading) {
+        return <Text>loadin</Text>
+      } else {
+        return <Text>?</Text>
+      }
+    }
   }),
   columnHelper.accessor(row => row, {
     id: 'nftsStaked',
     header: 'NFTs Staked',
-    cell: info => (
-      <Text>
-        {(103410).toLocaleString('en-US')}
-        {/* {info.getValue() != 0 ? info.getValue().toLocaleString('en-US') : '-'} */}
-      </Text>
-    )
+    cell: info => {
+      const project = info.getValue()
+      const stakedQuery = useRewardDistributorTotalStakedNfts({
+          // address: project.rewardsDistributerAddress
+          address: ContractAddress.RewardDistributor
+        }),
+        { data: stakedNfts } = stakedQuery
+      if (stakedQuery.isSuccess) {
+        return <Text>{stakedNfts?.toLocaleString('en-US')}</Text>
+      } else if (stakedQuery.isLoading) {
+        return <Text>loadin</Text>
+      } else {
+        return <Text>?</Text>
+      }
+    }
   }),
   columnHelper.accessor(row => row, {
     id: 'nftRewardsRate',
@@ -218,18 +250,25 @@ export const allProjectsColumns = (selectedTable: boolean) => [
       const {
         token: { symbol }
       } = project
+
+      const rewardsRateQuery = useRewardDistributorRewardsPerSecond({
+          // address: project.rewardsDistributerAddress
+          address: ContractAddress.RewardDistributor
+        }),
+        { data: rewardsRate } = rewardsRateQuery
+
       //WE DONT HAVE MARKET VALUE ATM
       const marketValueNow = '.00412'
-      // const { name, marketValueNow } = data
-      const rate = 922
-      const dollarValue = new BigNumber(marketValueNow).times(rate).toNumber()
+      const dollarValue = new BigNumber(marketValueNow)
+        .times(rewardsRate?.toString() || 0)
+        .toNumber()
 
       const formatted = formatCurrency(dollarValue)
 
       return (
         <Flex as='span' direction='column'>
           <Text as='h3'>
-            {rate} {symbol.toUpperCase()}
+            {rewardsRate?.toLocaleString('en-US')} {symbol.toUpperCase()}
           </Text>
           <Text fontWeight={500} fontSize='12px' color='text-gray'>
             {formatted}
@@ -290,7 +329,11 @@ export const allProjectsColumns = (selectedTable: boolean) => [
 ]
 
 //creating specific column cells for the my projects table
-export const myProjectsColumns = (selectedTable: boolean) => [
+export const myProjectsColumns = (
+  selectedTable: boolean,
+  isConnected: boolean,
+  address: Address
+) => [
   columnHelper.accessor(row => row, {
     id: 'name',
     cell: info => {
@@ -328,31 +371,54 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     header: 'Total Available',
     cell: info => {
       const project = info.getValue()
+
+      const balanceQuery = useRewardTokenBalanceOf({
+          enabled: isConnected,
+          // address: project.microTokenAddress
+          address: ContractAddress.RewardToken,
+          args: [address],
+
+          watch: true
+        }),
+        { data: walletBalance } = balanceQuery
+
       const { token } = project
       const { symbol, decimals } = token
       //WE DONT HAVE MARKET VALUES ATM
       const marketValueNow = '.00412'
       const marketValue24HrsAgo = '.00498'
-      // const { name, marketValueNow, key, decimals } = data
-      const { balances } = walletBalance
+
       const decimal = 1 / Math.pow(10, decimals || 18)
-      const balance = formatBigNumber(balances[symbol]).times(decimal)
+      const balance = formatBigNumber(walletBalance?.toString() || 0).times(
+        decimal
+      )
+
       const dollarValue = new BigNumber(marketValueNow)
         .times(balance)
         .toNumber()
 
       const formatted = formatCurrency(dollarValue)
 
-      return (
-        <Flex as='span' direction='column'>
-          <Text as='h3'>
-            {balance.decimalPlaces(4).toFormat()} {symbol.toUpperCase()}
-          </Text>
-          <Text fontWeight={500} fontSize='12px' color='text-gray'>
-            {formatted}
-          </Text>
-        </Flex>
-      )
+      if (balanceQuery.isSuccess) {
+        return (
+          <Flex as='span' direction='column'>
+            <Text as='h3'>
+              {balance.decimalPlaces(4).toFormat()} {symbol.toUpperCase()}
+            </Text>
+            <Text fontWeight={500} fontSize='12px' color='text-gray'>
+              {formatted}
+            </Text>
+          </Flex>
+        )
+      } else if (balanceQuery.isLoading) {
+        return (
+          <Flex as='span'>
+            <Text>loadin</Text>
+          </Flex>
+        )
+      } else {
+        return <Text>?</Text>
+      }
     }
   }),
   columnHelper.accessor(row => row, {
@@ -360,28 +426,46 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     header: 'Rewards Rate',
     cell: info => {
       const project = info.getValue()
+
+      const rewardsRateQuery = useRewardDistributorRewardsPerSecond({
+          enabled: isConnected,
+          // address: project.rewardsDistributerAddress
+          address: ContractAddress.RewardDistributor,
+          args: [address]
+        }),
+        { data: rewardsRate } = rewardsRateQuery
       const {
         token: { symbol }
       } = project
       //WE DONT HAVE MARKET VALUES ATM
       const marketValueNow = '.00412'
+
       const marketValue24HrsAgo = '.00498'
       // const { name, marketValueNow } = data
-      const rate = 922
-      const dollarValue = new BigNumber(marketValueNow).times(rate).toNumber()
+
+      // const dollarValue = marketValueNow * rewardsRate?.toString()
+
+      const dollarValue = new BigNumber(marketValueNow)
+        .times(rewardsRate?.toString() || 0)
+        .toNumber()
 
       const formatted = formatCurrency(dollarValue)
-
-      return (
-        <Flex as='span' direction='column'>
-          <Text as='h3'>
-            {rate} {symbol.toUpperCase()}
-          </Text>
-          <Text fontWeight={500} fontSize='12px' color='text-gray'>
-            {formatted}
-          </Text>
-        </Flex>
-      )
+      if (rewardsRateQuery.isSuccess) {
+        return (
+          <Flex as='span' direction='column'>
+            <Text as='h3'>
+              {rewardsRate?.toLocaleString('en-US')} {symbol.toUpperCase()}
+            </Text>
+            <Text fontWeight={500} fontSize='12px' color='text-gray'>
+              {formatted}
+            </Text>
+          </Flex>
+        )
+      } else if (rewardsRateQuery.isLoading) {
+        return <Text as='h3'>loadin</Text>
+      } else {
+        return <Text>?</Text>
+      }
     }
   }),
   columnHelper.accessor(row => row, {
@@ -389,30 +473,46 @@ export const myProjectsColumns = (selectedTable: boolean) => [
     header: 'Rewards',
     cell: info => {
       const project = info.getValue()
+
+      const rewardsBalanceQuery = useRewardDistributorPendingRewards({
+          enabled: isConnected,
+          // address: project.rewardsDistributerAddress
+          address: ContractAddress.RewardDistributor,
+          args: [address]
+        }),
+        { data: rewardsBalance } = rewardsBalanceQuery
+
       //WE DONT HAVE MARKET VALUES ATM
       const marketValueNow = '.00412'
       const marketValue24HrsAgo = '.00498'
       const { token } = project
       const { symbol, decimals } = token
-      const { balances } = pendingBalance
+
       const decimal = 1 / Math.pow(10, decimals || 18)
-      const balance = formatBigNumber(balances[symbol]).times(decimal)
+      const balance = formatBigNumber(rewardsBalance?.toString() || 0).times(
+        decimal
+      )
       const dollarValue = new BigNumber(marketValueNow)
         .times(balance)
         .toNumber()
 
       const formatted = formatCurrency(dollarValue)
-
-      return (
-        <Flex as='span' direction='column'>
-          <Text as='h3'>
-            {balance.decimalPlaces(4).toFormat()} {symbol.toUpperCase()}
-          </Text>
-          <Text fontWeight={500} fontSize='12px' color='text-gray'>
-            {formatted}
-          </Text>
-        </Flex>
-      )
+      if (rewardsBalanceQuery.isSuccess) {
+        return (
+          <Flex as='span' direction='column'>
+            <Text as='h3'>
+              {balance.decimalPlaces(4).toFormat()} {symbol.toUpperCase()}
+            </Text>
+            <Text fontWeight={500} fontSize='12px' color='text-gray'>
+              {formatted}
+            </Text>
+          </Flex>
+        )
+      } else if (rewardsBalanceQuery.isLoading) {
+        return <Text>loadin</Text>
+      } else {
+        return <Text>?</Text>
+      }
     }
   }),
 
