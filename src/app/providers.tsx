@@ -35,7 +35,7 @@ library.add(
 
 export function Providers ({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false)
-  const [queryClient] = React.useState(() => new QueryClient())
+  const [queryClient] = React.useState<QueryClient>(() => new QueryClient())
   React.useEffect(() => setMounted(true), [])
 
   const buttonTheme = merge(lightTheme(), {

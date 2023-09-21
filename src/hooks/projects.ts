@@ -1,6 +1,6 @@
 //Data
 import { useQuery } from '@tanstack/react-query'
-import { api } from '@./api'
+import { api } from '@api'
 
 //Types
 import { Project } from '@./types/projects'
