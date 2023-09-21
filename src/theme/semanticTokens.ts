@@ -59,7 +59,15 @@ export const semanticTokens = {
       default: '#F3F3F3'
     },
     'box-border': {
-      default: '#f3f3f3'
+      default: '#F3F3F3'
+    }
+    ,
+    'skeleton-start': {
+      default: '#F3F3F3'
+    }
+    ,
+    'skeleton-end': {
+      default: '#B4B4B4'
     }
   },
   fonts: {
