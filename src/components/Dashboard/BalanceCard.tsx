@@ -62,23 +62,10 @@ export const BalanceCard = ({ projects }: Props) => {
       return totalBalance
     },
     {
-      total: new BigNumber(0),
+      total: BigNumber(0),
       pending: BigNumber(0)
     }
   )
-
-  // const { data: tokenBalance } = useRewardTokenBalanceOf({
-  //   enabled: account?.isConnected,
-  //   address: ContractAddress.RewardToken,
-  //   args: [account.address!]
-  // })
-
-  // const { data: pendingRewards } = useRewardDistributorPendingRewards({
-  //   enabled: account?.isConnected,
-  //   address: ContractAddress.RewardDistributor,
-  //   args: [account.address!],
-  //   watch: true
-  // })
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
