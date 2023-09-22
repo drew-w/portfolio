@@ -75,7 +75,7 @@ export function MintNFTModal ({ isOpen, token, onClose }: Props) {
             >
               <Flex direction={['column', 'column', 'row']} alignItems='center'>
                 <Image
-                  src={token?.uiConfig.tokenLogo}
+                  src={token.uiConfig.logoUri}
                   height={50}
                   width={50}
                   alt='token image'
@@ -90,7 +90,7 @@ export function MintNFTModal ({ isOpen, token, onClose }: Props) {
                     fontWeight={500}
                     color='text-light-gray'
                   >
-                    {token?.uiConfig.name}
+                    {token?.name}
                   </Text>
                 </Flex>
               </Flex>
