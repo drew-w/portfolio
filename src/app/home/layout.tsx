@@ -27,7 +27,7 @@ export default function RootLayout ({
         px='30px'
         h='61px'
       >
-        <Image src={image} height={30} alt='debt' draggable={false} />
+        <Image src={image || logo} height={30} alt='debt' draggable={false} />
         <Stack align='center' spacing={10} direction='row' h='full'>
           <ConnectButton />
         </Stack>
