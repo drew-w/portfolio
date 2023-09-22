@@ -7,15 +7,17 @@ import {
   useRewardTokenBalanceOf,
   useRewardDistributorPendingRewards
 } from '@generated'
-import { ContractAddress } from '@utils/constants'
 import { useState } from 'react'
+import BigNumber from 'bignumber.js'
 
 //Style UI
 import { InfoTooltip } from '@components/InfoTooltip'
 import { CollectModal } from '../Modals/CollectModal'
 
 //Types
+import { ContractAddress } from '@utils/constants'
 import { Project } from '@./types/projects'
+import { formatCurrency } from '@utils/format'
 interface Props {
   projects: Project[]
 }
@@ -24,18 +26,59 @@ export const BalanceCard = ({ projects }: Props) => {
   const account = useAccount()
   const { isConnected } = account
 
-  const { data: tokenBalance } = useRewardTokenBalanceOf({
-    enabled: account?.isConnected,
-    address: ContractAddress.RewardToken,
-    args: [account.address!]
-  })
+  const { total, pending } = projects.reduce(
+    (totalBalance: { total: BigNumber; pending: BigNumber }, project) => {
+      const { total, pending } = totalBalance
+      const marketValue = '0.00412'
+      const { decimals } = project.token
+      const decimal = 1 / Math.pow(10, decimals)
+      const balanceQuery = useRewardTokenBalanceOf({
+        enabled: account.isConnected,
+        // address: project.rewardsDistributerAddress,
+        address: ContractAddress.RewardToken,
+        args: [account.address!]
+      })
+      const pendingQuery = useRewardDistributorPendingRewards({
+        enabled: account?.isConnected,
+        // address: project.rewardsDistributerAddress,
+        address: ContractAddress.RewardDistributor,
+        args: [account.address!],
+        watch: true
+      })
+      if (balanceQuery.isSuccess) {
+        console.log('you did it!')
+        const balance = BigNumber(balanceQuery.data?.toString() || 0)
+        const dollarValue = balance.times(decimal).times(marketValue)
+        const newTotal = total.plus(dollarValue)
+        totalBalance.total = newTotal
+      }
+      if (pendingQuery.isSuccess) {
+        console.log('you did it again!')
+        const balance = BigNumber(pendingQuery.data?.toString() || 0)
+        const dollarValue = balance.times(decimal).times(marketValue)
+        const newPending = pending.plus(dollarValue)
+        totalBalance.pending = newPending
+      }
+      return totalBalance
+    },
+    {
+      total: new BigNumber(0),
+      pending: BigNumber(0)
+    }
+  )
 
-  const { data: pendingRewards } = useRewardDistributorPendingRewards({
-    enabled: account?.isConnected,
-    address: ContractAddress.RewardDistributor,
-    args: [account.address!],
-    watch: true
-  })
+  // const { data: tokenBalance } = useRewardTokenBalanceOf({
+  //   enabled: account?.isConnected,
+  //   address: ContractAddress.RewardToken,
+  //   args: [account.address!]
+  // })
+
+  // const { data: pendingRewards } = useRewardDistributorPendingRewards({
+  //   enabled: account?.isConnected,
+  //   address: ContractAddress.RewardDistributor,
+  //   args: [account.address!],
+  //   watch: true
+  // })
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -73,10 +116,11 @@ export const BalanceCard = ({ projects }: Props) => {
                 COLLECT
               </Button>
               <Text fontSize='30px' fontWeight='semibold'>
-                {(pendingRewards || 0)?.toLocaleString('en-US', {
+                {/* {(pendingRewards || 0)?.toLocaleString('en-US', {
                   style: 'currency',
                   currency: 'USD'
-                })}
+                })} */}
+                {formatCurrency(pending.toNumber())}
               </Text>
             </Flex>
           </Flex>
@@ -97,12 +141,8 @@ export const BalanceCard = ({ projects }: Props) => {
               <InfoTooltip label='are you feeling ok' />
             </Flex>
             <Flex as='span' w='full'>
-              <></>
               <Text fontSize='30px' fontWeight='semibold'>
-                {(tokenBalance || 0)?.toLocaleString('en-US', {
-                  style: 'currency',
-                  currency: 'USD'
-                })}
+                {formatCurrency(total.toNumber())}
               </Text>
             </Flex>
           </Flex>

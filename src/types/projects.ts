@@ -1,11 +1,12 @@
 import { Token } from './tokens'
+import { Address } from 'wagmi'
 
 export interface Project {
   id: string
   name: string
-  rewardsDistributerAddress: string
-  microTokenAddress: string
-  nftAddress: string
+  rewardsDistributerAddress: Address
+  microTokenAddress: Address
+  nftAddress: Address
   token: Token
   uiConfig: {
     logoUri: string
