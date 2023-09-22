@@ -5,7 +5,7 @@ export const HomeSkeleton = () => {
   return (
     <Stack spacing={4}>
       <HStack
-        spacing={4}
+        spacing='20px'
         flexDirection={{ base: 'column', md: 'column', lg: 'row' }}
       >
         <Skeleton
@@ -36,14 +36,7 @@ export const HomeSkeleton = () => {
           endColor='skeleton-end'
           borderRadius='10px'
           w={{ base: '320px', md: '320px', lg: '1000px' }}
-          h='150px'
-        />
-        <Skeleton
-          startColor='skeleton-start'
-          endColor='skeleton-end'
-          borderRadius='10px'
-          w={{ base: '320px', md: '320px', lg: '1000px' }}
-          h='150px'
+          h='300px'
         />
       </Stack>
     </Stack>
