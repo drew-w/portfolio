@@ -5,7 +5,6 @@ import smallLogo from '@assets/debt.svg'
 import '@rainbow-me/rainbowkit/styles.css'
 import { Flex, Stack, Box, useBreakpointValue } from '@chakra-ui/react'
 import Image from 'next/image'
-import { ConnectButton } from '@components/ConnectButton'
 import styles from './Home.module.css'
 
 export default function RootLayout ({
@@ -26,10 +25,11 @@ export default function RootLayout ({
         align='center'
         px='30px'
         h='61px'
+        box-boxShadow='box-shadow-primary'
       >
         <Image src={image || logo} height={30} alt='debt' draggable={false} />
         <Stack align='center' spacing={10} direction='row' h='full'>
-          <ConnectButton />
+          Button
         </Stack>
       </Flex>
       <Box
