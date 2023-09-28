@@ -1,4 +1,4 @@
-import { Poppins } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import { semanticTokens } from '@theme/semanticTokens'
 import { extendTheme } from '@chakra-ui/react'
 import { mode, GlobalStyleProps } from '@chakra-ui/theme-tools'
@@ -11,7 +11,8 @@ import { Drawer } from '@theme/Drawer'
 
 const config = {
   useSystemColorMode: false,
-  initialColorMode: 'light'
+  initialColorMode: 'light',
+  disableTransitionOnChange: false
 }
 
 const styles = {
@@ -19,20 +20,20 @@ const styles = {
     body: {
       bg: mode(
         semanticTokens.colors['bg-default'].default,
-        semanticTokens.colors['bg-default'].default
+        semanticTokens.colors['bg-default']._dark
       )(props)
     }
   })
 }
 
-const poppins = Poppins({
+const inter = Inter({
   subsets: ['latin'],
   style: ['normal'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 })
 
 const fonts = {
-  poppins: poppins.style.fontFamily
+  inter: inter.style.fontFamily
 }
 
 const components = {
