@@ -1,9 +1,9 @@
 'use client'
-import logo from '@assets/debtlogo.svg'
-import smallLogo from '@assets/debt.svg'
-
-import '@rainbow-me/rainbowkit/styles.css'
+//Chakra UI
 import { Flex, Stack, Box, useBreakpointValue } from '@chakra-ui/react'
+
+//Style UI
+import { ColorModeSwitcher } from '@components/ColorModeSwitcher'
 import Image from 'next/image'
 import styles from './Home.module.css'
 
@@ -12,10 +12,6 @@ export default function RootLayout ({
 }: {
   children: React.ReactNode
 }) {
-  const image = useBreakpointValue(
-    { base: smallLogo, md: logo },
-    { fallback: logo }
-  )
   return (
     <>
       <Flex
@@ -25,12 +21,9 @@ export default function RootLayout ({
         align='center'
         px='30px'
         h='61px'
-        box-boxShadow='box-shadow-primary'
+        boxShadow='box-shadow-primary'
       >
-        <Image src={image || logo} height={30} alt='debt' draggable={false} />
-        <Stack align='center' spacing={10} direction='row' h='full'>
-          Button
-        </Stack>
+        <ColorModeSwitcher />
       </Flex>
       <Box
         className={styles.mainBox}

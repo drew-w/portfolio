@@ -5,6 +5,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '@theme'
+import '@theme-toggles/react/css/Within.css'
+import { ColorModeScript } from '@chakra-ui/react'
 
 //FONT AWESOME
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -36,6 +38,7 @@ export function Providers ({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>{children}</ChakraProvider>
       <ReactQueryDevtools initialIsOpen={false} />
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     </QueryClientProvider>
   )
 }

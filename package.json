@@ -23,6 +23,7 @@
     "@rainbow-me/rainbowkit": "^1.0.4",
     "@tanstack/react-query": "^4.32.0",
     "@tanstack/react-query-devtools": "^4.32.0",
+    "@theme-toggles/react": "^4.1.0",
     "framer-motion": "^10.15.0",
     "next": "^13.4.8",
     "react": "^18.2.0",
