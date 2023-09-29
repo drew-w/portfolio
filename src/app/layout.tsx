@@ -1,5 +1,9 @@
-import '@rainbow-me/rainbowkit/styles.css'
+//Data
 import { Providers } from './providers'
+
+//Style UI
+import { Header } from '@components/Header'
+import styles from './Root.module.css'
 
 export const metadata = {
   title: 'DEBT'
@@ -16,7 +20,10 @@ export default function RootLayout ({
         <link rel='icon' href='/favicon.ico' />
       </head>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          <div className={styles.mainBox}>{children}</div>
+        </Providers>
       </body>
     </html>
   )

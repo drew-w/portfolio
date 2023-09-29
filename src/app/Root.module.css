@@ -1,0 +1,9 @@
+.mainBox {
+  height: calc(100vh - 61px);
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.mainBox &::-webkit-scrollbar {
+  display: none;
+}
