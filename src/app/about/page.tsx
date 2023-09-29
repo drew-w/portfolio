@@ -7,11 +7,11 @@ import { BalanceCard } from '@components/BalanceCard'
 
 //Types
 
-export default function Home () {
+export default function About () {
   return (
     <Flex as='main' w='full' justify='center' py='20px'>
       {/* <BalanceCard /> */}
-      home
+      about
     </Flex>
   )
 }

@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '@theme'
 import '@theme-toggles/react/css/Within.css'
+import '@theme-toggles/react/css/Around.css'
 import { ColorModeScript } from '@chakra-ui/react'
 
 //FONT AWESOME
