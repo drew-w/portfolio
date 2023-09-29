@@ -11,26 +11,14 @@ import { ColorModeScript } from '@chakra-ui/react'
 
 //FONT AWESOME
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret, faCircleInfo } from '@fortawesome/pro-light-svg-icons'
+import {} from '@fortawesome/pro-solid-svg-icons'
 import {
-  faChevronDown,
-  faChevronUp,
-  faPercent,
-  faDollarSign,
-  faArrowUpRight,
-  faTimer
-} from '@fortawesome/pro-solid-svg-icons'
+  faTwitter,
+  faGithub,
+  faLinkedin
+} from '@fortawesome/free-brands-svg-icons'
 
-library.add(
-  faUserSecret,
-  faCircleInfo,
-  faChevronUp,
-  faChevronDown,
-  faPercent,
-  faDollarSign,
-  faArrowUpRight,
-  faTimer
-)
+library.add(faTwitter, faGithub, faLinkedin)
 
 export function Providers ({ children }: { children: React.ReactNode }) {
   const [queryClient] = React.useState<QueryClient>(() => new QueryClient())
