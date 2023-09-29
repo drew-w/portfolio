@@ -5,11 +5,8 @@ import { useRadioGroup, useRadio, Box, Flex } from '@chakra-ui/react'
 //Data
 import { useRouter, usePathname } from 'next/navigation'
 
-//Types
-type TimePeriod = 'home' | 'about' | 'history' | string
-
 export const HeaderNav = () => {
-  const options = ['home', 'about', 'history']
+  const options = ['home', 'about', 'projects']
   const router = useRouter()
   const pathname = usePathname()
   const { getRootProps, getRadioProps } = useRadioGroup({
@@ -25,7 +22,7 @@ export const HeaderNav = () => {
       {...group}
       borderRadius={25}
       shadow='box-shadow-primary'
-      borderColor='radio-border'
+      borderColor='border-primary'
       borderWidth={1}
     >
       {options.map(value => {
@@ -59,7 +56,7 @@ function RadioCard (props: any) {
         transitionProperty='background-color'
         transitionDuration='200ms'
         _checked={{
-          bg: 'radio-bg',
+          bg: 'brand-green',
           color: 'radio-text'
         }}
         px='24px'

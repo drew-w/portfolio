@@ -8,16 +8,31 @@ export const semanticTokens = {
       default: '#0E464B',
       _dark: '#1E1E1E'
     },
-    'radio-bg': {
+    'box-bg-primary': {
+      default: '#ffffff',
+      _dark: '#28292A'
+    },
+    'brand-green': {
       default: '#0E464B',
       _dark: '#008b8b'
+    },
+    'brand-orange': {
+      default: '#F28529',
+      _dark: '#ffa812'
     },
     'radio-text': {
       default: '#FFF',
       _dark: '#0c0c0c'
     },
-    'radio-border': {
-      // default: '#F28529',
+    'text-primary': {
+      default: '#1F1F1F',
+      _dark: '#E3E3E3'
+    },
+    'text-secondary': {
+      default: '#444746',
+      _dark: '#C4C7C5'
+    },
+    'border-primary': {
       default: '#F3F3F3',
       _dark: '#4c4c4c'
     }

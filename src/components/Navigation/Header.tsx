@@ -3,7 +3,7 @@
 import { Flex, Box } from '@chakra-ui/react'
 
 //Style UI
-import { HeaderNav } from '@components/HeaderNav'
+import { HeaderNav } from '@components/Navigation/HeaderNav'
 import { ColorModeSwitcher } from '@components/ColorModeSwitcher'
 
 export const Header = () => (
