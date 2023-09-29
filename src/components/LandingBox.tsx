@@ -54,18 +54,26 @@ export const LandingBox = () => (
     <Flex as='span' w='full' justify='center' mt={5}>
       <Stack direction='row' spacing={5} align='center'>
         <IconButton
+          onClick={() => window.open('https://twitter.com/bbo_drew', '_blank')}
           aria-label='twitter'
           variant='icon'
           icon={<Icon color='currentColor' prefix='fab' name='twitter' />}
         />
 
         <IconButton
+          onClick={() => window.open('https://github.com/drew-w', '_blank')}
           aria-label='github'
           variant='icon'
           icon={<Icon color='currentColor' prefix='fab' name='github' />}
         />
 
         <IconButton
+          onClick={() =>
+            window.open(
+              'https://www.linkedin.com/in/bbo-drew-woodmansee/',
+              '_blank'
+            )
+          }
           aria-label='linkedin'
           variant='icon'
           icon={<Icon color='currentColor' prefix='fab' name='linkedin' />}
