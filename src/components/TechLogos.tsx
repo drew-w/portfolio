@@ -201,10 +201,11 @@ export const Prisma = () => (
   </svg>
 )
 
-export const Native = () => <Image src='/native.svg' h='full' />
+export const Native = () => <Image src='/native.svg' h='full' alt='' />
 
 export const Redux = ({ colorMode }: any) => (
   <Image
+    alt=''
     src={colorMode === 'light' ? '/redux-dark.png' : '/redux-light.png'}
     h='100%'
   />
