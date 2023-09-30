@@ -1,69 +1,46 @@
 'use client'
 //Chakra
-import { useRadioGroup, useRadio, Box, Flex } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 
 //Data
 import { useRouter, usePathname } from 'next/navigation'
 
 export const HeaderNav = () => {
-  const options = ['home', 'about', 'projects']
   const router = useRouter()
   const pathname = usePathname()
-  const { getRootProps, getRadioProps } = useRadioGroup({
-    name: 'framework',
-    defaultValue: pathname.substring(1),
-    onChange: router.push
-  })
+  const currentPage = pathname.substring(1)
 
-  const group = getRootProps()
+  const options = ['home', 'projects', 'about']
   return (
     <Flex
       justify='space-between'
-      {...group}
       borderRadius={25}
       shadow='box-shadow-primary'
       borderColor='border-primary'
       borderWidth={1}
     >
       {options.map(value => {
-        const radio = getRadioProps({ value })
         return (
-          <RadioCard key={value} {...radio}>
+          <Box
+            onClick={() => router.push(value)}
+            as='label'
+            key={value}
+            fontSize={14}
+            fontWeight={500}
+            cursor='pointer'
+            borderRadius={25}
+            h='42px'
+            transitionProperty='background-color'
+            transitionDuration='200ms'
+            bg={currentPage === value ? 'brand-green' : 'none'}
+            color={currentPage === value ? 'radio-text' : 'auto'}
+            px='24px'
+            py='11px'
+          >
             {value.charAt(0).toUpperCase() + value.slice(1)}
-          </RadioCard>
+          </Box>
         )
       })}
     </Flex>
-  )
-}
-
-function RadioCard (props: any) {
-  const { getInputProps, getRadioProps } = useRadio(props)
-
-  const input = getInputProps()
-  const checkbox = getRadioProps()
-
-  return (
-    <Box as='label'>
-      <input {...input} />
-      <Box
-        fontSize={14}
-        fontWeight={500}
-        {...checkbox}
-        cursor='pointer'
-        borderRadius={25}
-        h='42px'
-        transitionProperty='background-color'
-        transitionDuration='200ms'
-        _checked={{
-          bg: 'brand-green',
-          color: 'radio-text'
-        }}
-        px='24px'
-        py='11px'
-      >
-        {props.children}
-      </Box>
-    </Box>
   )
 }
