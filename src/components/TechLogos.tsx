@@ -212,6 +212,6 @@ export const Native = () => <Image src='/native.svg' h='full' />
 export const Redux = ({ colorMode }: any) => (
   <Image
     src={colorMode === 'light' ? '/redux-dark.png' : '/redux-light.png'}
-    h='full'
+    h='100%'
   />
 )
