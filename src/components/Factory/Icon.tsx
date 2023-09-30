@@ -14,7 +14,7 @@ interface Props extends IconProps {
 export function Icon ({
   prefix,
   name,
-  size = '20px',
+  size = '4xl',
   color = 'icon-primary',
   ...rest
 }: Props) {
@@ -23,7 +23,7 @@ export function Icon ({
     <FAIcon
       color={color}
       icon={[prefix as IconPrefix, name as IconName]}
-      fontSize={size}
+      fontSize='4xl'
       {...rest}
     />
   )

@@ -2,7 +2,8 @@
 import { Providers } from './providers'
 
 //Style UI
-import { Header } from '@components/Header'
+import { Header } from '@components/Navigation/Header'
+import { Footer } from '@components/Navigation/Footer'
 import styles from './Root.module.css'
 
 export const metadata = {
@@ -22,7 +23,8 @@ export default function RootLayout ({
       <body>
         <Providers>
           <Header />
-          <div className={styles.mainBox}>{children}</div>
+          <main className={styles.mainBox}>{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>

@@ -13,11 +13,11 @@ export const ColorModeSwitcher = () => {
       as='div'
       cursor='pointer'
       onClick={toggleColorMode}
-      variant='solid'
+      variant='icon'
       p={0}
       icon={
         <Around
-          duration={1000}
+          duration={800}
           toggled={colorMode === 'light'}
           toggle={toggleColorMode}
         />

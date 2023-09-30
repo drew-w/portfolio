@@ -17,9 +17,17 @@ const variantPrimary = defineStyle(() => {
   }
 })
 
+const variantIcon = defineStyle(() => {
+  return {
+    color: 'brand-orange',
+    _hover: {
+      transform: 'scale(1.1)'
+    }
+  }
+})
+
 const Button: ComponentStyleConfig = {
   baseStyle: {
-    // textTransform: 'uppercase',
     letterSpacing: '-0.025em',
     color: 'primary-text',
     borderRadius: '13px',
@@ -31,7 +39,8 @@ const Button: ComponentStyleConfig = {
     variant: 'primary'
   },
   variants: {
-    primary: variantPrimary
+    primary: variantPrimary,
+    icon: variantIcon
   }
 }
 

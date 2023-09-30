@@ -4,10 +4,6 @@ import { extendTheme } from '@chakra-ui/react'
 import { mode, GlobalStyleProps } from '@chakra-ui/theme-tools'
 
 import { Button } from '@theme/Button'
-import { Table } from '@theme/Table'
-import { Modal } from '@theme/Modal'
-import { Menu } from '@theme/Menu'
-import { Drawer } from '@theme/Drawer'
 
 const config = {
   useSystemColorMode: false,
@@ -35,13 +31,15 @@ const inter = Inter({
 const fonts = {
   inter: inter.style.fontFamily
 }
+const Text = {
+  baseStyle: {
+    color: 'text-primary'
+  }
+}
 
 const components = {
   Button,
-  Table,
-  Modal,
-  Menu,
-  Drawer
+  Text
 }
 
 const theme = extendTheme({
