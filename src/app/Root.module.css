@@ -1,5 +1,5 @@
 .mainBox {
-  min-height: calc(100vh - 61px);
+  min-height: calc(100vh - 150px);
   overflow: scroll;
   scrollbar-width: none;
   padding-top: 61px;
