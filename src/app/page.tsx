@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { Flex, Center } from '@chakra-ui/react'
 
-export function Page () {
+export default function RootPage () {
   const router = useRouter()
   useEffect(() => {
     router.push('/home')
@@ -14,5 +14,3 @@ export function Page () {
     </Flex>
   )
 }
-
-export default Page
