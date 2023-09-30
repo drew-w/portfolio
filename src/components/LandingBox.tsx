@@ -2,7 +2,6 @@
 //Chakra
 import {
   Flex,
-  Box,
   Avatar,
   Heading,
   Text,

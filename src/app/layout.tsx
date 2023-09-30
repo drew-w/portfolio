@@ -23,7 +23,7 @@ export default function RootLayout ({
       <body>
         <Providers>
           <Header />
-          <div className={styles.mainBox}>{children}</div>
+          <main className={styles.mainBox}>{children}</main>
           <Footer />
         </Providers>
       </body>
