@@ -20,13 +20,13 @@ export const semanticTokens = {
       default: '#F28529',
       _dark: '#ffa812'
     },
-    'radio-text': {
-      default: '#FFF',
-      _dark: '#0c0c0c'
-    },
     'text-primary': {
       default: '#1F1F1F',
       _dark: '#E3E3E3'
+    },
+    'text-inverse': {
+      default: '#E3E3E3',
+      _dark: '#1F1F1F'
     },
     'text-secondary': {
       default: '#444746',

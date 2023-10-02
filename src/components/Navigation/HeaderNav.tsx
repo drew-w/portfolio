@@ -33,7 +33,7 @@ export const HeaderNav = () => {
             transitionProperty='background-color'
             transitionDuration='200ms'
             bg={currentPage === value ? 'brand-green' : 'none'}
-            color={currentPage === value ? 'radio-text' : 'auto'}
+            color={currentPage === value ? 'text-inverse' : 'auto'}
             px='24px'
             py='11px'
           >
