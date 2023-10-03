@@ -1,6 +1,6 @@
 'use client'
 //Chakra
-import { Flex, Heading, Box, Stack } from '@chakra-ui/react'
+import { Flex, Box, Stack } from '@chakra-ui/react'
 
 //Style UI
 import { LandingBox } from '@components/LandingBox'
@@ -31,7 +31,6 @@ export default function Home () {
           <Flex
             w='full'
             maxW='container.sm'
-            // bgGradient='radial(reverse-green 60%, alt-green,)'
             borderRadius='10px'
             borderColor='border-primary'
             borderWidth={1}

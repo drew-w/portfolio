@@ -1,14 +1,6 @@
 'use client'
 //Chakra
-import {
-  Flex,
-  Box,
-  Stack,
-  StackDivider,
-  Heading,
-  Text,
-  useColorModeValue
-} from '@chakra-ui/react'
+import { Flex, Stack, StackDivider } from '@chakra-ui/react'
 
 //Data
 import { projects } from './data'
@@ -16,18 +8,7 @@ import { projects } from './data'
 //Style UI
 import { ProjectCard } from '@components/ProjectCard'
 
-//Types
-
 export default function Projects () {
-  //todo use new semantic token values instead
-  const gradientGreen = useColorModeValue(
-    'linear(to-l, #008b8b, #b8ffff)',
-    'linear(to-l, #0E464B, #008b8b)'
-  )
-  const gradientOrange = useColorModeValue(
-    'linear(to-l, #ffa812, #f8c090)',
-    'linear(to-l, #F28529, #ffa812)'
-  )
   return (
     <Flex
       as='main'
@@ -38,26 +19,16 @@ export default function Projects () {
       align='center'
     >
       <Flex
+        direction='column'
         maxW='container.lg'
         as='section'
         w='full'
-        h='600px'
+        // h='600px'
         mb={10}
         textAlign='justify'
         align='right'
-      >
-        <Box flex={1} />
-        <Box flex={1}>
-          <Heading color='brand-green' as='h1' fontSize='2xl'>
-            Projects
-          </Heading>
-          <Text>
-            Here is a list of all projects I have worked on with links to demo
-            and live versions of the websites. Maybe I can think of some other
-            cool thing to put in this blurb a little later.
-          </Text>
-        </Box>
-      </Flex>
+        position='relative'
+      ></Flex>
       <Stack
         borderColor='border-primary'
         borderWidth={1}
@@ -72,7 +43,11 @@ export default function Projects () {
           <ProjectCard
             key={index}
             project={project}
-            gradient={index % 2 === 0 ? gradientGreen : gradientOrange}
+            gradient={
+              index % 2 === 0
+                ? 'linear(to-l, reverse-green, alt-green)'
+                : 'linear(to-l, reverse-orange, alt-orange)'
+            }
           />
         ))}
       </Stack>
