@@ -52,13 +52,6 @@ export const semanticTokens = {
       default: '#F3F3F3',
       _dark: '#4c4c4c'
     }
-    // 'fg-default': {
-    //   default: '#FFFFFF'
-    // }
-    // #0E464B
-    // #008b8b
-    // #F28529
-    // #ffa812
   },
   fonts: {
     body: 'inter',

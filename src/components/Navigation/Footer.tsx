@@ -1,14 +1,25 @@
 'use client'
 //Chakra
-import { Flex, Box } from '@chakra-ui/react'
+import { Flex, Box, Text } from '@chakra-ui/react'
 
 //Style UI
 import { FooterWaves } from './FooterWaves'
 
 export const Footer = () => (
-  <Flex as='footer' w='full' h='150px'>
+  <Flex as='footer' w='full' h='150px' direction='column'>
     <Box w='full' h='full' position='relative'>
       <FooterWaves position='absolute' />
+      <Flex
+        w='full'
+        align='center'
+        justify='center'
+        zIndex={2}
+        position='absolute'
+        // bg='blue.500'
+        bottom={0}
+      >
+        <Text color='#C4C7C5'>Contact: eesnamdoow@gmail.com</Text>
+      </Flex>
     </Box>
   </Flex>
 )

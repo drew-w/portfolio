@@ -3,9 +3,8 @@ import { defineStyle } from '@chakra-ui/styled-system'
 
 const variantPrimary = defineStyle(() => {
   return {
-    color: 'text-secondary',
-    bg: 'btn-primary-bg',
-    fontSize: '11px',
+    color: 'text-inverse',
+    bg: 'brand-green',
     fontWeight: 600,
     _hover: {
       opacity: 0.9,
