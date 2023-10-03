@@ -5,8 +5,8 @@ export const semanticTokens = {
       _dark: '#1f1f1f'
     },
     'fg-default': {
-      default: '#0E464B',
-      _dark: '#1E1E1E'
+      default: '#FAFAFCbb',
+      _dark: '#1f1f1fbb'
     },
     'box-bg-primary': {
       default: '#ffffff',
@@ -16,8 +16,24 @@ export const semanticTokens = {
       default: '#0E464B',
       _dark: '#008b8b'
     },
+    'reverse-green': {
+      default: '#008b8b',
+      _dark: '#0E464B'
+    },
+    'alt-green': {
+      default: '#b8ffff',
+      _dark: '#008b8b'
+    },
     'brand-orange': {
       default: '#F28529',
+      _dark: '#ffa812'
+    },
+    'reverse-orange': {
+      default: '#ffa812',
+      _dark: '#F28529'
+    },
+    'alt-orange': {
+      default: '#f8c090',
       _dark: '#ffa812'
     },
     'text-primary': {

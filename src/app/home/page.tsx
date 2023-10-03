@@ -31,7 +31,7 @@ export default function Home () {
           <Flex
             w='full'
             maxW='container.sm'
-            bg='box-bg-primary'
+            bgGradient='radial(reverse-green 60%, alt-green,)'
             borderRadius='10px'
             borderColor='border-primary'
             borderWidth={1}
@@ -41,9 +41,8 @@ export default function Home () {
               draggable={false}
               width={1024}
               height={1024}
-              src='/drew.png'
+              src='/test.png'
               alt=''
-              objectFit='contain'
               style={{
                 borderRadius: '10px'
               }}
@@ -52,9 +51,6 @@ export default function Home () {
         </Flex>
       </Flex>
       <Box w='full' as='section' px='20px' maxW='1200px'>
-        <Heading as='h3' fontSize='24px' color='brand-green'>
-          Professional Experience with:
-        </Heading>
         <Flex w='full' justify='center' py='20px' mb='10px' h='fit-content'>
           <Box maxW='1300px' w='full'>
             <TechMarquee />
