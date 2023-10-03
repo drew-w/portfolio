@@ -1,22 +1,15 @@
 //Chakra
-import { Flex, Image, Box, Heading, Text, Link } from '@chakra-ui/react'
+import { Flex, Image, Box, Heading, Text, Link, Stack } from '@chakra-ui/react'
 
 //Types
+import { Project } from '@./types/project'
 interface Props {
-  title: string
-  image: string
-  description: string
-  link: string
+  project: Project
   gradient: string
 }
 
-export const ProjectCard = ({
-  image,
-  title,
-  description,
-  link,
-  gradient
-}: Props) => {
+export const ProjectCard = ({ project, gradient }: Props) => {
+  const { title, image, description, stack, url } = project
   return (
     <Flex w='full' align='center' padding='6' rounded='lg' direction='column'>
       <Box
@@ -27,6 +20,7 @@ export const ProjectCard = ({
         zIndex={1}
         rounded='lg'
         cursor='pointer'
+        onClick={() => window.open(url, '_blank')}
       >
         <Flex
           rounded='lg'
@@ -63,12 +57,35 @@ export const ProjectCard = ({
           />
         </Flex>
       </Box>
-      <Flex direction='column'>
+      <Flex direction='column' py={5} w='full'>
         <Heading color='brand-green' fontSize='2xl'>
           {title}
         </Heading>
         <Text>{description}</Text>
-        <Link color='brand-orange'>{link}</Link>
+        <Flex
+          as='span'
+          align='baseline'
+          pt={5}
+          w='full'
+          overflowWrap='anywhere'
+          overflow='hidden'
+        >
+          <Heading as='h5' color='brand-orange' fontSize='md'>
+            Stack and Technologies Used:{' '}
+          </Heading>
+          {stack.map((tech, i) => (
+            <Text
+              pl={1}
+              color='text-secondary'
+              fontSize='sm'
+              fontWeight={300}
+              key={tech}
+            >
+              {tech}
+              {i !== stack.length - 1 && ','}
+            </Text>
+          ))}
+        </Flex>
       </Flex>
     </Flex>
   )

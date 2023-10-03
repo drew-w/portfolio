@@ -10,6 +10,9 @@ import {
   useColorModeValue
 } from '@chakra-ui/react'
 
+//Data
+import { projects } from './data'
+
 //Style UI
 import { ProjectCard } from '@components/ProjectCard'
 
@@ -36,10 +39,7 @@ export default function Projects () {
       <Flex
         maxW='container.lg'
         as='section'
-        // bgGradient='linear(to-tr, brand-green 50%, #0000 50%)'
         w='full'
-        // h='calc(100vh - 150px)'
-
         h='600px'
         mb={10}
         textAlign='justify'
@@ -65,47 +65,14 @@ export default function Projects () {
         maxW='container.lg'
         bg='box-bg-primary'
         w='full'
-        divider={<StackDivider borderColor='brand-orange' />}
+        divider={<StackDivider borderColor='box-border' />}
       >
-        <ProjectCard
-          image='/dappStack.png'
-          title='sample'
-          description='this is a thing im doing real quick'
-          link='https://demo-preview.thedebtbox.com/home'
-          gradient={gradientGreen}
-        />
-
-        <ProjectCard
-          image='/webStack.png'
-          title='sample'
-          description='this is a thing im doing real quick'
-          link='https://demo-preview.thedebtbox.com/home'
-          gradient={gradientOrange}
-        />
-
-        <ProjectCard
-          image='/xomly.png'
-          title='sample'
-          description='this is a thing im doing real quick'
-          link='https://demo-preview.thedebtbox.com/home'
-          gradient={gradientGreen}
-        />
-
-        <ProjectCard
-          image='/ecoStack.png'
-          title='sample'
-          description=''
-          link=''
-          gradient={gradientOrange}
-        />
-
-        <ProjectCard
-          image='/fairStack.png'
-          title='sample'
-          description='this is a thing im doing real quick'
-          link='https://demo-preview.thedebtbox.com/home'
-          gradient={gradientGreen}
-        />
+        {projects.map((project, index) => (
+          <ProjectCard
+            project={project}
+            gradient={index % 2 === 0 ? gradientGreen : gradientOrange}
+          />
+        ))}
       </Stack>
     </Flex>
   )
