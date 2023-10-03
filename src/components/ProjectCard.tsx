@@ -48,6 +48,7 @@ export const ProjectCard = ({ project, gradient }: Props) => {
           }}
         >
           <Image
+            alt='project'
             rounded='lg'
             height='500px'
             w='full'

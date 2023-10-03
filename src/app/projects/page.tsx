@@ -19,6 +19,7 @@ import { ProjectCard } from '@components/ProjectCard'
 //Types
 
 export default function Projects () {
+  //todo use new semantic token values instead
   const gradientGreen = useColorModeValue(
     'linear(to-l, #008b8b, #b8ffff)',
     'linear(to-l, #0E464B, #008b8b)'
@@ -69,6 +70,7 @@ export default function Projects () {
       >
         {projects.map((project, index) => (
           <ProjectCard
+            key={index}
             project={project}
             gradient={index % 2 === 0 ? gradientGreen : gradientOrange}
           />
