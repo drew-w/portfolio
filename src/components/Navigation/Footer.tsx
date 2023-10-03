@@ -15,7 +15,6 @@ export const Footer = () => (
         justify='center'
         zIndex={2}
         position='absolute'
-        // bg='blue.500'
         bottom={0}
       >
         <Text color='#C4C7C5'>Contact: eesnamdoow@gmail.com</Text>
