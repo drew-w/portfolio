@@ -126,7 +126,7 @@ export default function About () {
             My personal achievements in this field include tournament wins in
             games like{' '}
             <Link
-              color='brand-green'
+              color='brand-orange'
               onClick={() =>
                 window.open(
                   'https://store.steampowered.com/app/801630/UNDER_NIGHT_INBIRTH_ExeLateclr/',
@@ -138,7 +138,7 @@ export default function About () {
             </Link>
             ,{' '}
             <Link
-              color='brand-green'
+              color='brand-orange'
               onClick={() =>
                 window.open(
                   'https://store.steampowered.com/app/1384160/GUILTY_GEAR_STRIVE/',
@@ -150,7 +150,7 @@ export default function About () {
             </Link>
             ,{' '}
             <Link
-              color='brand-green'
+              color='brand-orange'
               onClick={() =>
                 window.open(
                   'https://store.steampowered.com/app/1090630/Granblue_Fantasy_Versus/',
@@ -162,7 +162,7 @@ export default function About () {
             </Link>
             , and{' '}
             <Link
-              color='brand-green'
+              color='brand-orange'
               onClick={() =>
                 window.open(
                   'https://store.steampowered.com/app/1372280/MELTY_BLOOD_TYPE_LUMINA/',
@@ -214,13 +214,13 @@ export default function About () {
             direction={{ base: 'column', md: 'row' }}
             align='center'
             justify='space-between'
-            h='248px'
+            minH='248px'
+            h={{ base: 'full', md: '248px' }}
           >
             <Box flex={1} h='full'>
               <Image
                 src='/mandy1.jpeg'
                 borderRadius='10px'
-                // h='600px'
                 w='full'
                 objectFit='contain'
               />

@@ -70,22 +70,25 @@ export const ProjectCard = ({ project, gradient }: Props) => {
           w='full'
           overflowWrap='anywhere'
           overflow='hidden'
+          direction={{ base: 'column', md: 'row' }}
         >
           <Heading as='h5' color='brand-orange' fontSize='md'>
             Stack and Technologies Used:{' '}
           </Heading>
-          {stack.map((tech, i) => (
-            <Text
-              pl={1}
-              color='text-secondary'
-              fontSize='sm'
-              fontWeight={300}
-              key={tech}
-            >
-              {tech}
-              {i !== stack.length - 1 && ','}
-            </Text>
-          ))}
+          <>
+            {stack.map((tech, i) => (
+              <Text
+                pl={1}
+                color='text-secondary'
+                fontSize='sm'
+                fontWeight={300}
+                key={tech}
+              >
+                {tech}
+                {i !== stack.length - 1 && ','}
+              </Text>
+            ))}
+          </>
         </Flex>
       </Flex>
     </Flex>
