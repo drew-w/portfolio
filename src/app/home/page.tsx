@@ -31,17 +31,18 @@ export default function Home () {
           <Flex
             w='full'
             maxW='container.sm'
-            bgGradient='radial(reverse-green 60%, alt-green,)'
+            // bgGradient='radial(reverse-green 60%, alt-green,)'
             borderRadius='10px'
             borderColor='border-primary'
             borderWidth={1}
             shadow='box-shadow-primary'
+            transform='scaleX(-1)'
           >
             <Image
               draggable={false}
               width={1024}
               height={1024}
-              src='/test.png'
+              src='/drew2.png'
               alt=''
               style={{
                 borderRadius: '10px'
