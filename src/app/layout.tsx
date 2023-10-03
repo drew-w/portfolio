@@ -7,7 +7,7 @@ import { Footer } from '@components/Navigation/Footer'
 import styles from './Root.module.css'
 
 export const metadata = {
-  title: 'DEBT'
+  title: 'Drew Woodmansee'
 }
 
 export default function RootLayout ({
@@ -18,7 +18,7 @@ export default function RootLayout ({
   return (
     <html lang='en'>
       <head>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
       <body>
         <Providers>

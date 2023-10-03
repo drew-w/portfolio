@@ -12,12 +12,20 @@ export const Header = () => (
     px={{ base: 0, md: '30px' }}
     h='61px'
     w='full'
-    opacity='.95'
-    bg='bg-default'
+    background='fg-default'
     position='fixed'
     zIndex={99}
+    backdropFilter='auto'
+    backdropBlur='15px'
   >
-    <Flex w='full' h='full' justify='center' align='center' position='relative'>
+    <Flex
+      w='full'
+      h='full'
+      justify='center'
+      align='center'
+      position='relative'
+      zIndex={99}
+    >
       <HeaderNav />
       <Box position='absolute' right={{ base: 0, md: 5 }}>
         <ColorModeSwitcher />

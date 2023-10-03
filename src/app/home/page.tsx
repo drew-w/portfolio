@@ -1,6 +1,6 @@
 'use client'
 //Chakra
-import { Flex, Heading, Box, Stack } from '@chakra-ui/react'
+import { Flex, Box, Stack } from '@chakra-ui/react'
 
 //Style UI
 import { LandingBox } from '@components/LandingBox'
@@ -31,19 +31,18 @@ export default function Home () {
           <Flex
             w='full'
             maxW='container.sm'
-            bg='box-bg-primary'
             borderRadius='10px'
             borderColor='border-primary'
             borderWidth={1}
             shadow='box-shadow-primary'
+            transform='scaleX(-1)'
           >
             <Image
               draggable={false}
               width={1024}
               height={1024}
-              src='/drew.png'
+              src='/drew2.png'
               alt=''
-              objectFit='contain'
               style={{
                 borderRadius: '10px'
               }}
@@ -52,9 +51,6 @@ export default function Home () {
         </Flex>
       </Flex>
       <Box w='full' as='section' px='20px' maxW='1200px'>
-        <Heading as='h3' fontSize='24px' color='brand-green'>
-          Professional Experience with:
-        </Heading>
         <Flex w='full' justify='center' py='20px' mb='10px' h='fit-content'>
           <Box maxW='1300px' w='full'>
             <TechMarquee />

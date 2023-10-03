@@ -8,7 +8,6 @@ import { useRouter, usePathname } from 'next/navigation'
 export const HeaderNav = () => {
   const router = useRouter()
   const pathname = usePathname()
-  const currentPage = pathname.substring(1)
 
   const options = ['home', 'projects', 'about']
   return (
@@ -18,6 +17,7 @@ export const HeaderNav = () => {
       shadow='box-shadow-primary'
       borderColor='border-primary'
       borderWidth={1}
+      bg='bg-default'
     >
       {options.map(value => {
         return (
@@ -32,8 +32,8 @@ export const HeaderNav = () => {
             h='42px'
             transitionProperty='background-color'
             transitionDuration='200ms'
-            bg={currentPage === value ? 'brand-green' : 'none'}
-            color={currentPage === value ? 'radio-text' : 'auto'}
+            bg={pathname.includes(value) ? 'brand-green' : 'none'}
+            color={pathname.includes(value) ? 'text-inverse' : 'auto'}
             px='24px'
             py='11px'
           >

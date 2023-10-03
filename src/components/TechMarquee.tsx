@@ -14,19 +14,11 @@ import {
 
 export const TechMarquee = () => {
   const { colorMode } = useColorMode()
-  // const screenSize =
-  //   useBreakpointValue(
-  //     { base: 'base', sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' },
-  //     { fallback: 'lg' }
-  //   ) || 'lg'
   const isSmall =
     useBreakpointValue({
       base: true,
       md: false
     }) || false
-  const marqueeWidth = useBreakpointValue({
-    base: '375px'
-  })
   return (
     <Marquee
       speed={75}

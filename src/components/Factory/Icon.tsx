@@ -23,7 +23,7 @@ export function Icon ({
     <FAIcon
       color={color}
       icon={[prefix as IconPrefix, name as IconName]}
-      fontSize='4xl'
+      fontSize={size}
       {...rest}
     />
   )
