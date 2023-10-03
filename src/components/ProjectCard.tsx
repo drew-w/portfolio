@@ -18,15 +18,7 @@ export const ProjectCard = ({
   gradient
 }: Props) => {
   return (
-    <Flex
-      w='full'
-      align='center'
-      padding='6'
-      backgroundColor='box-bg-primary'
-      boxShadow='box-shadow-primary'
-      rounded='lg'
-      direction='column'
-    >
+    <Flex w='full' align='center' padding='6' rounded='lg' direction='column'>
       <Box
         role='group'
         position='relative'
