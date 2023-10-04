@@ -31,7 +31,13 @@ export const LandingBox = () => {
       shadow='box-shadow-primary'
       justify='space-between'
     >
-      <Stack direction='row' spacing={5} alignSelf='center'>
+      <Stack
+        direction='row'
+        spacing={5}
+        alignSelf='center'
+        align='center'
+        pb={3}
+      >
         <Avatar
           size='xl'
           name='Drew Woodmansee'
