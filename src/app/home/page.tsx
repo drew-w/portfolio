@@ -41,7 +41,7 @@ export default function Home () {
               draggable={false}
               width={1024}
               height={1024}
-              src='/drew2.png'
+              src='/drew.png'
               alt=''
               style={{
                 borderRadius: '10px'

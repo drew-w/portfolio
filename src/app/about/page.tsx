@@ -55,15 +55,15 @@ export default function About () {
             About Me
           </Heading>
           <Text w='full'>
-            Raised in San Diego, CA, I am a passionate Full Stack Engineer with
-            experience creating applications using Next.js, Node.js, React
-            Native, Solidity and SQL. I'm driven by a relentless curiosity to
-            learn and innovate, often learning new libraries and skills in my
-            free time and then bringing these skills into my professional work.
-            I speak fluent Spanish, which has not only broadened my
-            communication skills but also allowed me to connect with a diverse
-            range of people and cultures, so I thrive in team environments where
-            I can put these skills to their fullest use.
+            I am a passionate Full Stack Engineer with experience creating
+            applications using Next.js, Node.js, React Native, Solidity and SQL.
+            I'm driven by a relentless curiosity to learn and innovate, often
+            learning new libraries and skills in my free time and then bringing
+            these skills into my professional work. I speak fluent Spanish,
+            which has not only broadened my communication skills but also
+            allowed me to connect with a diverse range of people and cultures,
+            so I thrive in team environments where I can put these skills to
+            their fullest use.
           </Text>
           <Image
             src='/beach.jpeg'
@@ -74,13 +74,14 @@ export default function About () {
             objectFit='cover'
           />
           <Text w='full'>
-            My most recent professional experience was as lead front-end
-            engineer and Xomly, a company based near the Silicon Slopes in
-            Draper, UT. As lead developer, I was responsible for determining the
-            Stack used on each new project started, as well as managing a team
-            of 2-3 other developers. Although front-end was my primary role, I
-            was also able to work along side the back-end team, writing
-            endpoints using Prisma and creating Smart Contracts with Solidity.
+            Although I am from southern California, my most recent professional
+            experience was as lead front-end engineer and Xomly, a company based
+            near the Silicon Slopes in Draper, UT. As lead developer, I was
+            responsible for determining the Stack used on each new project
+            started, as well as managing a team of 2-3 other developers.
+            Although front-end was my primary role, I was also able to work
+            along side the back-end team, writing endpoints using Prisma and
+            creating Smart Contracts with Solidity.
           </Text>
           <Button
             rightIcon={<Icon prefix='fal' name='download' size='2x' />}
@@ -178,12 +179,12 @@ export default function About () {
           <Flex
             w='full'
             direction={{ base: 'column', md: 'row' }}
-            justify='space-between'
+            justify={'space-between'}
           >
-            <Box flex={1} pr='3'>
+            <Box flex={1} pr={{ base: 0, md: '3' }}>
               <Tweet id='1425154981775044608' />
             </Box>
-            <Box flex={1} pl='3'>
+            <Box flex={1} pl={{ base: 0, md: '3' }}>
               <Tweet id='1438341177594503168' />
             </Box>
           </Flex>
