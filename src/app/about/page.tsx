@@ -72,6 +72,7 @@ export default function About () {
             w='full'
             h='400px'
             objectFit='cover'
+            alt='me'
           />
           <Text w='full'>
             Although I am from southern California, my most recent professional
@@ -122,6 +123,7 @@ export default function About () {
             maxW='500px'
             w='full'
             objectFit='contain'
+            alt='commentating'
           />
           <Text w='full'>
             My personal achievements in this field include tournament wins in
@@ -224,6 +226,7 @@ export default function About () {
                 borderRadius='10px'
                 w='full'
                 objectFit='contain'
+                alt='mandy'
               />
             </Box>
             <Box flex={1} h='full'>
@@ -234,6 +237,7 @@ export default function About () {
                 w='full'
                 h='full'
                 objectFit='cover'
+                alt='mandy'
               />
             </Box>
             <Box flex={1} h='full'>
@@ -244,6 +248,7 @@ export default function About () {
                 h='full'
                 w='full'
                 objectFit='cover'
+                alt='mandy'
               />
             </Box>
           </Stack>
